@@ -31,8 +31,8 @@ module.exports = {
 
   output: {
     path: path.join(__dirname, '../dist'),
-    filename: production ? 'static/[name]-[hash:8].js' : '[name].js',
-    chunkFilename: 'static/[hash:8].[name].js',
+    filename: production ? '[name]-[hash:8].js' : '[name].js',
+    chunkFilename: '[hash:8].[name].js',
     publicPath: process.env.PATHNAME_BASE || '/',
   },
 
