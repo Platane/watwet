@@ -7,6 +7,7 @@ import { create } from './store/index'
 
 import { init as initUi } from '~/sideEffect/ui'
 import { init as initNavigator } from '~/sideEffect/navigator'
+import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 // import { init as initStorage } from '~/sideEffect/storage'
 // import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
 
@@ -37,6 +38,7 @@ if (SENTRY_DSN) {
 
 // init store
 const sideEffects = [
+  initOfflineDetector,
   initUi,
   // initStorage,
   initNavigator,
