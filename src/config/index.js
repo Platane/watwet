@@ -5,3 +5,5 @@ export const GOOGLE_CLIENT_ID =
   '323658393768-08255rmjt4up5t9cvoqf99b23tjra4ed.apps.googleusercontent.com'
 
 export const GOOGLE_API_KEY = 'AIzaSyAAgJIctOGSkUPGvNr0AeQtxETWUxiIwYU'
+
+export const SENTRY_DSN = process.env.SENTRY_DSN || null

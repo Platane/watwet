@@ -3,37 +3,42 @@
   "version": "0.1.0",
   "dependencies": {
     "emotion": "8.0.12",
-    "preact": " 8.2.7"
+    "preact": "8.2.7",
+    "preact-emotion": "8.0.12",
+    "preact-redux": "2.0.3",
+    "prop-types": "15.6.0",
+    "raven-js": "3.21.0",
+    "redux": "3.7.2",
+    "unfetch": "3.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-jest": "22.0.1",
     "babel-loader": "7.1.2",
-    "babel-plugin-emotion": " 8.0.12",
+    "babel-plugin-emotion": "8.0.12",
     "babel-plugin-module-resolver": "3.0.0",
     "babel-plugin-transform-class-properties": "6.24.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "babel-plugin-transform-react-jsx": " 6.24.1",
+    "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-flow": "6.23.0",
-    "babili-webpack-plugin": " 0.1.2",
+    "babili-webpack-plugin": "0.1.2",
     "file-loader": "1.1.6",
     "flow-bin": "0.61.0",
     "jest": "22.0.1",
     "prettier": "1.9.2",
     "webpack": "3.10.0",
-    "webpack-assets-manifest": " 1.0.0",
+    "webpack-assets-manifest": "1.0.0",
     "webpack-dev-server": "2.9.7"
   },
   "jest": {
-    "testMatch": [
-      "**/__tests__/**/*.(spec|test).js"
-    ]
+    "testMatch": ["**/__tests__/**/*.(spec|test).js"]
   },
   "scripts": {
-    "start": "NODE_ENV=demo webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
+    "start":
+      "NODE_ENV=demo webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose"
   }
 }
