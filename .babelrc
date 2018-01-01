@@ -1,0 +1,18 @@
+{
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "~": "./src",
+          "type": "./src/type"
+        }
+      }
+    ],
+    "transform-class-properties",
+    "transform-object-rest-spread",
+    "emotion",
+    ["transform-react-jsx", { "pragma": "h" }]
+  ],
+  "presets": ["flow"]
+}
