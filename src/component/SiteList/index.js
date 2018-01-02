@@ -1,9 +1,6 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-
-const Site = ({ info, onClick }) => (
-  <SiteContainer onClick={onClick}>{info.name}</SiteContainer>
-)
+import { Site } from './Site'
 
 export const SiteList = ({ sites, onClickSite }) => (
   <Container>
@@ -16,11 +13,5 @@ export const SiteList = ({ sites, onClickSite }) => (
     ))}
   </Container>
 )
-
-const SiteContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 20px;
-`
 
 const Container = styled.div``
