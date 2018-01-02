@@ -9,12 +9,18 @@ const pathSw = 'sw.js'
 // const newPathSw = path.basename(pathSw)
 const newPathSw = 'sw.js'
 
+const PATHNAME_BASE = process.env.PATHNAME_BASE || '/'
+
+const replaceFileName = s =>
+  s
+    .replace('/index.js', PATHNAME_BASE + pathIndex)
+    .replace('/sw.js', PATHNAME_BASE + newPathSw)
+
 // replace filename in index.html
 {
-  const content = fs
-    .readFileSync(path.resolve(__dirname, '../src/index.html'))
-    .toString()
-    .replace('/index.js', '/' + pathIndex)
+  const content = replaceFileName(
+    fs.readFileSync(path.resolve(__dirname, '../src/index.html')).toString()
+  )
 
   fs.writeFileSync(path.resolve(__dirname, '../dist/index.html'), content)
   fs.writeFileSync(path.resolve(__dirname, '../dist/index.html'), content)
@@ -22,20 +28,18 @@ const newPathSw = 'sw.js'
 
 // replace filename in index.js
 {
-  const content = fs
-    .readFileSync(path.resolve(__dirname, '../dist/' + pathIndex))
-    .toString()
-    .replace('/sw.js', '/' + newPathSw)
+  const content = replaceFileName(
+    fs.readFileSync(path.resolve(__dirname, '../dist/' + pathIndex)).toString()
+  )
 
   fs.writeFileSync(path.resolve(__dirname, '../dist/' + pathIndex), content)
 }
 
 // replace filename in sw.js
 {
-  const content = fs
-    .readFileSync(path.resolve(__dirname, '../dist/' + pathSw))
-    .toString()
-    .replace('/index.js', '/' + pathIndex)
+  const content = replaceFileName(
+    fs.readFileSync(path.resolve(__dirname, '../dist/' + pathSw)).toString()
+  )
 
   fs.writeFileSync(path.resolve(__dirname, '../dist/' + newPathSw), content)
 }
