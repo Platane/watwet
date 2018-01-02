@@ -18,13 +18,17 @@ const buildUrl = (basePath: string) => (
   query = {},
   hash = {}
 ) =>
-  window.location.origin +
-  '/' +
-  [...basePath.split('/'), ...pathname.split('/')].join('/') +
-  '?' +
-  querystringStringify(query) +
-  '#' +
-  querystringStringify(hash)
+  [
+    window.location.origin,
+
+    '/' + toPath([...toArray(basePath), ...toArray(pathname)]),
+
+    Object.keys(query).length && '?' + querystringStringify(query),
+
+    Object.keys(hash).length && '#' + querystringStringify(hash),
+  ]
+    .filter(Boolean)
+    .join('')
 
 const parsePathname = (basePath: string) => (pathname: string) => {
   const b = toArray(basePath)
