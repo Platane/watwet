@@ -9,6 +9,7 @@ import { init as initUi } from '~/sideEffect/ui'
 import { init as initNavigator } from '~/sideEffect/navigator'
 import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 // import { init as initStorage } from '~/sideEffect/storage'
+import { init as initOnlineStorage } from '~/sideEffect/onlineStorage'
 import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
 
 import { prepare } from './service/google-api'
@@ -43,8 +44,8 @@ if (SENTRY_DSN) {
 const sideEffects = [
   initOfflineDetector,
   initUi,
-  // initStorage,
   initNavigator,
   initServiceWorker,
+  initOnlineStorage,
 ]
 Raven.context(() => create(sideEffects))
