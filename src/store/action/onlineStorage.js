@@ -3,7 +3,7 @@ export const hydrateVegetalDictionary = vegetalDictionary => ({
   vegetalDictionary,
 })
 
-export const hydrateSites = sites => ({
-  type: 'onlineStorage:hydrateSites',
-  sites,
+export const hydrateHabitats = habitats => ({
+  type: 'onlineStorage:hydrateHabitats',
+  habitats,
 })

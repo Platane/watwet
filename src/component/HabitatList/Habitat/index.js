@@ -7,7 +7,7 @@ const countVegetal = levels =>
     0
   )
 
-export const Site = ({ info, levels, onClick }) => (
+export const Habitat = ({ info, levels, onClick }) => (
   <Container onClick={onClick}>
     <Name>{info.name}</Name>
     <VegetalCount>{`${countVegetal(levels)} species`}</VegetalCount>

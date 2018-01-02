@@ -1,3 +1,4 @@
+// herbacée
 export type Level = 'A' | 'a' | 'h'
 
 export type Vegetal = {
@@ -16,8 +17,9 @@ export type GeolocPoint = {
   lng: number,
 }
 
-export type SiteInfo = {
+export type HabitatInfo = {
   name: string,
+  description: string,
   geoloc: GeolocPoint,
   picture_url: string,
 }
@@ -27,10 +29,10 @@ export type VegetalPopulation = {
   representation: number,
 }[]
 
-export type Site = {
+export type Habitat = {
   id: string,
 
-  info: SiteInfo,
+  info: HabitatInfo,
 
   levels: {
     A: {
@@ -46,4 +48,15 @@ export type Site = {
       representation: number,
     },
   },
+}
+
+export type Site = {
+  id: string,
+
+  name: string,
+  description: string,
+
+  client: string,
+
+  habitats: Habitat[],
 }

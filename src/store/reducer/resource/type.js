@@ -1,5 +1,5 @@
-import type { Site } from 'type'
+import type { Habitat } from 'type'
 
 export type State = {
-  sites: Site[],
+  habitats: Habitat[],
 }

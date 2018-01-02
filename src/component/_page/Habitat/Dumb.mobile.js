@@ -3,13 +3,13 @@ import styled from 'preact-emotion'
 
 import { LevelSelector } from '~/component/LevelSelector'
 
-export const Site = ({ site, updateSite }) => (
+export const Habitat = ({ habitat, updateHabitat }) => (
   <Container>
-    {site && site.info.name}
+    {habitat && habitat.info.name}
 
     <LevelSelector
-      site={site}
-      onSiteChange={updateSite}
+      habitat={habitat}
+      onHabitatChange={updateHabitat}
       onSelect={e => console.log(e)}
     />
   </Container>

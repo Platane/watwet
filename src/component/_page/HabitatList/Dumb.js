@@ -1,10 +1,10 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-import { SiteList as List } from '~/component/SiteList'
+import { HabitatList as List } from '~/component/HabitatList'
 
-export const SiteList = ({ sites, goToSite }) => (
+export const HabitatList = ({ habitats, goToHabitat }) => (
   <Container>
-    {sites && <List onClickSite={goToSite} sites={sites} />}
+    {habitats && <List onClickHabitat={goToHabitat} habitats={habitats} />}
   </Container>
 )
 

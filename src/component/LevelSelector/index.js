@@ -15,16 +15,16 @@ const RowContainer = styled.div`
   flex-direction: row;
 `
 
-export const LevelSelector = ({ site, onSiteChange, onSelect }) => (
+export const LevelSelector = ({ habitat, onHabitatChange, onSelect }) => (
   <Container>
     {['A', 'a', 'h'].map(x => (
       <Row
         key={x}
         label={x}
-        value={site.levels[x].representation}
+        value={habitat.levels[x].representation}
         onSelect={() => onSelect(x)}
         onChange={value =>
-          onSiteChange(set(site, ['levels', x, 'representation'], value))
+          onHabitatChange(set(habitat, ['levels', x, 'representation'], value))
         }
       />
     ))}

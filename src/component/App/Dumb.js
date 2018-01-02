@@ -3,17 +3,17 @@ import styled from 'preact-emotion'
 
 import { RepartitionBar } from '~/component/RepartitionBar'
 import { Header } from '~/component/Header'
-import { SiteList } from '~/component/_page/SiteList'
-import { Site } from '~/component/_page/Site'
+import { HabitatList } from '~/component/_page/HabitatList'
+import { Habitat } from '~/component/_page/Habitat'
 
 import cssReset from '../_abstract/cssReset'
 
 export const Content = ({ routerKey, routerParam }) => {
   switch (routerKey) {
-    case 'siteList':
-      return <SiteList />
-    case 'site':
-      return <Site />
+    case 'habitatList':
+      return <HabitatList />
+    case 'habitat':
+      return <Habitat />
     default:
       return null
   }

@@ -1,4 +1,4 @@
-import type { Site } from 'type'
+import type { Habitat } from 'type'
 
 import { vegetals } from './vegetals'
 
@@ -19,11 +19,12 @@ const level = () => ({
   ),
 })
 
-export const sites: Site[] = Array.from({ length: 16 }).map((_, i) => ({
-  id: `site-${i + 1}`,
+export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
+  id: `habitat-${i + 1}`,
 
   info: {
-    name: pickVegetal().name_fr,
+    description: pickVegetal().name_fr,
+    name: pickVegetal().name_la,
     picture_url: '',
     geoloc: {
       lat: 0,
