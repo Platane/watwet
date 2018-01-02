@@ -14,6 +14,7 @@ import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
 import { prepare } from './service/google-api'
 import { getCurrentUser, signIn } from './service/google-api/auth'
 import { read } from '~/service/google-api/spreadSheets/vegetalDictionary'
+import { list } from '~/service/google-api/spreadSheets/site'
 
 const run = async () => {
   await prepare()
@@ -23,6 +24,8 @@ const run = async () => {
   if (!getCurrentUser()) await signIn()
 
   console.log(await read())
+
+  console.log(await list())
 }
 
 run()

@@ -1,10 +1,16 @@
 import { GOOGLE_CLIENT_ID, GOOGLE_API_KEY } from '~/config'
 import { promisify } from '~/util/promisify'
 
-const SCOPES = 'https://www.googleapis.com/auth/spreadsheets.readonly'
 const GAPI_URL = 'https://apis.google.com/js/api.js'
+
+const SCOPES = [
+  'https://www.googleapis.com/auth/spreadsheets',
+  'https://www.googleapis.com/auth/drive.metadata.readonly',
+].join(' ')
+
 const DISCOVERY_DOCS = [
   'https://sheets.googleapis.com/$discovery/rest?version=v4',
+  'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
 ]
 
 const loadScript = url =>

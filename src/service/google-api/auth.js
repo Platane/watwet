@@ -9,24 +9,23 @@ export const getCurrentUser = (): User | null => {
 
   const user = gapi.auth2.getAuthInstance().currentUser.get()
 
-  const profile = user.getBasicProfile()
+  const profile = user && user.getBasicProfile()
 
-  return (
-    (user && {
-      id: profile.getId(),
-      name: profile.getName(),
-      picture_url: profile.getImageUrl(),
-    }) ||
-    null
-  )
+  if (!user || !profile || !user.isSignedIn()) return null
+
+  return {
+    id: profile.getId(),
+    name: profile.getName(),
+    picture_url: profile.getImageUrl(),
+  }
 }
 
 export const signIn = () => {
   const gapi = window.gapi
 
   return gapi.auth2.getAuthInstance().signIn({
-    ux_mode: 'redirect',
-    redirect_uri: 'https://platane.github.io/watwet',
+    // ux_mode: 'redirect',
+    // redirect_uri: 'https://platane.github.io/watwet',
   })
 }
 
