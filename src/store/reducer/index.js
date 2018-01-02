@@ -1,17 +1,23 @@
 import { combineReducers } from 'redux'
 
-import { reduce as router, defaultState as routerDefaultState } from './router'
+import {
+  reduce as resource,
+  defaultState as resourceDefaultState,
+} from './resource'
 import {
   reduce as offline,
   defaultState as offlineDefaultState,
 } from './offline'
+import { reduce as router, defaultState as routerDefaultState } from './router'
 
 export const reduce = combineReducers({
-  router,
+  resource,
   offline,
+  router,
 })
 
 export const defaultState = {
-  router: routerDefaultState,
+  resource: resourceDefaultState,
   offline: offlineDefaultState,
+  router: routerDefaultState,
 }

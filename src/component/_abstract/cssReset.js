@@ -12,7 +12,6 @@ export default () => {
       }
 
       html,
-      #app,
       body {
         height: 100%;
         position: relative;

@@ -1,9 +1,9 @@
-import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import { connect } from 'preact-redux'
+import { App as Dumb } from './Dumb'
 
-import cssReset from '../_abstract/cssReset'
+const injectState = connect(state => ({
+  routerKey: state.router.key,
+  routerParam: state.router.param,
+}))
 
-export const App = ({ content, path, onPathChange }) =>
-  cssReset() || <Container />
-
-const Container = styled.div``
+export const App = injectState(Dumb)
