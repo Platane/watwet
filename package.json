@@ -19,11 +19,13 @@
     "babel-plugin-emotion": "8.0.12",
     "babel-plugin-module-resolver": "3.0.0",
     "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-inline-environment-variables": "0.2.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-plugin-transform-react-jsx": "6.24.1",
     "babel-plugin-transform-runtime": "6.23.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-flow": "6.23.0",
+    "babel-preset-minify": "0.2.0",
     "babili-webpack-plugin": "0.1.2",
     "file-loader": "1.1.6",
     "flow-bin": "0.61.0",
@@ -41,6 +43,6 @@
       "NODE_ENV=demo webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose",
     "build":
-      "rm -rf dist && NODE_ENV=production webpack --config ./script/webpack.config.js && node ./script/rewriteFileName.js"
+      "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js && node ./script/rewriteFileName.js"
   }
 }

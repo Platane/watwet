@@ -4,7 +4,8 @@ const path = require('path')
 const assetManifest = require('../dist/assetManifest.json')
 
 const pathIndex = assetManifest['index.js']
-const pathSw = assetManifest['sw.js']
+const pathSw = 'sw.js'
+// const pathSw = assetManifest['sw.js']
 // const newPathSw = path.basename(pathSw)
 const newPathSw = 'sw.js'
 

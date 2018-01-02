@@ -6,19 +6,6 @@ const BabiliPlugin = require('babili-webpack-plugin')
 
 const production = process.env.NODE_ENV === 'production'
 
-const createEnvVarArray = () => {
-  const o = {}
-  ;['NODE_ENV', 'VERSION', 'PATHNAME_BASE', 'SENTRY_DSN']
-    .filter(name => name in process.env)
-    .forEach(name => (o[`process.env.${name}`] = `"${process.env[name]}"`))
-
-  o[`process.env.RELEASE_DATE`] = Date.now()
-
-  return o
-}
-
-console.log('injected env var', createEnvVarArray())
-
 module.exports = {
   entry: {
     index: [
@@ -26,7 +13,6 @@ module.exports = {
       // path.join(__dirname, '../src/asset/image/favicon/favicon.ico'),
       path.join(__dirname, '../src/index.html'),
     ],
-    sw: path.join(__dirname, '../src/service/serviceWorker/sw.js'),
   },
 
   output: {
@@ -93,8 +79,6 @@ module.exports = {
 
     !production && new webpack.NamedModulesPlugin(),
 
-    new webpack.DefinePlugin(createEnvVarArray()),
-
     new WebpackAssetsManifest({
       output: path.resolve(__dirname, '../dist', 'assetManifest.json'),
     }),
@@ -102,7 +86,7 @@ module.exports = {
 
   devServer: {
     port: 8082,
-    contentBase: false,
+    contentBase: [path.resolve(__dirname, '../dist')],
     historyApiFallback: true,
     watchOptions: {
       ignored: /node_modules/,

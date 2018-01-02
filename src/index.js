@@ -9,7 +9,7 @@ import { init as initUi } from '~/sideEffect/ui'
 import { init as initNavigator } from '~/sideEffect/navigator'
 import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 // import { init as initStorage } from '~/sideEffect/storage'
-// import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
+import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
 
 import { prepare } from './service/google-api'
 import { getCurrentUser, signIn } from './service/google-api/auth'
@@ -42,6 +42,6 @@ const sideEffects = [
   initUi,
   // initStorage,
   initNavigator,
-  // initServiceWorker,
+  initServiceWorker,
 ]
 Raven.context(() => create(sideEffects))

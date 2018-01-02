@@ -7,3 +7,5 @@ export const GOOGLE_CLIENT_ID =
 export const GOOGLE_API_KEY = 'AIzaSyAAgJIctOGSkUPGvNr0AeQtxETWUxiIwYU'
 
 export const SENTRY_DSN = process.env.SENTRY_DSN || null
+
+export const PATHNAME_BASE = process.env.PATHNAME_BASE || '/'

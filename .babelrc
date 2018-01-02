@@ -9,10 +9,21 @@
         }
       }
     ],
+    [
+      "transform-inline-environment-variables",
+      {
+        "include": ["NODE_ENV", "VERSION", "PATHNAME_BASE", "SENTRY_DSN"]
+      }
+    ],
     "transform-class-properties",
     "transform-object-rest-spread",
     "emotion",
     ["transform-react-jsx", { "pragma": "h" }]
   ],
-  "presets": ["flow"]
+  "presets": ["flow"],
+  "env": {
+    "production": {
+      "presets": ["minify"]
+    }
+  }
 }
