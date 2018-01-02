@@ -1,7 +1,7 @@
 import { VEGETAL_DICTIONARY_ID } from '~/config'
 import type { Vegetal } from 'type'
 
-export const read = async (): Vegetal[] => {
+export const read = async (): Promise<Vegetal[]> => {
   const gapi = window.gapi
 
   const res = await gapi.client.sheets.spreadsheets.values.get({
@@ -12,6 +12,6 @@ export const read = async (): Vegetal[] => {
   return res.result.values.map(x => ({
     id: x[1],
     name_fr: x[0],
-    name_la: x[0],
+    name_la: x[1],
   }))
 }
