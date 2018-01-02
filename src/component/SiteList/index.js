@@ -1,10 +1,20 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 
-const Site = ({ info }) => <SiteContainer>{info.name}</SiteContainer>
+const Site = ({ info, onClick }) => (
+  <SiteContainer onClick={onClick}>{info.name}</SiteContainer>
+)
 
-export const SiteList = ({ sites }) => (
-  <Container>{sites.map(site => <Site key={site.id} {...site} />)}</Container>
+export const SiteList = ({ sites, onClickSite }) => (
+  <Container>
+    {sites.map(site => (
+      <Site
+        key={site.id}
+        {...site}
+        onClick={onClickSite && (() => onClickSite(site))}
+      />
+    ))}
+  </Container>
 )
 
 const SiteContainer = styled.div`

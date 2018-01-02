@@ -2,8 +2,10 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { SiteList as List } from '~/component/SiteList'
 
-export const SiteList = ({ sites }) => (
-  <Container>{sites && <List sites={sites} />}</Container>
+export const SiteList = ({ sites, goToSite }) => (
+  <Container>
+    {sites && <List onClickSite={goToSite} sites={sites} />}
+  </Container>
 )
 
 const Container = styled.div`
