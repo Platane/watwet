@@ -20,7 +20,8 @@ const run = async () => {
 
   console.log(getCurrentUser())
 
-  if (!getCurrentUser()) await signIn()
+  // if (!getCurrentUser()) await signIn()
+  await signIn()
 
   console.log(await read())
 }

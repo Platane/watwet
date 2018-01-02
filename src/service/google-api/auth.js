@@ -24,7 +24,10 @@ export const getCurrentUser = (): User | null => {
 export const signIn = () => {
   const gapi = window.gapi
 
-  return gapi.auth2.getAuthInstance().signIn()
+  return gapi.auth2.getAuthInstance().signIn({
+    ux_mode: 'redirect',
+    redirect_uri: 'https://platane.github.io/watwet',
+  })
 }
 
 export const signOut = () => {

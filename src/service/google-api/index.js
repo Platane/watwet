@@ -26,9 +26,9 @@ export const prepare = async () => {
   const load = await promisify(gapi.load, gapi)('client:auth2')
 
   await gapi.client.init({
+    scope: SCOPES,
     apiKey: GOOGLE_API_KEY,
     clientId: GOOGLE_CLIENT_ID,
     discoveryDocs: DISCOVERY_DOCS,
-    scope: SCOPES,
   })
 }
