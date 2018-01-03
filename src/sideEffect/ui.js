@@ -4,11 +4,23 @@ import { Provider } from 'preact-redux'
 import { App } from '~/component/App'
 
 export const init = store => {
-  const app = (
-    <Provider store={store}>
-      <App />
-    </Provider>
-  )
+  const update = () => {
+    const { init } = store.getState()
 
-  render(app, document.body, document.getElementById('app'))
+    if (!init.navigator || !init.localStorage) return
+
+    unsubscribe()
+
+    const app = (
+      <Provider store={store}>
+        <App />
+      </Provider>
+    )
+
+    render(app, document.body, document.getElementById('app'))
+  }
+
+  const unsubscribe = store.subscribe(update)
+
+  update()
 }
