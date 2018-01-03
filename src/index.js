@@ -6,30 +6,31 @@ import { SENTRY_DSN } from '~/config'
 import { create } from './store/index'
 
 import { init as initUi } from '~/sideEffect/ui'
+import { init as initAuth } from '~/sideEffect/auth'
 import { init as initNavigator } from '~/sideEffect/navigator'
-import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
-// import { init as initStorage } from '~/sideEffect/storage'
+import { init as initLocalStorage } from '~/sideEffect/localStorage'
 import { init as initOnlineStorage } from '~/sideEffect/onlineStorage'
 import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
+import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 
-import { prepare } from './service/google-api'
-import { getCurrentUser, signIn } from './service/google-api/auth'
-import { read } from '~/service/google-api/spreadSheets/vegetalDictionary'
-import { list } from '~/service/google-api/spreadSheets/site'
-
-const run = async () => {
-  await prepare()
-
-  console.log(getCurrentUser())
-
-  if (!getCurrentUser()) await signIn()
-
-  console.log(await read())
-
-  console.log(await list())
-}
-
-run()
+// import { prepare } from './service/google-api'
+// import { getCurrentUser, signIn } from './service/google-api/auth'
+// import { read } from '~/service/google-api/spreadSheets/vegetalDictionary'
+// import { list } from '~/service/google-api/spreadSheets/site'
+//
+// const run = async () => {
+//   await prepare()
+//
+//   console.log(getCurrentUser())
+//
+//   if (!getCurrentUser()) await signIn()
+//
+//   console.log(await read())
+//
+//   console.log(await list())
+// }
+//
+// run()
 
 // init raven
 if (SENTRY_DSN) {
@@ -42,10 +43,12 @@ if (SENTRY_DSN) {
 
 // init store
 const sideEffects = [
-  initOfflineDetector,
   initUi,
+  initAuth,
   initNavigator,
+  initLocalStorage,
   initServiceWorker,
   initOnlineStorage,
+  initOfflineDetector,
 ]
 Raven.context(() => create(sideEffects))
