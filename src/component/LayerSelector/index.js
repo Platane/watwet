@@ -1,5 +1,7 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
+import { RepartitionBar } from '~/component/RepartitionBar'
+import { fromHash } from '~/component/_abstract/palette'
 
 const Row = ({ label, value, onSelect, onChange }) => (
   <RowContainer>
@@ -14,7 +16,7 @@ const RowContainer = styled.div`
   flex-direction: row;
 `
 
-export const LevelSelector = ({ layers, onChange, onSelect }) => (
+export const LayerSelector = ({ layers, onChange, onSelect }) => (
   <Container>
     {['A', 'a', 'h'].map(x => (
       <Row
@@ -25,6 +27,12 @@ export const LevelSelector = ({ layers, onChange, onSelect }) => (
         onChange={value => onChange({ ...layers, [x]: value })}
       />
     ))}
+
+    <RepartitionBar
+      colors={Object.keys(layers).map(key => fromHash(key))}
+      values={Object.keys(layers).map(key => layers[key])}
+      labels={Object.keys(layers)}
+    />
   </Container>
 )
 

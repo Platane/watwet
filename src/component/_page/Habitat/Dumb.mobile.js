@@ -1,12 +1,12 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 
-import { LevelSelector } from '~/component/LevelSelector'
+import { LayerSelector } from '~/component/LayerSelector'
 import { VegetalListWithSearch } from '~/component/VegetalListWithSearch'
 
 export const Habitat = ({ habitat, vegetals, updateHabitat }) => (
   <Container>
-    <LevelSelector
+    <LayerSelector
       layers={habitat.layers}
       onChange={layers => updateHabitat({ ...habitat, layers })}
       onSelect={e => console.log(e)}
