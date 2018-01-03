@@ -2,25 +2,26 @@ import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 
 import { LevelSelector } from '~/component/LevelSelector'
+import { VegetalListWithSearch } from '~/component/VegetalListWithSearch'
 
-export const Habitat = ({ habitat, updateHabitat }) => (
+export const Habitat = ({ habitat, vegetals, updateHabitat }) => (
   <Container>
-    {habitat && habitat.info.name}
-
     <LevelSelector
-      habitat={habitat}
-      onHabitatChange={updateHabitat}
+      layers={habitat.layers}
+      onChange={layers => updateHabitat({ ...habitat, layers })}
       onSelect={e => console.log(e)}
+    />
+    <VegetalListWithSearch
+      vegetals={vegetals}
+      population={habitat.population}
+      onChange={population => updateHabitat({ ...habitat, population })}
     />
   </Container>
 )
 
 const Container = styled.div`
-  max-width: 800px;
-  width: calc(100% - 40px);
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-around;
   margin: 20px;
-  flex: 100px 1 1;
 `

@@ -1,6 +1,5 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-import { set } from '~/util/reduxHelper'
 
 const Row = ({ label, value, onSelect, onChange }) => (
   <RowContainer>
@@ -15,17 +14,15 @@ const RowContainer = styled.div`
   flex-direction: row;
 `
 
-export const LevelSelector = ({ habitat, onHabitatChange, onSelect }) => (
+export const LevelSelector = ({ layers, onChange, onSelect }) => (
   <Container>
     {['A', 'a', 'h'].map(x => (
       <Row
         key={x}
         label={x}
-        value={habitat.levels[x].representation}
+        value={layers[x]}
         onSelect={() => onSelect(x)}
-        onChange={value =>
-          onHabitatChange(set(habitat, ['levels', x, 'representation'], value))
-        }
+        onChange={value => onChange({ ...layers, [x]: value })}
       />
     ))}
   </Container>

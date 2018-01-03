@@ -12,13 +12,6 @@ const pickRepartition = n => {
   return arr.map(x => x / sum)
 }
 
-const level = () => ({
-  representation: Math.random(),
-  population: pickRepartition(Math.floor(Math.random() * 3 + 1)).map(
-    representation => ({ vegetal: pickVegetal(), representation })
-  ),
-})
-
 export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
   id: `habitat-${i + 1}`,
 
@@ -32,9 +25,17 @@ export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
     },
   },
 
-  levels: {
-    A: level(),
-    a: level(),
-    h: level(),
+  layers: {
+    A: Math.random(),
+    a: Math.random(),
+    h: Math.random(),
   },
+
+  population: [].concat(
+    ...['A', 'a', 'h'].map(x =>
+      pickRepartition(Math.floor(Math.random() * 3 + 1)).map(
+        representation => ({ vegetal: pickVegetal(), representation })
+      )
+    )
+  ),
 }))

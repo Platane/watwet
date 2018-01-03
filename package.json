@@ -4,10 +4,12 @@
   "dependencies": {
     "emotion": "8.0.12",
     "preact": "8.2.7",
+    "preact-compat": "3.17.0",
     "preact-emotion": "8.0.12",
     "preact-redux": "2.0.3",
     "prop-types": "15.6.0",
     "raven-js": "3.21.0",
+    "react-simplest-typeahead": "1.0.1",
     "redux": "3.7.2",
     "unfetch": "3.0.0"
   },

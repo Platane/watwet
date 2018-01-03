@@ -1,15 +1,15 @@
+// Arborée
+// buissonant
 // herbacée
-export type Level = 'A' | 'a' | 'h'
+export type Layer = 'A' | 'a' | 'h'
 
 export type Vegetal = {
   id: string,
 
-  level: Level,
+  layer: Layer,
 
   name_fr: string,
   name_la: string,
-
-  isWet: boolean,
 }
 
 export type GeolocPoint = {
@@ -24,29 +24,18 @@ export type HabitatInfo = {
   picture_url: string,
 }
 
-export type VegetalPopulation = {
-  vegetal: Vegetal,
-  representation: number,
-}[]
-
 export type Habitat = {
   id: string,
 
   info: HabitatInfo,
 
-  levels: {
-    A: {
-      population: VegetalPopulation,
-      representation: number,
-    },
-    a: {
-      population: VegetalPopulation,
-      representation: number,
-    },
-    h: {
-      population: VegetalPopulation,
-      representation: number,
-    },
+  population: {
+    vegetal: Vegetal,
+    representation: number,
+  }[],
+
+  layers: {
+    [Layer]: number,
   },
 }
 
