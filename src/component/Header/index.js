@@ -1,14 +1,14 @@
-import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import { connect } from 'preact-redux'
+import { Header as Dumb } from './Dumb'
+import { goTo } from '~/store/action/router'
+import { logout } from '~/store/action/auth'
+import { selectCurrentUser } from '~/store/selector/currentUser'
 
-export const Header = ({}) => <Container>0</Container>
+const injectState = connect(
+  state => ({
+    user: selectCurrentUser(state),
+  }),
+  { logout }
+)
 
-const Container = styled.div`
-  background-color: #eee;
-  width: 100%;
-  height: 40px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 0 20px;
-`
+export const Header = injectState(Dumb)
