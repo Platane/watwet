@@ -18,7 +18,7 @@ export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
   info: {
     description: pickVegetal().name_fr,
     name: pickVegetal().name_la,
-    picture_url: '',
+    picture_url: 'https://github.com/Platane.png',
     geoloc: {
       lat: 0,
       lng: 0,

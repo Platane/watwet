@@ -672,4 +672,8 @@ export const vegetals: Vegetal[] = [
   { name_fr: 'Yunnan camellia', name_la: 'Camellia yunnanensis' },
   { name_fr: 'Zebrawood', name_la: 'Brachystegia spiciformis' },
   { name_fr: 'Zedoary', name_la: 'Curcuma zedoaria' },
-].map((x, i) => ({ ...x, id: `vegetal-${i + 1}` }))
+].map((x, i) => ({
+  ...x,
+  id: `vegetal-${i + 1}`,
+  layer: ['A', 'a', 'h'][Math.floor(Math.random() * 3)],
+}))
