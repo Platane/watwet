@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "dependencies": {
     "emotion": "8.0.12",
+    "lodash.deburr": "4.1.0",
+    "lodash.kebabcase": "4.1.1",
     "preact": "8.2.7",
     "preact-compat": "3.17.0",
     "preact-emotion": "8.0.12",
@@ -21,6 +23,7 @@
     "babel-plugin-emotion": "8.0.12",
     "babel-plugin-module-resolver": "3.0.0",
     "babel-plugin-transform-class-properties": "6.24.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "6.26.0",
     "babel-plugin-transform-inline-environment-variables": "0.2.0",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
     "babel-plugin-transform-react-jsx": "6.24.1",
@@ -42,7 +45,7 @@
   },
   "scripts": {
     "start":
-      "NODE_ENV=demo webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
+      "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose",
     "build":
       "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js && node ./script/rewriteFileName.js"

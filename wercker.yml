@@ -15,6 +15,10 @@ build:
       code: yarn build
 
     - script:
+      name: test
+      code: yarn test
+
+    - script:
       name: prepare
       code: |
         mv dist gh-pages
