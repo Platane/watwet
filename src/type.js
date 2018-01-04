@@ -1,5 +1,5 @@
 // Arborée
-// buissonant
+// arbustive
 // herbacée
 export type Layer = 'A' | 'a' | 'h'
 
@@ -48,4 +48,10 @@ export type Site = {
   client: string,
 
   habitats: Habitat[],
+}
+
+export type User = {
+  id: string,
+  name: string,
+  picture_url: string,
 }
