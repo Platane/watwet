@@ -12,27 +12,29 @@ const state_rg = new RegExp(
   `strate .*(${layers_names.map(x => x.normalizedName).join('|')})`
 )
 
-const extractSeparator = ([x, r]) => {
+const extractSeparator = ([x, representation]) => {
   const m = deburr(x.toLowerCase()).match(state_rg)
 
   if (!m) return null
 
   return {
     layer: layers_names.find(x => x.normalizedName == m[1]).key,
-    representation: r / 100,
+    representation,
   }
 }
 
-const extractVegetal = layer => ([name_fr, name_la, id, r]): {
+const extractVegetal = layer => ([name_fr, name_la, representation]): {
   vegetal: Vegetal,
   representation: number,
 } => {
-  const representation = parseInt(((r || '').match(/\d+/) || [0])[0], 10)
-
-  return {
-    vegetal: { id, layer, name_fr, name_la },
-    representation,
-  }
+  return (
+    name_fr &&
+    name_la &&
+    representation && {
+      vegetal: { id: name_la, layer, name_fr, name_la },
+      representation,
+    }
+  )
 }
 
 export const getId = (i: number, name: string) => {
@@ -54,9 +56,12 @@ export const parse = (values: string[][]): Habitat => {
     if (s) {
       layer = s.layer
       layers[s.layer] = s.representation
-    } else {
-      population.push(extractVegetal(layer)(x))
+      return
     }
+
+    const v = extractVegetal(layer)(x)
+
+    if (v) population.push(v)
   })
 
   return {

@@ -31,11 +31,11 @@ const run = async () => {
 
   const asites = await list()
 
-  // console.log(await get(sites[0].id))
-
   const s = sites[0]
   s.id = asites[0].id
-  await set(s)
+
+  // await set(s)
+  console.log(await get(sites[0].id))
 }
 
 run()

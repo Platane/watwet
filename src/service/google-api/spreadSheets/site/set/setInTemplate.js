@@ -1,5 +1,5 @@
 import { deepEqual } from '~/util/object'
-import { format as formatHabitat } from './parse/habitat'
+import { format as formatHabitat } from '../parse/habitat'
 
 const template_id = '16fF8PwRsD77wAlWrfOWOb0btEVtCLuD37AKwX7hdAB8'
 
