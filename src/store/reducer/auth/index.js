@@ -29,10 +29,13 @@ export const reduce = (state: State, action): State => {
 
 export const reducer2 = (state: GlobalState, action): GlobalState => {
   const shouldConnect =
-    !state.auth.connected && state.init.network && !state.offline
+    !state.auth.connected &&
+    state.init.network &&
+    !state.offline &&
+    state.resource.shouldRead
 
-  // if (shouldConnect !== state.auth.shouldConnect)
-  //   return set(state, ['auth', 'shouldConnect'], shouldConnect)
+  if (shouldConnect !== state.auth.shouldConnect)
+    return set(state, ['auth', 'shouldConnect'], shouldConnect)
 
   if (state.auth.shouldDisconnect && !state.auth.connected)
     return set(state, ['auth', 'shouldDisconnect'], false)

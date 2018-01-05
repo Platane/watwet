@@ -6,11 +6,16 @@ export const init = store => {
   const update = () => {
     const state = store.getState()
     write('watwet-user', selectCurrentUser(state))
+    write('watwet-resource', {
+      sites: state.resource.sites,
+      habitats: state.resource.habitats,
+    })
   }
 
   store.dispatch(
     readAction({
       user: read('watwet-user'),
+      resource: read('watwet-resource'),
     })
   )
 
