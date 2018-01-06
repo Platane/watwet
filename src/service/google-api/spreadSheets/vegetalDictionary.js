@@ -1,7 +1,7 @@
 import { VEGETAL_DICTIONARY_ID } from '~/config'
 import type { Vegetal } from 'type'
 
-export const read = async (): Promise<Vegetal[]> => {
+export const get = async (): Promise<Vegetal[]> => {
   const gapi = window.gapi
 
   const res = await gapi.client.sheets.spreadsheets.values.get({

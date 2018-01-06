@@ -1,41 +1,23 @@
 import { h, Component } from 'preact'
 import styled, { css } from 'preact-emotion'
 import { injectFilterState, Typeahead } from 'react-simplest-typeahead'
+import { normalize, splitWithPattern } from '~/util/textSearch'
 
-const filterFunction = pattern => vegetal =>
-  vegetal.name_la.toLowerCase().includes(pattern.toLowerCase())
-
-const exposePattern = (word, pattern) => {
-  if (!pattern) return [{ text: word, type: 'normal' }]
-
-  let s = 0
-  let i
-
-  const e = []
-
-  const p = pattern.toLowerCase()
-  const w = word.toLowerCase()
-
-  while ((i = w.indexOf(p, s)) >= 0) {
-    const pre = word.slice(s, i)
-
-    s = i + p.length
-
-    const pa = word.slice(i, s)
-
-    e.push({ text: pre, type: 'normal' }, { text: pa, type: 'match' })
-  }
-
-  e.push({ text: word.slice(s), type: 'normal' })
-
-  return e
-}
+const filterFunction = pattern => ({ normalizedName, id }) =>
+  normalizedName.includes(normalize(pattern)) || id.includes(normalize(pattern))
 
 const renderOption = pattern => ({ option, isHighlighted, ...props }) => (
   <Item key={option.id} {...props} isHighlighted={isHighlighted}>
-    {exposePattern(option.name_la, pattern).map(({ text, type }) => (
-      <Text type={type}>{text}</Text>
-    ))}
+    <Code>
+      {splitWithPattern(option.id, pattern).map(({ text, type }) => (
+        <Text type={type}>{text}</Text>
+      ))}
+    </Code>
+    <Name>
+      {splitWithPattern(option.name, pattern).map(({ text, type }) => (
+        <Text type={type}>{text}</Text>
+      ))}
+    </Name>
   </Item>
 )
 
@@ -43,6 +25,12 @@ const Text = styled.span`
   color: ${props => (props.type === 'match' ? '#000' : '#555')};
   font-weight: ${props => (props.type === 'match' ? 'bold' : 'normal')};
 `
+
+const Code = styled.span`
+  min-width: 100px;
+  display: inline-block;
+`
+const Name = styled.span``
 
 const Item = styled.div`
   padding: 10px;
@@ -55,7 +43,7 @@ const SearchBar_ = ({ pattern, ...props }) => (
     pattern={pattern}
     value=""
     renderOption={renderOption(pattern)}
-    placeholder="your favorite vegetal here ..."
+    placeholder="habitat name"
     cusmtomClassName={cusmtomClassName}
     {...props}
   />

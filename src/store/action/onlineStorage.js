@@ -8,6 +8,11 @@ export const hydrateHabitats = habitats => ({
   habitats,
 })
 
+export const hydrateHabitatCanonicalNames = habitatCanonicalNames => ({
+  type: 'onlineStorage:hydrateHabitatCanonicalNames',
+  habitatCanonicalNames,
+})
+
 export const hydrateSites = sites => ({
   type: 'onlineStorage:hydrateSites',
   sites,

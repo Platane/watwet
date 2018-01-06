@@ -9,6 +9,7 @@ export const init = store => {
     write('watwet-resource', {
       sites: state.resource.sites,
       habitats: state.resource.habitats,
+      habitatCanonicalNames: state.resource.habitatCanonicalNames,
     })
   }
 

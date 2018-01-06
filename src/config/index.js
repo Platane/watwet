@@ -1,6 +1,8 @@
 export const VEGETAL_DICTIONARY_ID =
   '19HU7tNo-Pjx5hSF38da1-Qeoqr14aKHbnvBP5q6xGUs'
 
+export const HABITAT_NAME_ID = '1Mex_t61Y5qALeTJpKWrJyokLb1hmoUJNqJeUIoI8Qq4'
+
 export const GOOGLE_CLIENT_ID =
   '323658393768-08255rmjt4up5t9cvoqf99b23tjra4ed.apps.googleusercontent.com'
 

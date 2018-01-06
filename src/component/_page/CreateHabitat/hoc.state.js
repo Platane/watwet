@@ -4,7 +4,7 @@ export default C =>
   class createHabitatState extends Component {
     state = { info: {} }
 
-    onChange = info => this.setState({ info })
+    onChange = info => this.setState({ info: { ...this.state.info, ...info } })
 
     onSubmit = () => this.props.createHabitat({ info })
 

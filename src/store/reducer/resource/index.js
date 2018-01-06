@@ -5,6 +5,7 @@ export const defaultState = {
   habitats: {},
   sites: {},
   vegetalDictionary: [],
+  habitatCanonicalNames: [],
 
   shouldRead: true,
 }
@@ -40,6 +41,9 @@ export const reduce = (state: State, action): State => {
 
     case 'onlineStorage:hydrateVegetalDictionary':
       return { ...state, vegetalDictionary: action.vegetalDictionary }
+
+    case 'onlineStorage:hydrateHabitatCanonicalNames':
+      return { ...state, habitatCanonicalNames: action.habitatCanonicalNames }
 
     default:
       return state
