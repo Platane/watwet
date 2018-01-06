@@ -16,6 +16,7 @@ export default () => {
         height: 100%;
         position: relative;
         margin: 0;
-    }
+        font-family: Lato,Avenir Next,Helvetica Neue,sans-serif;
+      }
     `
 }

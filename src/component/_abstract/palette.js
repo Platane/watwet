@@ -1,14 +1,16 @@
-export const primary = '#E54B4B'
-export const secondary = '#FFA987'
-export const white = '#F7EBE8'
+// export const primary = '#E54B4B'
+// export const secondary = '#FFA987'
+//
+export const white = '#fefefe'
 export const grey = '#444140'
 export const black = '#1E1E24'
 
-// export const trio = [
-//   'hsl(35, 100%, 77%)',
-//   'hsl(24, 100%, 66%)',
-//   'hsl(204, 96%, 69%)',
-// ]
+export const variant = [
+  'hsl(35, 100%, 77%)',
+  'hsl(24, 100%, 66%)',
+  'hsl(204, 96%, 69%)',
+  'hsl(234, 96%, 69%)',
+]
 
 export const vibrant1 = 'hsl(25, 79%, 57%)'
 export const vibrant2 = 'hsl(9, 84%, 27%)'
@@ -16,7 +18,7 @@ export const vibrant2 = 'hsl(9, 84%, 27%)'
 export const trio = [
   'hsl(93, 46%, 72%)',
   'hsl(99, 13%, 43%)',
-  'hsl(93, 31%, 21%)',
+  // 'hsl(93, 31%, 21%)',
   'hsl(39, 19%, 29%)',
 ]
 
@@ -38,4 +40,4 @@ const toInt = x => {
 }
 
 export const fromHash = (hash: string) =>
-  `hsl(${(toInt(hash) % 30) * 12},80%,80%)`
+  `hsl(${(toInt(hash) % 30) * 12},60%,60%)`

@@ -1,14 +1,17 @@
 import { connect } from 'preact-redux'
 import { Header as Dumb } from './Dumb'
 import { goTo } from '~/store/action/router'
-import { logout } from '~/store/action/auth'
 import { selectCurrentUser } from '~/store/selector/currentUser'
+import { selectSpreadSheetUrl } from '~/store/selector/spreadSheetUrl'
+import { selectOffline } from '~/store/selector/offline'
 
 const injectState = connect(
   state => ({
     user: selectCurrentUser(state),
+    offline: selectOffline(state),
+    spreadSheetUrl: !selectOffline(state) && selectSpreadSheetUrl(state),
   }),
-  { logout }
+  { goToHome: () => goTo('/') }
 )
 
 export const Header = injectState(Dumb)
