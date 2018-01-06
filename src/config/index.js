@@ -9,3 +9,9 @@ export const GOOGLE_API_KEY = 'AIzaSyAAgJIctOGSkUPGvNr0AeQtxETWUxiIwYU'
 export const SENTRY_DSN = process.env.SENTRY_DSN || null
 
 export const PATHNAME_BASE = process.env.PATHNAME_BASE || '/'
+
+export const CLOUDINARY_NAME = 'dztf8jekp'
+
+export const CLOUDINARY_API_KEY = '281743959422359'
+
+export const CLOUDINARY_UPLOAD_PRESET = 'wjvwri8j'

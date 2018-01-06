@@ -3,6 +3,7 @@ import styled from 'preact-emotion'
 
 import { RepartitionBar } from '~/component/RepartitionBar'
 import { Header } from '~/component/Header'
+import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { HabitatList } from '~/component/_page/HabitatList'
 import { Habitat } from '~/component/_page/Habitat'
 
@@ -10,10 +11,15 @@ import cssReset from '../_abstract/cssReset'
 
 export const Content = ({ routerKey, routerParam }) => {
   switch (routerKey) {
+    case 'habitatCreate':
+      return <CreateHabitat />
+
     case 'habitatList':
       return <HabitatList />
+
     case 'habitat':
       return <Habitat />
+
     default:
       return null
   }
