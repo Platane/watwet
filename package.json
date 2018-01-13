@@ -10,15 +10,15 @@
     "preact-emotion": "8.0.12",
     "preact-redux": "2.0.3",
     "prop-types": "15.6.0",
-    "raven-js": "3.21.0",
-    "react-simplest-typeahead": "1.0.1",
+    "raven-js": "3.22.0",
+    "react-simplest-typeahead": "1.1.0",
     "redux": "3.7.2",
     "unfetch": "3.0.0"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
-    "babel-jest": "22.0.1",
+    "babel-jest": "22.0.6",
     "babel-loader": "7.1.2",
     "babel-plugin-emotion": "8.0.12",
     "babel-plugin-module-resolver": "3.0.0",
@@ -33,21 +33,21 @@
     "babel-preset-minify": "0.2.0",
     "babili-webpack-plugin": "0.1.2",
     "file-loader": "1.1.6",
-    "flow-bin": "0.61.0",
-    "jest": "22.0.1",
-    "prettier": "1.9.2",
+    "flow-bin": "0.63.1",
+    "jest": "22.0.6",
+    "prettier": "1.10.2",
     "webpack": "3.10.0",
     "webpack-assets-manifest": "1.0.0",
-    "webpack-dev-server": "2.9.7"
+    "webpack-dev-server": "2.10.1"
   },
   "jest": {
-    "testMatch": ["**/__tests__/**/*.(spec|test).js"]
+    "testMatch": [
+      "**/__tests__/**/*.(spec|test).js"
+    ]
   },
   "scripts": {
-    "start":
-      "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
+    "start": "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose",
-    "build":
-      "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js && node ./script/rewriteFileName.js"
+    "build": "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js && node ./script/rewriteFileName.js"
   }
 }
