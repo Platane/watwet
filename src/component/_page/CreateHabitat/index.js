@@ -1,15 +1,14 @@
 import { connect } from 'preact-redux'
 import { CreateHabitat as Dumb } from './Dumb'
-import { goTo } from '~/store/action/router'
-import { logout } from '~/store/action/auth'
-import { selectCurrentUser } from '~/store/selector/currentUser'
+import { createHabitat } from '~/store/action/mutation'
+import { selectCurrentSite } from '~/store/selector/currentSite'
 import withState from './hoc.state'
 
 const injectState = connect(
   state => ({
-    user: selectCurrentUser(state),
+    siteId: (selectCurrentSite(state) || { id: null }).id,
   }),
-  { logout }
+  { createHabitat }
 )
 
-export const CreateHabitat = withState(injectState(Dumb))
+export const CreateHabitat = injectState(withState(Dumb))

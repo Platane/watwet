@@ -24,4 +24,8 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin: 20px;
+
+  @media (max-width: 750px) {
+    flex-direction: column;
+  }
 `

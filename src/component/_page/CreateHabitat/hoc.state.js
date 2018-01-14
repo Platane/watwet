@@ -6,7 +6,10 @@ export default C =>
 
     onChange = info => this.setState({ info: { ...this.state.info, ...info } })
 
-    onSubmit = () => this.props.createHabitat({ info })
+    onSubmit = () =>
+      this.props.createHabitat(this.props.siteId, {
+        info: this.state.info,
+      })
 
     render() {
       return (

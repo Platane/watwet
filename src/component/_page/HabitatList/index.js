@@ -13,6 +13,7 @@ const injectState = connect(
   },
   dispatch => ({
     goToHabitat: habitat => dispatch(goTo(`habitat/${habitat.id}`)),
+    goToCreateHabitat: () => dispatch(goTo(`habitat/create`)),
   })
 )
 

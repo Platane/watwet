@@ -6,7 +6,7 @@ import { Header } from '~/component/Header'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { HabitatList } from '~/component/_page/HabitatList'
 import { Habitat } from '~/component/_page/Habitat'
-
+import { variant } from '~/component/_abstract/palette'
 import cssReset from '../_abstract/cssReset'
 import * as palette from '../_abstract/palette'
 
@@ -56,14 +56,22 @@ export const App = ({ routerKey, routerParam }) =>
     <Container>
       <Header />
       <Palette />
-      <ContentWrap>
+      <ContentWrap routerKey={routerKey}>
         <Content routerKey={routerKey} routerParam={routerParam} />
       </ContentWrap>
       <Footer />
     </Container>
   )
 
+const back_color = {
+  home: variant[0],
+  habitatCreate: variant[3],
+  habitatList: variant[0],
+  habitat: variant[1],
+}
 const ContentWrap = styled.div`
+  background-color: ${props => back_color[props.routerKey]};
+  transition: background-color 280ms ease;
   flex: 0px 1 1;
 `
 
