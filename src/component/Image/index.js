@@ -5,7 +5,8 @@ export const Image = ({ url, style, ...props }) => (
   <Image_
     {...props}
     style={{
-      backgroundImage: `url(${url}) ${props.postImage || ''}`,
+      backgroundImage: `${props.preImage || ''} url(${url}) ${props.postImage ||
+        ''}`,
       ...(style || {}),
     }}
   />
