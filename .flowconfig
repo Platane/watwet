@@ -9,4 +9,4 @@ flow-typed
 [options]
 all=true
 module.name_mapper='^~/\(.*\)' -> '<PROJECT_ROOT>/src/\1'
-module.name_mapper='^types/\(.*\)' -> '<PROJECT_ROOT>/src/type/\1'
+module.name_mapper='^type/\(.*\)' -> '<PROJECT_ROOT>/src/type/\1'
