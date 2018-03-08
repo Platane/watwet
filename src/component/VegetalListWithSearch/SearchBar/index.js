@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import styled, { css } from 'preact-emotion'
 import { injectFilterState, Typeahead } from 'react-simplest-typeahead'
+import { Layer as IconLayer_ } from '~/component/Icon/Layer'
 
 const filterFunction = pattern => vegetal =>
   vegetal.name_la.toLowerCase().includes(pattern.toLowerCase())
@@ -33,21 +34,37 @@ const exposePattern = (word, pattern) => {
 
 const renderOption = pattern => ({ option, isHighlighted, ...props }) => (
   <Item key={option.id} {...props} isHighlighted={isHighlighted}>
-    {exposePattern(option.name_la, pattern).map(({ text, type }) => (
-      <Text type={type}>{text}</Text>
-    ))}
+    <IconLayer layer={option.layer} />
+    <Name>
+      {exposePattern(option.name_la, pattern).map(({ text, type }) => (
+        <Text type={type}>{text}</Text>
+      ))}
+    </Name>
   </Item>
 )
+const IconLayer = styled(IconLayer_)`
+  margin-right: 20px;
+  width: 16px;
+  height: 16px;
+`
 
 const Text = styled.span`
   color: ${props => (props.type === 'match' ? '#000' : '#555')};
   font-weight: ${props => (props.type === 'match' ? 'bold' : 'normal')};
+`
+const Name = styled.span`
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `
 
 const Item = styled.div`
   padding: 10px;
   background-color: ${props => (props.isHighlighted ? '#eee' : 'transparent')};
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 const SearchBar_ = ({ pattern, ...props }) => (
@@ -56,13 +73,17 @@ const SearchBar_ = ({ pattern, ...props }) => (
     value=""
     renderOption={renderOption(pattern)}
     placeholder="your favorite vegetal here ..."
-    cusmtomClassName={cusmtomClassName}
+    customClassName={customClassName}
     {...props}
   />
 )
 
-const cusmtomClassName = {
-  input: css``,
+const customClassName = {
+  input: css`
+    padding: 14px 20px;
+    border: none;
+    border-radius: 2px;
+  `,
   options: css``,
   typeahead: css``,
 }

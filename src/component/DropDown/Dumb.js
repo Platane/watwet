@@ -33,6 +33,7 @@ const Panel = styled.div`
   background-color: ${white};
   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.3);
   border-radius: 2px;
+  z-index: 3;
 
   &::after {
     content: '';

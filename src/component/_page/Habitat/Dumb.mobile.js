@@ -4,19 +4,34 @@ import styled from 'preact-emotion'
 import { HabitatHeader } from '~/component/HabitatHeader'
 import { LayerSelector } from '~/component/LayerSelector'
 import { VegetalListWithSearch } from '~/component/VegetalListWithSearch'
+import { filterVegetal } from '~/store/selector/currentLayer'
 
-export const Habitat = ({ habitat, vegetals, updateHabitat }) => (
+export const Habitat = ({
+  currentLayer,
+  habitat,
+  vegetals,
+  updateHabitat,
+  selectLayer,
+}) => (
   <Container>
     <HabitatHeader habitat={habitat} />
     <Content>
       <LayerSelector
+        currentLayer={currentLayer}
         layers={habitat.layers}
         onChange={layers => updateHabitat({ ...habitat, layers })}
-        onSelect={e => console.log(e)}
+        onSelect={selectLayer}
       />
+
+      <div style={{ height: '60px' }} />
+
       <VegetalListWithSearch
-        vegetals={vegetals}
-        population={habitat.population}
+        currentLayer={currentLayer}
+        vegetals={vegetals.filter(filterVegetal(currentLayer))}
+        population={habitat.population.filter(x =>
+          filterVegetal(currentLayer)(x.vegetal)
+        )}
+        population_unfilter={habitat.population}
         onChange={population => updateHabitat({ ...habitat, population })}
       />
     </Content>
@@ -30,5 +45,11 @@ const Container = styled.div`
 `
 
 const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  max-width: 480px;
   margin: 20px;
+  min-height: 600px;
 `

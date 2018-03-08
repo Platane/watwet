@@ -3,6 +3,7 @@ import styled from 'preact-emotion'
 
 import { RepartitionBar } from '~/component/RepartitionBar'
 import { Header } from '~/component/Header'
+import { Footer } from '~/component/Footer'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { HabitatList } from '~/component/_page/HabitatList'
 import { Habitat } from '~/component/_page/Habitat'
@@ -73,11 +74,6 @@ const ContentWrap = styled.div`
   background-color: ${props => back_color[props.routerKey]};
   transition: background-color 280ms ease;
   flex: 0px 1 1;
-`
-
-const Footer = styled.div`
-  background-color: #eee;
-  height: 30px;
 `
 
 const Container = styled.div`

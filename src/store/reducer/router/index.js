@@ -1,6 +1,7 @@
 import { routeValidator } from '~/service/router/routeValidator'
 import { routes } from './routes'
 import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
+import { keyToLabel } from '~/store/selector/currentLayer'
 
 import type { State } from './type'
 
@@ -32,6 +33,17 @@ export const reduceGlobal = (state, action) => {
         ...state,
         router: getRoute(`habitat/${habitatId}`),
       }
+
+    case 'location:selectLayer':
+      if (state.router.param.habitatId)
+        return {
+          ...state,
+          router: getRoute(
+            `habitat/${state.router.param.habitatId}/${keyToLabel(
+              action.layer
+            ) || ''}`
+          ),
+        }
   }
 
   return state
