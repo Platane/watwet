@@ -28,7 +28,7 @@ export const reduce = (state: State, action): State => {
       return {
         query: action.query,
         hash: action.hash,
-        ...getRoute(action.pathname),
+        ...getRoute(action.path),
       }
   }
 
