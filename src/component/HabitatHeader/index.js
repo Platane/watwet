@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import styled, { keyframes } from 'preact-emotion'
 import { Image } from '~/component/Image'
 
 export const HabitatHeader = ({ habitat }) => (
@@ -11,6 +11,7 @@ export const HabitatHeader = ({ habitat }) => (
       />
     </BackgroundW>
     <Picture url={habitat && habitat.info.picture_url} />
+    <Name>{habitat && habitat.info.name}</Name>
   </Container>
 )
 
@@ -21,6 +22,24 @@ const BackgroundW = styled.div`
   right: 0;
   bottom: 0;
   overflow: hidden;
+`
+
+const nameAnimation = keyframes`
+  0%{ transform: translateY(50px); opacity:0;}
+  100%{ transform: translateY(0); opacity:1;}
+`
+
+const Name = styled.div`
+  position: absolute;
+  height: 20px;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+  text-align: center;
+  color: #fff;
+  font-size: 1.2em;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0);
+  animation: ${nameAnimation} 280ms ease;
 `
 
 const Background = styled(Image)`
@@ -46,4 +65,5 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 `

@@ -18,7 +18,7 @@ export const vibrant2 = 'hsl(9, 84%, 27%)'
 export const trio = [
   'hsl(93, 46%, 72%)',
   'hsl(99, 13%, 43%)',
-  // 'hsl(93, 31%, 21%)',
+  'hsl(93, 31%, 21%)',
   'hsl(39, 19%, 29%)',
 ]
 
