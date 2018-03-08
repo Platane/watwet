@@ -12,4 +12,5 @@ export const filterVegetal = key =>
 
 export const keyToLabel = key => d[key]
 
-export const selectCurrentLayer = state => _d[state.router.param.layer] || null
+export const selectCurrentLayer = state =>
+  _d[state.router.query && state.router.query.strate] || null

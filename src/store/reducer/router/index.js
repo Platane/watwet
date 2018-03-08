@@ -7,17 +7,29 @@ import type { State } from './type'
 
 const getRoute = routeValidator(routes)
 
-export const defaultState = getRoute('/')
+export const defaultState = {
+  hash: {},
+  query: {},
+  ...getRoute('/'),
+}
 
 export const reduce = (state: State, action): State => {
   state = state || defaultState
 
   switch (action.type) {
     case 'location:changed':
-      return getRoute(action.pathname)
+      return {
+        query: action.query,
+        hash: action.hash,
+        ...getRoute(action.pathname),
+      }
 
     case 'location:goTo':
-      return getRoute(action.path)
+      return {
+        query: action.query,
+        hash: action.hash,
+        ...getRoute(action.pathname),
+      }
   }
 
   return state
@@ -31,19 +43,28 @@ export const reduceGlobal = (state, action) => {
 
       return {
         ...state,
-        router: getRoute(`habitat/${habitatId}`),
+        router: {
+          hash: {},
+          query: {
+            strate: keyToLabel(action.layer),
+          },
+          ...getRoute(`habitat/${habitatId}`),
+        },
       }
 
     case 'location:selectLayer':
-      if (state.router.param.habitatId)
+      if (state.router.param.habitatId) {
+        const strate = keyToLabel(action.layer)
+
         return {
           ...state,
-          router: getRoute(
-            `habitat/${state.router.param.habitatId}/${keyToLabel(
-              action.layer
-            ) || ''}`
-          ),
+          router: {
+            hash: {},
+            query: strate ? { strate } : {},
+            ...getRoute(`habitat/${state.router.param.habitatId}`),
+          },
         }
+      }
   }
 
   return state

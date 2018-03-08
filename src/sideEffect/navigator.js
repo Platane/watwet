@@ -1,5 +1,5 @@
 import { locationChanged } from '~/store/action/router'
-// import { deepEqual } from '~/util/object'
+import { deepEqual } from '~/util/object'
 import { pushState, replaceState, getLocation } from '~/service/navigator'
 
 export const init = store => {
@@ -8,14 +8,12 @@ export const init = store => {
   )
 
   const update = () => {
-    const { path, param } = store.getState().router
+    const { path, param, query } = store.getState().router
     const location = getLocation()
 
-    if (path != location.pathname) pushState(path)
+    if (path != location.pathname) pushState(path, query)
 
-    // if (!deepEqual({}, location.query)) replaceState(path)
-    //
-    // if (!deepEqual({}, location.hash)) replaceState(path)
+    if (!deepEqual(query, location.query)) replaceState(path, query)
   }
 
   store.dispatch(locationChanged(getLocation()))
