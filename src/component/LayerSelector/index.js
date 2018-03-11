@@ -15,7 +15,7 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
     {layerLabels.map(({ key, label, color }) => (
       <Layer key={key}>
         <Left onClick={() => onSelect(currentLayer == key ? null : key)}>
-          <Label>{label}</Label>
+          <Label selected={currentLayer == key}>{label}</Label>
           <LayerBadge
             selected={currentLayer == key}
             size={30}
@@ -43,9 +43,17 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
   </Container>
 )
 
+const popAnimation = keyframes`
+  0%{ transform: scale(1,1)}
+  50%{ transform: scale(1.4,1.4)}
+  80%{ transform: scale(1.27,1.27)}
+  100%{ transform: scale(1.3,1.3)}
+`
+
 const LayerBadge = styled(LayerBadge_)`
-  transition: transform 260ms ease;
+  /* transition: transform 260ms ease; */
   transform: ${props => (props.selected ? 'scale(1.3,1.3)' : 'scale(1,1)')};
+  animation: ${props => (props.selected ? popAnimation : null)} 260ms;
 `
 
 const Container = styled.div`
@@ -53,9 +61,20 @@ const Container = styled.div`
 `
 const Label = styled.div`
   position: relative;
-  text-align: right;
-  min-width: 80px;
+  margin-left: auto;
   margin-right: 20px;
+  &::after {
+    content: '';
+    width: 100%;
+    background-color: ${white};
+    height: 1px;
+    position: absolute;
+    opacity: ${props => (props.selected ? 1 : 0)};
+    top: 21px;
+    left: 0;
+    transform: translateY(${props => (props.selected ? 0 : -4)}px);
+    transition: opacity 260ms ease, transform 260ms ease;
+  }
 `
 const Layer = styled.div`
   display: flex;
@@ -69,6 +88,7 @@ const Left = styled.div`
   flex-direction: row;
   align-items: center;
   margin-right: 20px;
+  min-width: 200px;
 `
 const Rigth = styled.div`
   display: flex;
@@ -79,6 +99,9 @@ const Rigth = styled.div`
 const Bar = styled.div`
   height: 30px;
   margin-right: 2px;
+  border: solid 1px ${props => (props.selected ? white : 'transparent')};
+  border-radius: 2px;
+  transition: border-color 260ms ease;
 `
 const Input = styled.input`
   height: 30px;

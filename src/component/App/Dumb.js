@@ -4,6 +4,7 @@ import styled from 'preact-emotion'
 import { RepartitionBar } from '~/component/RepartitionBar'
 import { Header } from '~/component/Header'
 import { Footer } from '~/component/Footer'
+import { Wallpaper } from '~/component/Wallpaper'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { HabitatList } from '~/component/_page/HabitatList'
 import { Habitat } from '~/component/_page/Habitat'
@@ -52,28 +53,22 @@ const Square = styled.div`
   background-color: ${props => props.color};
 `
 
+//<Palette />
 export const App = ({ routerKey, routerParam }) =>
   cssReset() || (
     <Container>
       <Header />
-      <Palette />
-      <ContentWrap routerKey={routerKey}>
+      <ContentWrap>
+        <Wallpaper />
         <Content routerKey={routerKey} routerParam={routerParam} />
       </ContentWrap>
       <Footer />
     </Container>
   )
 
-const back_color = {
-  home: variant[0],
-  habitatCreate: variant[3],
-  habitatList: variant[0],
-  habitat: variant[1],
-}
 const ContentWrap = styled.div`
-  background-color: ${props => back_color[props.routerKey]};
-  transition: background-color 280ms ease;
   flex: 0px 1 1;
+  position: relative;
 `
 
 const Container = styled.div`

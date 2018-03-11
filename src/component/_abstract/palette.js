@@ -16,10 +16,13 @@ export const vibrant1 = 'hsl(25, 79%, 57%)'
 export const vibrant2 = 'hsl(9, 84%, 27%)'
 
 export const trio = [
-  'hsl(93, 46%, 72%)',
-  'hsl(99, 13%, 43%)',
-  'hsl(93, 31%, 21%)',
-  'hsl(39, 19%, 29%)',
+  // 'hsl(93, 46%, 72%)',
+  // 'hsl(104, 27%, 30%)',
+  // 'hsl(99, 17%, 43%)',
+  'hsl(92, 31%, 31%)',
+  'hsl(100, 35%, 21%)',
+  'hsl(107, 31%, 21%)',
+  // 'hsl(39, 19%, 29%)',
 ]
 
 // https://stackoverflow.com/questions/6122571/simple-non-secure-hash-function-for-javascript

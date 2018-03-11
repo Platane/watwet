@@ -22,6 +22,8 @@ const SubmitButton = styled.button`
 `
 
 const Container = styled.div`
+  z-index: 2;
+  position: relative;
   background-color: #eee;
   margin: 10px;
 `
