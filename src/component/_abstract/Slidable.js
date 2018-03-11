@@ -1,4 +1,4 @@
-import React from 'react'
+import { h, Component } from 'preact'
 
 type Param = {
   bottom: number,
@@ -17,13 +17,13 @@ export type Props = {
   upFn: (p: Param, event: Event) => void,
 }
 
-const getPointerX = (event: MouseEvent | TouchEvent): number =>
+export const getPointerX = (event: MouseEvent | TouchEvent): number =>
   event.targetTouches ? event.targetTouches[0].clientX : event.clientX
 
-const getPointerY = (event: MouseEvent | TouchEvent): number =>
+export const getPointerY = (event: MouseEvent | TouchEvent): number =>
   event.targetTouches ? event.targetTouches[0].clientY : event.clientY
 
-export class Slidable extends React.Component<*, *> {
+export class Slidable extends Component<*, *> {
   container: null | any = null
 
   getSlideParam(event: MouseEvent | TouchEvent): Param {

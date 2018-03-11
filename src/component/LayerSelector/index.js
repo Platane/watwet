@@ -2,6 +2,7 @@ import { h, Component } from 'preact'
 import styled, { keyframes, css } from 'preact-emotion'
 import { white, trio } from '~/component/_abstract/palette'
 import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
+import { Slidable } from '~/component/_abstract/Slidable'
 import { clampU } from '~/util/math'
 
 const layerLabels = [
@@ -9,6 +10,9 @@ const layerLabels = [
   { key: 'a', color: trio[1], label: 'arbustif' },
   { key: 'h', color: trio[0], label: 'herbacé' },
 ]
+
+const setLayerValue = (onChange, layers, key) => x =>
+  onChange({ ...layers, [key]: clampU(x / 100) })
 
 export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
   <Container>
@@ -25,17 +29,25 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
           />
         </Left>
         <Rigth>
-          <Bar
-            selected={currentLayer == key}
-            style={{ width: `${100 * layers[key]}px`, backgroundColor: color }}
-          />
+          <Slidable
+            downFn={({ kx }) => setLayerValue(onChange, layers, key)(kx * 100)}
+            moveFn={({ kx }) => setLayerValue(onChange, layers, key)(kx * 100)}
+          >
+            <BarContainer>
+              <Bar
+                selected={currentLayer == key}
+                style={{
+                  width: `${100 * layers[key]}%`,
+                  backgroundColor: color,
+                }}
+              />
+            </BarContainer>
+          </Slidable>
           <Input
             type="number"
             value={Math.round(layers[key] * 100)}
             step={1}
-            onChange={e =>
-              onChange({ ...layers, [key]: clampU(e.target.value / 100) })
-            }
+            onChange={e => setLayerValue(onChange, layers, key)(e.target.value)}
           />
         </Rigth>
       </Layer>
@@ -102,6 +114,10 @@ const Bar = styled.div`
   border: solid 1px ${props => (props.selected ? white : 'transparent')};
   border-radius: 2px;
   transition: border-color 260ms ease;
+`
+const BarContainer = styled.div`
+  width: 100px;
+  position: relative;
 `
 const Input = styled.input`
   height: 30px;
