@@ -1,21 +1,20 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import styled, { keyframes } from 'preact-emotion'
 import { set } from '~/util/reduxHelper'
 import { LayerBadge } from '~/component/LayerBadge'
 import { clampU } from '~/util/math'
-
-const sortFn = (a, b) => (a.representation < b.representation ? 1 : -1)
 
 export const VegetalList = ({
   population,
   onRemove,
   onChangeRepresentation,
 }) => (
-  <Container>
-    {population
-      .slice()
-      .sort(sortFn)
-      .map(({ vegetal, representation }, i) => (
+  <Container style={{ height: `${population.length * 50}px` }}>
+    {population.map(({ vegetal, representation }, i) => (
+      <RowContainer
+        key={vegetal.id}
+        style={{ transform: `translateY(${i * 50}px)` }}
+      >
         <Row key={vegetal.id}>
           <LayerBadge size={30} layer={vegetal.layer} />
 
@@ -31,18 +30,36 @@ export const VegetalList = ({
 
           <RemoveButton onClick={() => onRemove(vegetal.id)}>×</RemoveButton>
         </Row>
-      ))}
+      </RowContainer>
+    ))}
   </Container>
 )
 
-const Container = styled.div``
+const Container = styled.div`
+  position: relative;
+`
 
+const popAnimation = keyframes`
+  0%{ transform: scale(0.5,0.5); opacity:0}
+  50%{ transform: scale(1.03,1.03); opacity:1}
+  100%{ transform: scale(1,1); opacity:1}
+`
+
+const RowContainer = styled.div`
+  transition: transform 260ms ease;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 50px;
+`
 const Row = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 10px 0;
+  animation: ${popAnimation} 260ms linear;
 `
 
 const RemoveButton = styled.div`
@@ -52,6 +69,9 @@ const RemoveButton = styled.div`
 
 const Name = styled.div`
   margin: 0 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const Input = styled.input`

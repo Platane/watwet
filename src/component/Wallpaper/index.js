@@ -56,7 +56,7 @@ const getColor = state => {
           }
         default:
           return {
-            color: white,
+            color: trio[2],
           }
       }
 
