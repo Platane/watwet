@@ -12,6 +12,9 @@ export const VegetalListWithSearch = ({
 }) => (
   <Container>
     <SearchBar onChange={onAdd} options={options} />
+
+    <div style={{ height: '20px' }} />
+
     <VegetalList
       population={population}
       onRemove={onRemove}
