@@ -1,7 +1,7 @@
 import { h, Component } from 'preact'
 import styled, { keyframes } from 'preact-emotion'
 import { set } from '~/util/reduxHelper'
-import { LayerBadge } from '~/component/LayerBadge'
+import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
 import { clampU } from '~/util/math'
 
 export const VegetalList = ({
@@ -37,6 +37,9 @@ export const VegetalList = ({
 
 const Container = styled.div`
   position: relative;
+`
+const LayerBadge = styled(LayerBadge_)`
+  flex-shrink: 0;
 `
 
 const popAnimation = keyframes`
