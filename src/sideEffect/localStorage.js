@@ -6,11 +6,7 @@ export const init = store => {
   const update = () => {
     const state = store.getState()
     write('watwet-user', selectCurrentUser(state))
-    write('watwet-resource', {
-      sites: state.resource.sites,
-      habitats: state.resource.habitats,
-      habitatCanonicalNames: state.resource.habitatCanonicalNames,
-    })
+    write('watwet-resource', state.resource)
   }
 
   store.dispatch(

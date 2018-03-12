@@ -1,17 +1,20 @@
 import { createSelector } from 'reselect'
-import { sites, habitats } from './primitive'
 
 export const selectCurrentSite = createSelector(
-  sites,
-  habitats,
-  (sites, habitats) => {
-    const site = sites[Object.keys(sites)[0]]
+  state => state.resource.mutated,
+  state => state.resource.original,
+  (mutated, original) => {
+    const siteKey = Object.keys(original).filter(x => x.match(/^site\./))[0]
+
+    const site = mutated[siteKey] || original[siteKey]
 
     if (!site) return null
 
     return {
       ...site,
-      habitats: site.habitats.map(id => habitats[id]).filter(Boolean),
+      habitats: site.habitats
+        .map(key => mutated[key] || original[key])
+        .filter(Boolean),
     }
   }
 )

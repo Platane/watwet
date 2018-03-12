@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect'
 import { normalize } from '~/util/textSearch'
 
-const habitatCanonicalNames = state => state.resource.habitatCanonicalNames
-
 const formatIndex = code => {
   const [a, ...b] = code.toString().split('.')
 
@@ -18,10 +16,10 @@ const formatIndex = code => {
 
 const formatCodeCorineBiotipe = code => code
 
-export const selectHabitatNameDictionary = createSelector(
-  habitatCanonicalNames,
-  habitatCanonicalNames =>
-    habitatCanonicalNames
+export const selectHabitatDictionary = createSelector(
+  state => state.resource.original.habitatDictionary,
+  habitatDictionary =>
+    (habitatDictionary || [])
       .map(x => ({
         ...x,
         id: formatIndex(x.codeCorineBiotipe),
@@ -31,3 +29,6 @@ export const selectHabitatNameDictionary = createSelector(
       }))
       .sort((a, b) => (a.id < b.id ? -1 : 1))
 )
+
+export const selectVegetalDictionary = state =>
+  state.resource.original.vegetalDictionary

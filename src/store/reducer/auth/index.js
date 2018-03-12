@@ -32,10 +32,10 @@ export const reducer2 = (state: GlobalState, action): GlobalState => {
     !state.auth.connected &&
     state.init.network &&
     !state.offline &&
-    state.resource.shouldRead
+    state.resource.required.length > 0
 
   if (shouldConnect !== state.auth.shouldConnect)
-    return set(state, ['auth', 'shouldConnect'], shouldConnect)
+    return set(state, ['auth', 'shouldConnect'], !!shouldConnect)
 
   if (state.auth.shouldDisconnect && !state.auth.connected)
     return set(state, ['auth', 'shouldDisconnect'], false)

@@ -1,14 +1,20 @@
 import { set, merge } from '~/util/reduxHelper'
+import { selectProperties } from '~/util/object'
 import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
+import { reduce as mutationReduce } from './mutation'
 import type { State } from './type'
 
 export const defaultState = {
-  habitats: {},
-  sites: {},
-  vegetalDictionary: [],
-  habitatCanonicalNames: [],
-
-  shouldRead: true,
+  mutated: {},
+  original: {},
+  dateFetched: {},
+  dateMutated: {},
+  shouldFetch: {},
+  required: [
+    //
+    'vegetalDictionary',
+    'habitatDictionary',
+  ],
 }
 
 export const reduce = (state: State, action): State => {
@@ -16,51 +22,50 @@ export const reduce = (state: State, action): State => {
 
   switch (action.type) {
     case 'localStorage:read':
-      return { ...state, ...(action.resource || {}) }
-
-    case 'mutation:habitat:update':
-      return merge(state, ['habitats', action.habitat.id], action.habitat)
-
-    case 'mutation:habitat:create': {
-      const site = state.sites[action.siteId] || { habitats: [] }
-      const id = getId(site.habitats.length, action.habitat.info.name)
-
       return {
         ...state,
-        habitats: { ...state.habitats, [id]: { ...action.habitat, id } },
-        sites: {
-          ...state.sites,
-          [action.siteId]: {
-            ...site,
-            habitats: [...site.habitats, id],
-          },
-        },
+        ...selectProperties([
+          'mutated',
+          'original',
+          'dateMutated',
+          'dateFetched',
+        ])(action.resource || {}),
       }
+
+    case 'resource:online:read': {
+      state = {
+        ...state,
+        dateFetched: { ...state.dateFetched },
+        original: { ...state.original },
+      }
+
+      Object.keys(action)
+        .filter(key => key !== 'type')
+        .forEach(key => {
+          state.dateFetched[key] = Date.now()
+          state.original[key] = action[key]
+        })
+
+      return state
     }
 
-    case 'onlineStorage:hydrateSites': {
-      const habitats = { ...state.habitats }
-      const sites = { ...state.sites }
+    default: {
+      const oldState = state.mutated
+      const newState = mutationReduce(oldState, action)
 
-      action.sites.forEach(site => {
-        sites[site.id] = {
-          ...site,
-          habitats: site.habitats.map(x => x.id),
+      if (oldState !== newState) {
+        state = {
+          ...state,
+          dateMutated: { ...state.dateMutated },
+          mutated: newState,
         }
 
-        site.habitats.forEach(h => (habitats[h.id] = h))
-      })
-
-      return { ...state, sites, habitats, shouldRead: false }
+        for (let key in newState)
+          if (newState[key] != oldState[key])
+            state.dateMutated[key] = Date.now()
+      }
     }
-
-    case 'onlineStorage:hydrateVegetalDictionary':
-      return { ...state, vegetalDictionary: action.vegetalDictionary }
-
-    case 'onlineStorage:hydrateHabitatCanonicalNames':
-      return { ...state, habitatCanonicalNames: action.habitatCanonicalNames }
-
-    default:
-      return state
   }
+
+  return state
 }

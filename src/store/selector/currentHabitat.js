@@ -1,10 +1,13 @@
 import { createSelector } from 'reselect'
-import { habitats } from './primitive'
 
 const habitatId = state => state.router.param.habitatId
 
 export const selectCurrentHabitat = createSelector(
-  habitats,
+  state => state.resource.mutated,
+  state => state.resource.original,
   habitatId,
-  (habitats, habitatId) => habitats[habitatId] || null
+  (mutated, original, habitatId) =>
+    (habitatId &&
+      (mutated[`habitat.${habitatId}`] || original[`habitat.${habitatId}`])) ||
+    null
 )

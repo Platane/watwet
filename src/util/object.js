@@ -33,7 +33,7 @@ export const deepEqual = (a: any, b: any) => {
   return a === b
 }
 
-export const trimProperties = (toTrim: string) => (o: any) => {
+export const trimProperties = (toTrim: string[]) => (o: any) => {
   if (Array.isArray(o)) return o.map(trimProperties(toTrim))
 
   if (isObject(o)) {
@@ -46,6 +46,14 @@ export const trimProperties = (toTrim: string) => (o: any) => {
   }
 
   return o
+}
+
+export const selectProperties = (toSelect: string[]) => (o: any) => {
+  const copy = {}
+
+  toSelect.filter(key => o[key]).forEach(key => (copy[key] = o[key]))
+
+  return copy
 }
 
 export const shallowEqual = (a: any, b: any) =>

@@ -6,7 +6,7 @@ import withState from './hoc.state'
 
 const injectState = connect(
   state => ({
-    siteId: (selectCurrentSite(state) || { id: null }).id,
+    siteId: (selectCurrentSite(state) || {}).id || 'default',
   }),
   { createHabitat }
 )

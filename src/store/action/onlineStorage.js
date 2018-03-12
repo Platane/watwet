@@ -17,3 +17,8 @@ export const hydrateSites = sites => ({
   type: 'onlineStorage:hydrateSites',
   sites,
 })
+
+export const hydrate = payload => ({
+  type: 'resource:online:read',
+  ...payload,
+})

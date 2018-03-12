@@ -1,18 +1,12 @@
-import {
-  hydrateVegetalDictionary,
-  hydrateSites,
-  hydrateHabitatCanonicalNames,
-} from '~/store/action/onlineStorage'
+import { hydrate } from '~/store/action/onlineStorage'
 
 import {
   list as listSites,
   get as getSite,
   create as createSite,
 } from '~/service/google-api/spreadSheets/site'
-import { get as getHabitatCanonicalNames } from '~/service/google-api/spreadSheets/habitatCanonicalNames'
-
-import { vegetals } from '~/__fixtures__/vegetals'
-import { habitats } from '~/__fixtures__/habitats'
+import { get as getHabitatDirectory } from '~/service/google-api/spreadSheets/habitatDirectory'
+import { get as getVegetalDictionary } from '~/service/google-api/spreadSheets/vegetalDictionary'
 
 const getSites = async () => {
   const sites = await listSites()
@@ -23,33 +17,41 @@ const getSites = async () => {
 }
 
 export const init = store => {
-  let pending = false
+  let pending = {}
 
   const update = async () => {
     const state = store.getState()
 
-    if (
-      !pending &&
-      state.init.network &&
-      !state.offline &&
-      state.auth.connected &&
-      state.resource.shouldRead
-    ) {
-      pending = true
+    if (state.init.network && !state.offline && state.auth.connected) {
+      const { required, original } = state.resource
 
-      store.dispatch(hydrateSites(await getSites()))
+      required
+        .filter(key => !original[key] && !pending[key])
+        .forEach(async key => {
+          pending[key] = Date.now()
 
-      store.dispatch(
-        hydrateHabitatCanonicalNames(await getHabitatCanonicalNames())
-      )
+          const [entity, id] = key.split('.', 2)
 
-      pending = false
+          switch (entity) {
+            case 'habitatDictionary': {
+              const habitatDictionary = await getHabitatDirectory()
+              store.dispatch(hydrate({ habitatDictionary }))
+              break
+            }
+
+            case 'vegetalDictionary': {
+              const vegetalDictionary = await getVegetalDictionary()
+              store.dispatch(hydrate({ vegetalDictionary }))
+              break
+            }
+          }
+
+          pending[key] = null
+        })
     }
   }
 
   update()
 
   store.subscribe(update)
-
-  store.dispatch(hydrateVegetalDictionary(vegetals))
 }

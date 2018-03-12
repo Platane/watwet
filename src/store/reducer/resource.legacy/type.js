@@ -8,9 +8,6 @@ export type FlatSite = {
 }
 
 export type State = {
-  mutated: Object,
-  original: Object,
-  dateFetched: { [string]: number },
-  dateMutated: { [string]: number },
-  shouldFetch: string[],
+  habitats: { [string]: FlatHabitat },
+  sites: { [string]: FlatSite },
 }
