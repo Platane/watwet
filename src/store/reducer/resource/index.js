@@ -1,5 +1,6 @@
 import { set, merge } from '~/util/reduxHelper'
 import { selectProperties } from '~/util/object'
+import { removeDuplicatePrimitive } from '~/util/array'
 import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
 import { reduce as mutationReduce } from './mutation'
 import type { State } from './type'
@@ -14,6 +15,7 @@ export const defaultState = {
     //
     'vegetalDictionary',
     'habitatDictionary',
+    'sites',
   ],
 }
 
@@ -66,6 +68,19 @@ export const reduce = (state: State, action): State => {
       }
     }
   }
+
+  return state
+}
+
+export const reduceGlobal = (state, action) => {
+  const siteKeys = state.resource.original.sites || []
+
+  if (siteKeys.some(key => !state.resource.required.includes(key)))
+    state = set(
+      state,
+      ['resource', 'required'],
+      removeDuplicatePrimitive([...state.resource.required, ...siteKeys])
+    )
 
   return state
 }

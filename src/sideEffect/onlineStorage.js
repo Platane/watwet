@@ -44,6 +44,23 @@ export const init = store => {
               store.dispatch(hydrate({ vegetalDictionary }))
               break
             }
+
+            case 'sites': {
+              let sites = await listSites()
+
+              if (sites.length === 0) {
+                await createSite('0')
+                sites = await listSites()
+              }
+
+              store.dispatch(hydrate({ sites: sites.map(x => `site.${x.id}`) }))
+              break
+            }
+
+            case 'site': {
+              store.dispatch(hydrate({ [key]: await getSite(id) }))
+              break
+            }
           }
 
           pending[key] = null

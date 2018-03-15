@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import { chainReducer } from '~/util/reduxHelper'
 import {
   reduce as resource,
+  reduceGlobal as resourceGlobal,
   defaultState as resourceDefaultState,
 } from './resource'
 import {
@@ -29,7 +30,8 @@ export const reduce = chainReducer(
     init,
   }),
   authGlobal,
-  routerGlobal
+  routerGlobal,
+  resourceGlobal
 )
 
 export const defaultState = {
