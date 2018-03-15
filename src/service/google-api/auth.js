@@ -20,13 +20,20 @@ export const getCurrentUser = (): User | null => {
   }
 }
 
+const isLocalhost = () =>
+  typeof location !== 'undefined' && location.hostname === 'localhost'
+
 export const signIn = () => {
   const gapi = window.gapi
 
-  return gapi.auth2.getAuthInstance().signIn({
-    // ux_mode: 'redirect',
-    // redirect_uri: 'https://platane.github.io/watwet',
-  })
+  return gapi.auth2.getAuthInstance().signIn(
+    isLocalhost()
+      ? {}
+      : {
+          ux_mode: 'redirect',
+          redirect_uri: 'https://platane.github.io/watwet',
+        }
+  )
 }
 
 export const signOut = () => {
