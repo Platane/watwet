@@ -4,6 +4,7 @@ import { App as Dumb } from './Dumb'
 const injectState = connect(state => ({
   routerKey: state.router.key,
   routerParam: state.router.param,
+  anonym: !state.auth.user,
 }))
 
 export const App = injectState(Dumb)

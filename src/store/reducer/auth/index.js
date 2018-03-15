@@ -5,6 +5,7 @@ import type { State as GlobalState } from '../type'
 export const defaultState = {
   user: null,
   connected: false,
+  pending: false,
   shouldConnect: false,
   shouldDisconnect: false,
 }
@@ -14,10 +15,20 @@ export const reduce = (state: State, action): State => {
 
   switch (action.type) {
     case 'auth:require:logout':
-      return { ...state, shouldDisconnect: true }
+      return { ...state, shouldDisconnect: true, pending: true }
 
+    case 'auth:require:login':
+      return { ...state, shouldConnect: true, pending: true }
+
+    case 'auth:fail':
     case 'auth:success':
-      return { ...state, user: action.user, connected: !!action.user }
+      return {
+        ...state,
+        user: action.user || null,
+        connected: !!action.user,
+        pending: false,
+        shouldConnect: false,
+      }
 
     case 'localStorage:read':
       return { ...state, user: state.user || action.user }
@@ -34,8 +45,8 @@ export const reducer2 = (state: GlobalState, action): GlobalState => {
     !state.offline &&
     state.resource.required.length > 0
 
-  if (shouldConnect !== state.auth.shouldConnect)
-    return set(state, ['auth', 'shouldConnect'], !!shouldConnect)
+  // if (shouldConnect !== state.auth.shouldConnect)
+  //   return set(state, ['auth', 'shouldConnect'], !!shouldConnect)
 
   if (state.auth.shouldDisconnect && !state.auth.connected)
     return set(state, ['auth', 'shouldDisconnect'], false)

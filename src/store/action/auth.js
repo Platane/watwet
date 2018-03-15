@@ -8,6 +8,10 @@ export const authSuccess = user => ({
   user,
 })
 
+export const login = () => ({
+  type: 'auth:require:login',
+})
+
 export const logout = () => ({
   type: 'auth:require:logout',
 })
