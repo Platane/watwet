@@ -1,0 +1,17 @@
+{
+  "start_url": "index.html",
+  "scope": ".",
+
+  "display": "standalone",
+  "background_color": "#444140",
+  "theme_color": "#b6e3ce",
+
+  "lang": "en-US",
+
+  "icons": [
+    { "sizes": "48x48", "src": "./icon48.png", "type": "image/png" },
+    { "sizes": "96x96", "src": "./icon96.png", "type": "image/png" },
+    { "sizes": "144x144", "src": "./icon144.png", "type": "image/png" },
+    { "sizes": "192x192", "src": "./icon192.png", "type": "image/png" }
+  ]
+}

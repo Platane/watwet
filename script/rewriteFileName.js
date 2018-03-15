@@ -14,6 +14,7 @@ const PATHNAME_BASE = process.env.PATHNAME_BASE || '/'
 const replaceFileName = s =>
   s
     .replace('/index.html', PATHNAME_BASE + 'index.html')
+    .replace('/manifest.json', PATHNAME_BASE + 'manifest.json')
     .replace('/index.js', PATHNAME_BASE + pathIndex)
     .replace('/sw.js', PATHNAME_BASE + newPathSw)
     .replace('__root', PATHNAME_BASE)
