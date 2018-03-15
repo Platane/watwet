@@ -13,6 +13,7 @@
     "raven-js": "3.22.0",
     "react-simplest-typeahead": "1.1.0",
     "redux": "3.7.2",
+    "supports-webp": "1.0.5",
     "unfetch": "3.0.0"
   },
   "devDependencies": {

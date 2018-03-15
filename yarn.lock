@@ -5377,6 +5377,10 @@ supports-color@^5.1.0:
   dependencies:
     has-flag "^2.0.0"
 
+"supports-webp@ 1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/supports-webp/-/supports-webp-1.0.5.tgz#a8640e481caf9324e962fe48ee5f95b21557d1a2"
+
 symbol-observable@^1.0.3:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/symbol-observable/-/symbol-observable-1.1.0.tgz#5c68fd8d54115d9dfb72a84720549222e8db9b32"

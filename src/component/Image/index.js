@@ -1,12 +1,21 @@
-import { h, Component } from 'preact'
+import { h } from 'preact'
 import styled from 'preact-emotion'
+import { createTransform } from '~/service/cloudinary'
+
+const transform = createTransform()
 
 export const Image = ({ url, style, ...props }) => (
   <Image_
     {...props}
     style={{
-      backgroundImage: `${props.preImage || ''} url(${url}) ${props.postImage ||
-        ''}`,
+      backgroundImage: [
+        props.preImage,
+        `url(${transform(url)})`,
+        props.postImage,
+      ]
+        .filter(Boolean)
+        .join(' '),
+
       ...(style || {}),
     }}
   />
