@@ -30,6 +30,11 @@ export const reduce = (state: State, action): State => {
         shouldConnect: false,
       }
 
+    case 'location:changed':
+      if (action.hash && action.hash.id_token)
+        return { ...state, pending: true }
+      else return state
+
     case 'localStorage:read':
       return { ...state, user: state.user || action.user }
 
