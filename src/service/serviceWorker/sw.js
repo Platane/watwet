@@ -1,12 +1,21 @@
 /* global caches self URL fetch */
 
-const assets = ['/index.html', '/index.js']
+const r = '__root'.replace(/\/$/, '')
+const assets = [
+  //
+  r,
+  r + '/',
+  '/index.html',
+  '/index.js',
+]
 
 const hostname = process.env.HOST || 'localhost'
 
-const assetCacheKey = assets.join('-')
+const assetCacheKey = assets.join('-').replace(/\//g, '')
 
 const staticCacheKey = 'static'
+
+const imageCacheKey = 'image'
 
 const dataCacheKey = 'data'
 
@@ -69,14 +78,20 @@ self.addEventListener('fetch', event => {
 
   const requestURL = new URL(event.request.url)
 
+  // cache cloudinary
+  if (requestURL.host === 'res.cloudinary.com')
+    // image, serve from cache if exists
+    return event.respondWith(cacheFirstStrategy(imageCacheKey)(event.request))
+
   if (hostname !== requestURL.hostname) return
+
   if (assets.includes(requestURL.pathname))
     // cached as asset
     return event.respondWith(caches.match(event.request))
   else if (requestURL.pathname.match(/\.(png|jpg|gif|webp|svg)$/))
     // image, serve from cache if exists
-    return event.respondWith(cacheFirstStrategy(staticCacheKey)(event.request))
-  else
-    // short term caching data
-    return event.respondWith(networkFirstStrategy(dataCacheKey)(event.request))
+    return event.respondWith(cacheFirstStrategy(imageCacheKey)(event.request))
+  // else
+  //   // short term caching data
+  //   return event.respondWith(networkFirstStrategy(dataCacheKey)(event.request))
 })

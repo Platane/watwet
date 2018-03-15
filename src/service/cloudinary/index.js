@@ -1,8 +1,7 @@
 import { parse as url_parse, format as url_format } from 'url'
 import supportsWebP from 'supports-webp'
 
-const pixelratio =
-  typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
+const pr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 
 const trimExtension = x => (x || '').replace(/(\.[a-z]+)$/, '')
 
@@ -17,7 +16,7 @@ const getDim = size =>
 const buildTransformString = ({ size = 'medium' }) =>
   [
     //
-    `w_${Math.round(pixelratio * getDim(size))}`,
+    `w_${Math.round(pr * getDim(size))}`,
     'c_limit',
     'q_auto:good',
   ].join(',')

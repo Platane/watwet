@@ -16,6 +16,7 @@ const replaceFileName = s =>
     .replace('/index.html', PATHNAME_BASE + 'index.html')
     .replace('/index.js', PATHNAME_BASE + pathIndex)
     .replace('/sw.js', PATHNAME_BASE + newPathSw)
+    .replace('__root', PATHNAME_BASE)
 
 // replace filename in index.html
 {
