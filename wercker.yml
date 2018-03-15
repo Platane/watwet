@@ -25,6 +25,16 @@ build:
 
 deploy-pages:
   steps:
+
+    - script:
+      name: set up permalink
+      cwd: gh-pages
+      code: |
+        echo '---' >> 404.html
+        echo 'permalink: /404.html' >> 404.html
+        echo '---' >> 404.html
+        cat index.html >> 404.html
+
     - takuma7/gh-pages:
         token: $GH_TOKEN
         basedir: gh-pages
