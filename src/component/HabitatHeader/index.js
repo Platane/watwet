@@ -6,11 +6,11 @@ export const HabitatHeader = ({ habitat }) => (
   <Container>
     <BackgroundW>
       <Background
-        url={habitat && habitat.info.picture_url}
+        src={habitat && habitat.info.picture_url}
         preImage="linear-gradient( 0deg, rgba(0,0,0,0.8), rgba(0,0,0,0.01) 40% ),"
       />
     </BackgroundW>
-    <Picture url={habitat && habitat.info.picture_url} />
+    <Picture src={habitat && habitat.info.picture_url} />
     <Name>{habitat && habitat.info.name}</Name>
   </Container>
 )

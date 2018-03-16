@@ -2,6 +2,7 @@ import { h } from 'preact'
 import styled from 'preact-emotion'
 
 import { DropZone as DropZone_ } from '~/component/DropZone'
+import { Image as Image_ } from '~/component/Image'
 
 export const InputImage = ({
   step,
@@ -43,13 +44,10 @@ const Body = styled.div`
   border: solid 1px #000;
 `
 
-const Image = styled.div`
+const Image = styled(Image_)`
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url(${props => props.src});
-  background-repeat: no-repeat;
-  background-size: 100%;
 `

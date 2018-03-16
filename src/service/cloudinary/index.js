@@ -21,7 +21,12 @@ const buildTransformString = ({ size = 'medium' }) =>
     'q_auto:good',
   ].join(',')
 
+export const isCloudinary = (url: any) =>
+  !!(url || '').match(/^(https?:\/\/)?(\w+\.)*cloudinary\.com\//)
+
 export const createTransform = (options = {}) => (url: string) => {
+  if (!isCloudinary(url)) return url
+
   const o = url_parse(url)
 
   // webp support

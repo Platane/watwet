@@ -4,7 +4,7 @@ import { Image } from '~/component/Image'
 
 export const Habitat = ({ info, population, onClick }) => (
   <Container onClick={onClick}>
-    <Picture url={info.picture_url} />
+    <Picture src={info.picture_url} />
     <Content>
       <Name>{info.name}</Name>
       <VegetalCount>{`${population.length} species`}</VegetalCount>
