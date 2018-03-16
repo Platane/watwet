@@ -54,9 +54,8 @@ module.exports = {
 
       {
         test: [/\.bmp/, /\.gif/, /\.jpe?g/, /\.png/, /\.otf/, /\.svg/],
-        loader: 'url-loader',
+        loader: 'file-loader',
         options: {
-          limit: 100,
           name: production
             ? 'static/[hash:8].[ext]'
             : 'static/[name].[hash:8].[ext]',
