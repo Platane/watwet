@@ -12,7 +12,13 @@
     [
       "transform-inline-environment-variables",
       {
-        "include": ["NODE_ENV", "VERSION", "PATHNAME_BASE", "SENTRY_DSN"]
+        "include": [
+          "NODE_ENV",
+          "VERSION",
+          "PATHNAME_BASE",
+          "SENTRY_DSN",
+          "HOST"
+        ]
       }
     ],
     "transform-class-properties",
