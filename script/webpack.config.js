@@ -65,18 +65,14 @@ module.exports = {
   },
 
   plugins: [
-    production &&
-      new BabiliPlugin(
-        {},
-        {
-          sourceMap: false,
-          comments: false,
-        }
-      ),
-
-    production && new webpack.HashedModuleIdsPlugin(),
-
-    !production && new webpack.NamedModulesPlugin(),
+    // production &&
+    //   new BabiliPlugin(
+    //     {},
+    //     {
+    //       sourceMap: false,
+    //       comments: false,
+    //     }
+    //   ),
 
     new WebpackAssetsManifest({
       output: path.resolve(__dirname, '../dist', 'assetManifest.json'),
