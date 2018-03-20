@@ -36,7 +36,7 @@
     "babili-webpack-plugin": "0.1.2",
     "file-loader": "1.1.11",
     "flow-bin": "0.68.0",
-    "jest": "23.0.0-alpha.0",
+    "jest": "22.4.2",
     "prettier": "1.11.1",
     "webpack": "4.1.1",
     "webpack-assets-manifest": "2.0.0",
