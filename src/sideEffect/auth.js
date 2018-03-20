@@ -1,6 +1,7 @@
 import { prepare } from '~/service/google-api/index'
 import { getCurrentUser, signIn, signOut } from '~/service/google-api/auth'
 import { authSuccess, authFail } from '~/store/action/auth'
+import { wait } from '~/util/time'
 
 export const init = store => {
   let preparing = false
@@ -66,7 +67,8 @@ export const init = store => {
     tryDisconnect(store.getState())
   }
 
-  update()
-
-  store.subscribe(update)
+  wait(1000).then(() => {
+    update()
+    store.subscribe(update)
+  })
 }
