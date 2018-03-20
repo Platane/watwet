@@ -61,6 +61,12 @@ const getColor = state => {
       }
 
     case 'home':
+    case 'siteList':
+    case 'siteCreate':
+      return {
+        color: '#123ad2',
+      }
+
     case 'habitatList':
       return {
         color: variant[0],
@@ -101,15 +107,7 @@ export const Wallpaper_ = ({ color, pattern }) => (
   </Container>
 )
 
-const back_color = {
-  home: variant[0],
-  habitatCreate: variant[3],
-  habitatList: variant[0],
-  habitat: variant[1],
-}
-
 const Container = styled.svg`
-  background-color: ${props => back_color[props.routerKey]};
   transition: background-color 280ms ease;
   position: absolute;
   opacity: 0.88;

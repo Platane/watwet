@@ -12,7 +12,7 @@ export const createHabitat = (siteId, habitat) => ({
     id: genUid(),
     info: {},
     population: [],
-    layers: { A: 0, a: 0, h: 0 },
+    layers: { A: 0.5, a: 0.5, h: 0.5 },
     ...habitat,
   },
 })

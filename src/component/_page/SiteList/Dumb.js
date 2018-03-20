@@ -3,20 +3,15 @@ import styled from 'preact-emotion'
 import { HabitatList as List } from '~/component/HabitatList'
 import { variant, white } from '~/component/_abstract/palette'
 
-export const HabitatList = ({
-  siteId,
-  habitats,
-  goToHabitat,
-  goToCreateHabitat,
-}) => (
+export const SiteList = ({ sites, goToSite, goToCreateSite }) => (
   <Container>
-    {habitats && (
-      <List onClickHabitat={goToHabitat(siteId)} habitats={habitats} />
-    )}
+    {sites.map(site => (
+      <Site key={site.id} onClick={goToSite(site)}>
+        {`${site.id}  ${site.name}`}
+      </Site>
+    ))}
 
-    {habitats && habitats.length == 0 && 'there is no habitat for this site'}
-
-    <AddButton onClick={goToCreateHabitat(siteId)} />
+    <AddButton onClick={goToCreateSite} />
   </Container>
 )
 
@@ -53,3 +48,5 @@ const Container = styled.div`
   margin: 20px;
   flex: 100px 1 1;
 `
+
+const Site = styled.div``

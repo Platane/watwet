@@ -7,6 +7,7 @@ import { Footer } from '~/component/Footer'
 import { Wallpaper } from '~/component/Wallpaper'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { HabitatList } from '~/component/_page/HabitatList'
+import { SiteList } from '~/component/_page/SiteList'
 import { Habitat } from '~/component/_page/Habitat'
 import { Login } from '~/component/_page/Login'
 import { variant } from '~/component/_abstract/palette'
@@ -16,6 +17,9 @@ export const Content = ({ anonym, routerKey, routerParam }) => {
   if (anonym) return <Login />
 
   switch (routerKey) {
+    case 'siteList':
+      return <SiteList />
+
     case 'habitatCreate':
       return <CreateHabitat />
 

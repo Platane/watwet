@@ -2,6 +2,8 @@ import { routeValidator } from '~/service/router/routeValidator'
 import { routes } from './routes'
 import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
 import { keyToLabel } from '~/store/selector/currentLayer'
+import { selectCurrentHabitatId } from '~/store/selector/currentHabitat'
+import { selectCurrentSiteId } from '~/store/selector/currentSite'
 
 import type { State } from './type'
 
@@ -46,20 +48,23 @@ export const reduceGlobal = (state, action) => {
         router: {
           hash: {},
           query: {},
-          ...getRoute(`habitat/${habitatId}`),
+          ...getRoute(`site/${site.id}/habitat/${habitatId}`),
         },
       }
 
     case 'location:selectLayer':
-      if (state.router.param.habitatId) {
+      if (selectCurrentHabitatId(state)) {
         const strate = keyToLabel(action.layer)
+
+        const siteId = selectCurrentSiteId(state)
+        const habitatId = selectCurrentHabitatId(state)
 
         return {
           ...state,
           router: {
             hash: {},
             query: strate ? { strate } : {},
-            ...getRoute(`habitat/${state.router.param.habitatId}`),
+            ...getRoute(`site/${siteId}/habitat/${habitatId}`),
           },
         }
       }
