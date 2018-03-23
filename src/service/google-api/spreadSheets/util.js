@@ -24,3 +24,5 @@ export const getAllSheets = (spreadsheetId: string, ranges: string[]) =>
 
     return Promise.reject(error)
   })
+
+export const malFormatedError = () => new Error('mal formated spreadsheet')

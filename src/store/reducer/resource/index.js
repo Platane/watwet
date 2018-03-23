@@ -1,7 +1,6 @@
 import { set, merge } from '~/util/reduxHelper'
 import { selectProperties } from '~/util/object'
 import { removeDuplicatePrimitive } from '~/util/array'
-import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
 import { reduce as mutationReduce } from './mutation'
 import type { State } from './type'
 

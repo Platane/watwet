@@ -15,6 +15,8 @@ export const create = async (title: string): Site => {
   return {
     id: result.id,
 
+    title,
+
     habitats: [],
   }
 }

@@ -1,10 +1,9 @@
 import deburr from 'lodash.deburr'
 import kebabCase from 'lodash.kebabcase'
 import { toPromise, getAllSheets } from '../../util'
-import { getId, format as formatHabitat } from '../parse/habitat'
-import { format as formatHabitatList } from '../parse/habitatList'
+import { formatHabitat } from '../parse/habitat'
+// import { format as formatHabitatList } from '../parse/habitatList'
 import { setSheets } from './setSheets'
-import { setInTemplate } from './setInTemplate'
 import type { Site } from 'type'
 
 export const set = async (site: Site) => {

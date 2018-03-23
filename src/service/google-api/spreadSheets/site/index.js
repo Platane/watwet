@@ -1,5 +1,5 @@
 export { get } from './get'
-export { set } from './set'
+// export { set } from './set'
 export { create } from './create'
 
 import type { Site } from 'type'

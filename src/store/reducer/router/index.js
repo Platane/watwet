@@ -1,6 +1,5 @@
 import { routeValidator } from '~/service/router/routeValidator'
 import { routes } from './routes'
-import { getId } from '~/service/google-api/spreadSheets/site/parse/habitat'
 import { keyToLabel } from '~/store/selector/currentLayer'
 import { selectCurrentHabitatId } from '~/store/selector/currentHabitat'
 import { selectCurrentSiteId } from '~/store/selector/currentSite'

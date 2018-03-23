@@ -17,12 +17,13 @@ export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
 
   info: {
     description: pickVegetal().name_fr,
+    location: pickVegetal().name_fr,
     name: pickVegetal().name_la,
     picture_url: 'https://github.com/Platane.png',
-    geoloc: {
-      lat: 0,
-      lng: 0,
-    },
+    // geoloc: {
+    //   lat: 0,
+    //   lng: 0,
+    // },
   },
 
   layers: {
@@ -33,7 +34,7 @@ export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
 
   population: [].concat(
     ...['A', 'a', 'h'].map(x =>
-      pickRepartition(Math.floor(Math.random() * 3 + 1)).map(
+      pickRepartition(Math.floor(Math.random() * 5 + 2)).map(
         representation => ({ vegetal: pickVegetal(), representation })
       )
     )

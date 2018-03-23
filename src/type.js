@@ -20,7 +20,8 @@ export type GeolocPoint = {
 export type HabitatInfo = {
   name: string,
   description: string,
-  geoloc: GeolocPoint,
+  location: string,
+  // geoloc: GeolocPoint,
   picture_url: string,
 }
 

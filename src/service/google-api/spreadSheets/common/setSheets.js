@@ -1,4 +1,12 @@
-export const setSheets = (old_sheets, sheets_title) => {
+type Sheet = {
+  properties: {
+    sheetId: number,
+    index: number,
+    title?: string,
+  },
+}
+
+export const setSheets = (old_sheets: Sheet[], sheets_title: string[]) => {
   const requests = []
 
   // remove useless sheets
@@ -12,7 +20,7 @@ export const setSheets = (old_sheets, sheets_title) => {
   sheets_title.slice(old_sheets.length).forEach(_ => {
     const sheetId = 0 | (Math.random() * (1 << 30))
 
-    old_sheets.push({ properties: { sheetId } })
+    old_sheets.push({ properties: { sheetId, index: 0 } })
 
     requests.push({
       addSheet: {
