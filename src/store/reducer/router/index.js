@@ -38,7 +38,7 @@ export const reduce = (state: State, action): State => {
 
 export const reduceGlobal = (state, action) => {
   switch (action.type) {
-    case 'mutation:habitat:create':
+    case 'mutation:habitat:create': {
       const site = state.resource.mutated[`site.${action.siteId}`]
       const habitatId = site.habitats[site.habitats.length - 1].split('.', 2)[1]
 
@@ -48,6 +48,17 @@ export const reduceGlobal = (state, action) => {
           hash: {},
           query: {},
           ...getRoute(`site/${site.id}/habitat/${habitatId}`),
+        },
+      }
+    }
+
+    case 'mutation:site:create':
+      return {
+        ...state,
+        router: {
+          hash: {},
+          query: {},
+          ...getRoute(`site/${action.site.id}`),
         },
       }
 
