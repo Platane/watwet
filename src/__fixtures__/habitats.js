@@ -1,4 +1,5 @@
 import type { Habitat } from 'type'
+import { removeDuplicate } from '~/util/array'
 
 import { vegetals } from './vegetals'
 
@@ -32,10 +33,12 @@ export const habitats: Habitat[] = Array.from({ length: 16 }).map((_, i) => ({
     h: Math.random(),
   },
 
-  population: [].concat(
-    ...['A', 'a', 'h'].map(x =>
-      pickRepartition(Math.floor(Math.random() * 5 + 2)).map(
-        representation => ({ vegetal: pickVegetal(), representation })
+  population: removeDuplicate((a, b) => a.vegetal.id == b.vegetal.id)(
+    [].concat(
+      ...['A', 'a', 'h'].map(x =>
+        pickRepartition(Math.floor(Math.random() * 5 + 2)).map(
+          representation => ({ vegetal: pickVegetal(), representation })
+        )
       )
     )
   ),

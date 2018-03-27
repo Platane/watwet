@@ -1,5 +1,5 @@
 import type { Site } from 'type'
-
+import { removeDuplicateId } from '~/util/array'
 import { habitats } from './habitats'
 import { vegetals } from './vegetals'
 
@@ -15,5 +15,5 @@ export const sites: Site[] = Array.from({ length: 16 }).map((_, i) => ({
   client: pickVegetal().name_la,
   name: pickVegetal().name_la,
 
-  habitats: Array.from({ length: 6 }, pickHabitat),
+  habitats: removeDuplicateId(Array.from({ length: 4 }, pickHabitat)),
 }))
