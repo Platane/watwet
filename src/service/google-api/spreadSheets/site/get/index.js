@@ -3,9 +3,12 @@ import { toPromise, malFormatedError } from '../../util'
 import { parseHabitat } from '../../common/parse/habitat'
 import type { Site, Habitat } from 'type'
 
-const parseSiteInfo = () => ({})
+const parseSiteInfo = () => ({
+  name: '',
+  description: '',
+})
 
-export const get = async (spreadsheetId: string): Site => {
+export const get = async (spreadsheetId: string): Promise<Site> => {
   const gapi = window.gapi
 
   const { result } = await toPromise(
@@ -20,6 +23,9 @@ export const get = async (spreadsheetId: string): Site => {
   return {
     id: spreadsheetId,
     ...parseSiteInfo(toGrid(result.sheets[0].data)),
-    habitats: result.sheets.slice(1).map(x => parseHabitat(toGrid(x.data))),
+    habitats: result.sheets.slice(1).map(x => ({
+      ...parseHabitat(toGrid(x.data)),
+      id: x.properties.sheetId,
+    })),
   }
 }

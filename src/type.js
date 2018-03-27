@@ -46,7 +46,7 @@ export type Site = {
   name: string,
   description: string,
 
-  client: string,
+  // client: string,
 
   habitats: Habitat[],
 }

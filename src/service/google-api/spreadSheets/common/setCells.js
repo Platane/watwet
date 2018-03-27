@@ -1,4 +1,5 @@
 import type { Grid } from './grid'
+import { fillGrid } from './grid'
 
 const formatValue = x =>
   (x && x[0] === '=' && { formulaValue: x }) ||

@@ -73,10 +73,10 @@ const parseHabitatList = (arr: Grid) => {
 
 const parseHabitatInfo = (arr: Grid) => ({
   picture_url: parseImage(arr[0][0]),
-  name: arr[0][0],
-  codeCorine: arr[0][1],
-  description: arr[0][2],
-  location: arr[0][3],
+  name: arr[0][1],
+  codeCorine: arr[1][1],
+  description: arr[2][1],
+  location: arr[3][1],
 })
 
 export const parseHabitat = (arr: Grid): Habitat => {
