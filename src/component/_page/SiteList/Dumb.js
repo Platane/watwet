@@ -49,4 +49,7 @@ const Container = styled.div`
   flex: 100px 1 1;
 `
 
-const Site = styled.div``
+const Site = styled.div`
+  padding: 20px 0;
+  cursor: pointer;
+`

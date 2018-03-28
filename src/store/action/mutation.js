@@ -1,8 +1,9 @@
 import { genIUid } from '~/util/uid'
+import { normalizeHabitat } from '~/service/normalize'
 
 export const updateHabitat = habitat => ({
   type: 'mutation:habitat:update',
-  habitat,
+  habitat: normalizeHabitat(habitat),
 })
 
 export const createHabitat = (siteId, habitat) => ({
@@ -12,7 +13,6 @@ export const createHabitat = (siteId, habitat) => ({
     id: genIUid(),
     info: {},
     population: [],
-    layers: { A: 0.5, a: 0.5, h: 0.5 },
     ...habitat,
   },
 })

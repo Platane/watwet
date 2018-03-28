@@ -9,6 +9,7 @@ import { filterVegetal } from '~/store/selector/currentLayer'
 export const Habitat = ({
   currentLayer,
   habitat,
+  layers,
   vegetals,
   updateHabitat,
   selectLayer,
@@ -18,8 +19,7 @@ export const Habitat = ({
     <Content>
       <LayerSelector
         currentLayer={currentLayer}
-        layers={habitat.layers}
-        onChange={layers => updateHabitat({ ...habitat, layers })}
+        layers={layers}
         onSelect={selectLayer}
       />
 

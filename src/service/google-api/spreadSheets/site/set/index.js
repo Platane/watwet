@@ -1,8 +1,6 @@
 import deburr from 'lodash.deburr'
 import kebabCase from 'lodash.kebabcase'
 import { toPromise, getAllSheets } from '../../util'
-import { formatHabitat } from '../parse/habitat'
-// import { format as formatHabitatList } from '../parse/habitatList'
 import { setSheets } from './setSheets'
 import type { Site } from 'type'
 

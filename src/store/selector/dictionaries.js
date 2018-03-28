@@ -32,3 +32,18 @@ export const selectHabitatDictionary = createSelector(
 
 export const selectVegetalDictionary = state =>
   state.resource.original.vegetalDictionary
+
+export const selectVegetal_byId = createSelector(
+  selectVegetalDictionary,
+  (arr = []) => {
+    const byId = {}
+    arr.forEach(x => (byId[x.id] = x))
+    return byId
+  }
+)
+
+export const selectDitionariesReady = createSelector(
+  selectVegetalDictionary,
+  selectHabitatDictionary,
+  (a, b) => !!(a && a.length && b && b.length)
+)

@@ -6,13 +6,13 @@ export const get = async (): Promise<Vegetal[]> => {
 
   const res = await gapi.client.sheets.spreadsheets.values.get({
     spreadsheetId: VEGETAL_DICTIONARY_ID,
-    range: 'Sheet1!A2:C',
+    range: 'Sheet1!A2:D',
   })
 
   return res.result.values.map(x => ({
-    id: x[1],
-    name_fr: x[0],
-    name_la: x[1],
-    layer: x[2],
+    id: x[0],
+    wet: x[1].toLowerCase().trim() === 'true',
+    name_fr: x[2],
+    name_la: x[3],
   }))
 }

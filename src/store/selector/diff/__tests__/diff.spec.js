@@ -36,18 +36,11 @@ it('should extract diff from site', () => {
     representation: 0.4,
   }
 
-  // modify one
-  b.habitats[2] = {
-    ...b.habitats[2],
-    layers: { ...b.habitats[2].layers, A: 0.4 },
-  }
-
   const diff = siteDiff(a, b)
 
   expect(
     [
       'updateInfo',
-      'updateLayer',
       'updateVegetalRepresentation',
       'addVegetal',
       'removeVegetal',

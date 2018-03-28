@@ -6,10 +6,12 @@ import {
   create as createSite,
 } from '~/service/google-api/spreadSheets/site'
 import { set as setHabitat } from '~/service/google-api/spreadSheets/habitat'
-
-import { normalizeSite } from './normalize'
-
 import { selectSpreadSheetApiReady } from '~/store/selector/spreadSheetApiReady'
+import {
+  selectVegetal_byId,
+  selectDitionariesReady,
+} from '~/store/selector/dictionaries'
+import { normalizeSite, getHabitat } from '~/service/normalize'
 
 export const init = store => {
   let pending = {}
@@ -17,7 +19,8 @@ export const init = store => {
   const update = async () => {
     const state = store.getState()
 
-    if (!selectSpreadSheetApiReady(state)) return
+    if (!selectSpreadSheetApiReady(state) || !selectDitionariesReady(state))
+      return
 
     if (Object.keys(pending).some(key => pending[key])) return
 
@@ -33,15 +36,26 @@ export const init = store => {
         switch (entity) {
           case 'sites': {
             // TODO create site
+            // const sites = await  listSites()
           }
 
           case 'site': {
-            // store.dispatch(hydrate({ [key]: await getSite(id) }))
+            // const site = {
+            //   ...mutated[key],
+            //   habitats: mutated[key].map(key => mutated[key] || original[key])
+            //   .filter(Boolean),
+            //
+            // const
+
             break
           }
 
           case 'habitat': {
-            const habitat = mutated[key]
+            const habitat: Habitat = getHabitat(
+              selectVegetal_byId(state),
+              state.resource
+            )(id)
+
             await setHabitat(habitat.siteId, habitat.id, habitat)
 
             const site = await getSite(habitat.siteId)

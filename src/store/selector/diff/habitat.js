@@ -1,4 +1,4 @@
-import type { Layer, Habitat } from 'type'
+import type { Habitat } from 'type'
 
 export type HabitatDiff =
   | {
@@ -6,12 +6,6 @@ export type HabitatDiff =
       property: 'name' | 'description' | 'location' | 'picture_url',
       nextValue: string,
       previousValue: string,
-    }
-  | {
-      type: 'updateLayer',
-      layer: Layer,
-      nextValue: number,
-      previousValue: number,
     }
   | {
       type: 'updateVegetalRepresentation',
@@ -41,18 +35,6 @@ export const habitatDiff = (a: Habitat, b: Habitat): HabitatDiff[] => {
         property,
         nextValue: b.info[property],
         previousValue: a.info[property],
-      }))
-  )
-
-  // updateLayer
-  diff.push(
-    ...['A', 'a', 'h']
-      .filter(layer => a.layers[layer] !== b.layers[layer])
-      .map(layer => ({
-        type: 'updateLayer',
-        layer,
-        nextValue: b.layers[layer],
-        previousValue: a.layers[layer],
       }))
   )
 

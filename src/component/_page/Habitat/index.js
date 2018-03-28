@@ -4,6 +4,7 @@ import { Habitat as desktop } from './Dumb.mobile'
 import { updateHabitat } from '~/store/action/mutation'
 import { selectLayer } from '~/store/action/router'
 import { selectCurrentHabitat } from '~/store/selector/currentHabitat'
+import { selectCurrentHabitatLayers } from '~/store/selector/currentHabitat'
 import { selectVegetalDictionary } from '~/store/selector/dictionaries'
 import {
   filterVegetal,
@@ -16,6 +17,7 @@ const injectState = connect(
   state => ({
     currentLayer: selectCurrentLayer(state),
     habitat: selectCurrentHabitat(state),
+    layers: selectCurrentHabitatLayers(state),
     vegetals: selectVegetalDictionary(state) || [],
   }),
   {

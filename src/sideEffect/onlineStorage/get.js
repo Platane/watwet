@@ -7,8 +7,7 @@ import {
 import { get as getHabitatDirectory } from '~/service/google-api/spreadSheets/habitatDirectory'
 import { get as getVegetalDictionary } from '~/service/google-api/spreadSheets/vegetalDictionary'
 import { selectSpreadSheetApiReady } from '~/store/selector/spreadSheetApiReady'
-
-import { normalizeSite } from './normalize'
+import { normalizeSite } from '~/service/normalize'
 
 export const init = store => {
   let pending = {}

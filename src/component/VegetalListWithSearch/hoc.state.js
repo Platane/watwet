@@ -4,7 +4,7 @@ export default C =>
   class PopulationState extends Component {
     onAdd = vegetal => {
       const population = [
-        { vegetal, representation: 0.1 },
+        { vegetal, representation: 0.1, layer: this.props.currentLayer || 'A' },
         ...this.props.population_unfilter,
       ]
 

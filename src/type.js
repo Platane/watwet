@@ -6,7 +6,7 @@ export type Layer = 'A' | 'a' | 'h'
 export type Vegetal = {
   id: string,
 
-  layer: Layer,
+  wet: boolean,
 
   name_fr: string,
   name_la: string,
@@ -21,8 +21,9 @@ export type HabitatInfo = {
   name: string,
   description: string,
   location: string,
-  // geoloc: GeolocPoint,
+  codeCorineBiotipe: string,
   picture_url: string,
+  // geoloc: GeolocPoint,
 }
 
 export type Habitat = {
@@ -31,13 +32,10 @@ export type Habitat = {
   info: HabitatInfo,
 
   population: {
+    layer: Layer,
     vegetal: Vegetal,
     representation: number,
   }[],
-
-  layers: {
-    [Layer]: number,
-  },
 }
 
 export type Site = {

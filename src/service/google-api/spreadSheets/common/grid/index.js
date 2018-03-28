@@ -1,4 +1,4 @@
-type GridCell = string | void
+type GridCell = string | number | boolean | void
 export type Grid = GridCell[][]
 
 export const toGrid = (data): Grid =>
