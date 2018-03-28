@@ -21,7 +21,7 @@ export const init = store => {
 
     if (Object.keys(pending).some(key => pending[key])) return
 
-    const { mutated } = state.resource
+    const { mutated, dateMutated } = state.resource
 
     Object.keys(mutated)
       .filter(key => !pending[key])
@@ -43,8 +43,16 @@ export const init = store => {
           case 'habitat': {
             const habitat = mutated[key]
             await setHabitat(habitat.siteId, habitat.id, habitat)
+
+            const site = await getSite(habitat.siteId)
+
+            const fromMutation = { [key]: dateMutated[key] }
+
             store.dispatch(
-              hydrate(normalizeSite(await getSite(habitat.siteId)))
+              hydrate(
+                normalizeSite(await getSite(habitat.siteId)),
+                fromMutation
+              )
             )
             break
           }

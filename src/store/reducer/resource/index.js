@@ -41,10 +41,20 @@ export const reduce = (state: State, action): State => {
       }
 
       Object.keys(action)
-        .filter(key => key !== 'type')
+        .filter(key => !['type', 'fromMutation'].includes(key))
         .forEach(key => {
           state.dateFetched[key] = Date.now()
           state.original[key] = action[key]
+        })
+
+      Object.keys(action.fromMutation)
+        .filter(key => action.fromMutation[key] == state.dateMutated[key])
+        .forEach(key => {
+          state.mutated = { ...state.mutated }
+          delete state.mutated[key]
+
+          state.dateMutated = { ...state.dateMutated }
+          delete state.dateMutated[key]
         })
 
       return state
