@@ -2,6 +2,7 @@ import { write, read } from '~/service/localStorage'
 import { selectCurrentUser } from '~/store/selector/currentUser'
 import { read as readAction } from '~/store/action/localStorage'
 import { debounce, wait } from '~/util/time'
+import { createSelector } from 'reselect'
 
 const createPersist = (label, selector) => {
   let persisted = null
@@ -10,62 +11,85 @@ const createPersist = (label, selector) => {
     const x = selector(state)
 
     if (x !== persisted) {
-      console.log('persist', label)
       persisted = x
       write(label, x)
     }
   }
 }
 
-const createPersistObject = (rootLabel, o) => {
-  const createPersistTree = (label, o) =>
-    typeof o === 'function'
-      ? [createPersist(label, o)]
-      : [].concat(
-          ...Object.keys(o).map(key =>
-            createPersistTree(label + '-' + key, o[key])
-          )
-        )
-
-  const createReadTree = (label, o) => () =>
-    typeof o === 'function'
-      ? read(label)
-      : Object.keys(o).reduce((u, key) => ({
-          ...u,
-          [key]: createReadTree(label + '-' + key, o[key]),
-        }))
-
-  const persistList = createPersistTree(rootLabel, o)
-  const read = createReadTree(rootLabel, o)
-
-  return {
-    write: state => persistList.forEach(fn => fn(state)),
-    read,
-  }
+const extractNonStatic = o => {
+  const copy = {}
+  for (let key in o)
+    if (!['vegetalDictionary', 'habitatDictionary'].includes(key))
+      copy[key] = o[key]
+  return copy
 }
 
-export const init = store => {
-  const { write, read } = createPersistObject('watwet', {
-    user: selectCurrentUser,
-    resource: {
-      original: state => state.resource.original,
-      mutated: state => state.resource.mutated,
-      dateFetched: state => state.resource.dateFetched,
-      dateMutated: state => state.resource.dateMutated,
+const selectStaticResources = createSelector(
+  state => state.resource.original.vegetalDictionary,
+  state => state.resource.original.habitatDictionary,
+  (vegetalDictionary, habitatDictionary) => ({
+    original: {
+      habitatDictionary,
+      vegetalDictionary,
     },
   })
+)
 
-  const update = debounce(1000)(() => {
-    let start = Date.now()
-
-    write(store.getState())
-
-    console.log(Date.now() - start, 'ms')
+const selectNonStaticResources = createSelector(
+  state => state.resource,
+  ({ original, mutated, dateMutated, dateFetched }) => ({
+    original: extractNonStatic(original),
+    mutated,
+    dateMutated,
+    dateFetched,
   })
+)
 
-  store.dispatch(readAction(read()))
+export const init = store => {
+  const persistUser = createPersist('watwet-user', selectCurrentUser)
+  const persistStaticResources = createPersist(
+    'watwet-resources-static',
+    selectStaticResources
+  )
+  const persistNonStaticResources = createPersist(
+    'watwet-resources-nonstatic',
+    selectNonStaticResources
+  )
 
-  update()
+  const update = () => {
+    const state = store.getState()
 
-  store.subscribe(update)
+    persistUser(state)
+    persistStaticResources(state)
+    persistNonStaticResources(state)
+  }
+
+  const r = () => {
+    const user = read('watwet-user')
+    const resourcesStatic = read('watwet-resources-static')
+    const resourcesNonStatic = read('watwet-resources-nonstatic')
+
+    return {
+      user,
+      resource:
+        resourcesStatic && resourcesNonStatic
+          ? {
+              ...resourcesNonStatic,
+              original: {
+                ...(resourcesStatic.original || {}),
+                ...(resourcesNonStatic.original || {}),
+              },
+            }
+          : null,
+    }
+  }
+
+  const debouncedUpdate = debounce(1000)(update)
+
+  store.dispatch(readAction(r()))
+
+  debouncedUpdate()
+
+  store.subscribe(debouncedUpdate)
 }
