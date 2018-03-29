@@ -25,7 +25,7 @@ export const setCells = (sheetId: string, old_cells: Grid, new_cells: Grid) => {
   for (let x = 0; x < w; x++) {
     //
 
-    if (old_cells[y][x] !== new_cells[y][x])
+    if (old_cells[y][x] != new_cells[y][x])
       requests.push({
         updateCells: {
           rows: [

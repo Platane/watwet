@@ -28,6 +28,7 @@ export type HabitatInfo = {
 
 export type Habitat = {
   id: string,
+  siteId: string,
 
   info: HabitatInfo,
 

@@ -26,9 +26,10 @@ export const set = async (
 
   const requests = setFromCurrentSheet(sheet, habitat)
 
-  await gapi.client.sheets.spreadsheets.batchUpdate({
-    spreadsheetId,
-    responseIncludeGridData: true,
-    requests,
-  })
+  if (requests.length)
+    await gapi.client.sheets.spreadsheets.batchUpdate({
+      // responseIncludeGridData: true,
+      spreadsheetId,
+      requests,
+    })
 }

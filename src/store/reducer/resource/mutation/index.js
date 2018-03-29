@@ -1,4 +1,4 @@
-export const reduce = (state, action) => {
+export const reduce = (state, action, original) => {
   switch (action.type) {
     //
     case 'mutation:habitat:update':
@@ -11,11 +11,15 @@ export const reduce = (state, action) => {
       const habitatKey = `habitat.${habitatId}`
       const siteKey = `site.${action.siteId}`
 
-      const site = state[siteKey] || { habitats: [], id: action.siteKey }
+      const site = state[siteKey] ||
+        original[siteKey] || { habitats: [], id: action.siteId }
 
       return {
         ...state,
-        [habitatKey]: action.habitat,
+        [habitatKey]: {
+          ...action.habitat,
+          siteId: action.siteId,
+        },
         [siteKey]: {
           ...site,
           habitats: [...site.habitats, habitatKey],

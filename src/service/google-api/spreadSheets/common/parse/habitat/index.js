@@ -77,7 +77,7 @@ const parseHabitatInfo = (arr: Grid) => ({
 })
 
 export const parseHabitat = (arr: Grid): Habitat => {
-  fillGrid(12, 3)(arr)
+  fillGrid(21, 4)(arr)
 
   return Array.from({ length: 3 }).reduce(
     (habitat, _, i) => {

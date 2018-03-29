@@ -2,6 +2,7 @@ import { hydrate } from '~/store/action/onlineStorage'
 
 import {
   list as listSites,
+  set as setSite,
   get as getSite,
   create as createSite,
 } from '~/service/google-api/spreadSheets/site'
@@ -11,72 +12,99 @@ import {
   selectVegetal_byId,
   selectDitionariesReady,
 } from '~/store/selector/dictionaries'
-import { normalizeSite, getHabitat } from '~/service/normalize'
+import {
+  normalizeSite,
+  getHabitat as getHabitatFromCache,
+  getSite as getSiteFromCache,
+} from '~/service/normalize'
+import { throttle } from '~/util/time'
 
-export const init = store => {
-  let pending = {}
+import type { Site, Habitat } from 'type'
+
+const priorityFn = key =>
+  [null, 'habitat', 'site', 'sites'].indexOf(key.split('.')[0]) || 0
+
+const sortFn = (a, b) => (priorityFn(a) < priorityFn(b) ? 1 : -1)
+
+export const init = async store => {
+  // let pending = {}
+  let pending = false
 
   const update = async () => {
     const state = store.getState()
 
-    if (!selectSpreadSheetApiReady(state) || !selectDitionariesReady(state))
+    if (
+      !selectSpreadSheetApiReady(state) ||
+      !selectDitionariesReady(state) ||
+      pending
+    )
       return
 
-    if (Object.keys(pending).some(key => pending[key])) return
+    // next key
+    const key = Object.keys(state.resource.mutated)
+      .sort(sortFn)
+      .shift()
 
-    const { mutated, dateMutated } = state.resource
+    if (!key) return
 
-    Object.keys(mutated)
-      .filter(key => !pending[key])
-      .forEach(async key => {
-        pending[key] = Date.now()
+    const [entity, id] = key.split('.', 2)
 
-        const [entity, id] = key.split('.', 2)
+    switch (entity) {
+      case 'sites': {
+        // TODO create site
+        // const sites = await  listSites()
+      }
 
-        switch (entity) {
-          case 'sites': {
-            // TODO create site
-            // const sites = await  listSites()
-          }
+      case 'site': {
+        pending = key
 
-          case 'site': {
-            // const site = {
-            //   ...mutated[key],
-            //   habitats: mutated[key].map(key => mutated[key] || original[key])
-            //   .filter(Boolean),
-            //
-            // const
+        const site: Site = getSiteFromCache(
+          selectVegetal_byId(state),
+          state.resource
+        )(id)
 
-            break
-          }
+        await setSite(site)
 
-          case 'habitat': {
-            const habitat: Habitat = getHabitat(
-              selectVegetal_byId(state),
-              state.resource
-            )(id)
+        const fromMutation = {
+          [key]: state.resource.dateMutated[key],
+        }
+        site.habitats
+          .map(habitat => `habitat.${habitat.id}`)
+          .forEach(key => (fromMutation[key] = state.resource.dateMutated[key]))
 
-            await setHabitat(habitat.siteId, habitat.id, habitat)
+        store.dispatch(hydrate(normalizeSite(await getSite(id)), fromMutation))
 
-            const site = await getSite(habitat.siteId)
+        break
+      }
 
-            const fromMutation = { [key]: dateMutated[key] }
+      case 'habitat': {
+        pending = key
 
-            store.dispatch(
-              hydrate(
-                normalizeSite(await getSite(habitat.siteId)),
-                fromMutation
-              )
-            )
-            break
-          }
+        const habitat: Habitat = getHabitatFromCache(
+          selectVegetal_byId(state),
+          state.resource
+        )(id)
+
+        await setHabitat(habitat.siteId, habitat.id, habitat)
+
+        const fromMutation = {
+          [key]: state.resource.dateMutated[key],
         }
 
-        pending[key] = null
-      })
+        store.dispatch(
+          hydrate(normalizeSite(await getSite(habitat.siteId)), fromMutation)
+        )
+        break
+      }
+    }
+
+    pending = null
+    update()
   }
 
-  update()
+  const throttledUpdate = throttle(1000)(update)
 
-  store.subscribe(update)
+  throttledUpdate()
+
+  store.subscribe(throttledUpdate)
 }

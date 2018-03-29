@@ -2,7 +2,7 @@ type GridCell = string | number | boolean | void
 export type Grid = GridCell[][]
 
 export const toGrid = (data): Grid =>
-  (data[0].rowData || []).map(({ values = [] }) =>
+  ((data && data[0] && data[0].rowData) || []).map(({ values = [] }) =>
     values.map(
       ({ formattedValue, userEnteredValue }) =>
         (userEnteredValue &&

@@ -6,74 +6,49 @@ type Sheet = {
   },
 }
 
-export const setSheets = (old_sheets: Sheet[], sheets_title: string[]) => {
-  const requests = []
-
+export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
+  //
+  //
   // remove useless sheets
-  requests.push(
-    ...old_sheets
-      .splice(sheets_title.length, Infinity)
-      .map(x => ({ deleteSheet: { sheetId: x.properties.sheetId } }))
-  )
-
-  // add extra sheets
-  sheets_title.slice(old_sheets.length).forEach(_ => {
-    const sheetId = 0 | (Math.random() * (1 << 30))
-
-    old_sheets.push({ properties: { sheetId, index: 0 } })
-
-    requests.push({
-      addSheet: {
-        properties: { sheetId },
-      },
-    })
-  })
-
-  // re-order sheet
-  sheets_title.forEach((title, i) => {
-    const sheet = old_sheets.find(x => x.properties.title === title)
-
-    if (!sheet) return
-
-    if (sheet.properties.index == i) return
-
-    sheet.properties.index = i
-
-    requests.push({
-      updateSheetProperties: {
-        properties: {
-          sheetId: sheet.properties.sheetId,
-          index: i,
-        },
-        fields: 'index',
-      },
-    })
-  })
-
-  old_sheets.sort((a, b) => (a.properties.index > b.properties.index ? 1 : -1))
-
-  // rename sheet
-  sheets_title.forEach((title, i) => {
-    if (
-      old_sheets[i].properties.title === title &&
-      old_sheets[i].properties.index === i
+  ...previous_sheets
+    .filter(
+      a => !next_sheets.some(b => a.properties.sheetId == b.properties.sheetId)
     )
-      return
+    .map(x => ({ deleteSheet: { sheetId: x.properties.sheetId } })),
 
-    old_sheets[i].properties.title = title
-    old_sheets[i].properties.index = i
+  //
+  //
+  // add extra sheets
+  ...next_sheets
+    .filter(
+      a =>
+        !previous_sheets.some(b => a.properties.sheetId == b.properties.sheetId)
+    )
+    .map(x => ({ addSheet: x })),
 
-    requests.push({
-      updateSheetProperties: {
-        properties: {
-          sheetId: old_sheets[i].properties.sheetId,
-          title,
-          index: i,
+  //
+  //
+  // re-order / re-name sheet
+  ...next_sheets
+    .map(b => {
+      const a = previous_sheets.find(
+        a => a.properties.sheetId === b.properties.sheetId
+      )
+
+      if (!a) return
+
+      if (
+        a.properties.title === b.properties.title &&
+        a.properties.index === b.properties.index
+      )
+        return
+
+      return {
+        updateSheetProperties: {
+          ...b,
+          fields: 'title,index',
         },
-        fields: 'title,index',
-      },
+      }
     })
-  })
-
-  return requests
-}
+    .filter(Boolean),
+]

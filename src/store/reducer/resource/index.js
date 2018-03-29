@@ -62,7 +62,7 @@ export const reduce = (state: State, action): State => {
 
     default: {
       const oldState = state.mutated
-      const newState = mutationReduce(oldState, action)
+      const newState = mutationReduce(oldState, action, state.original)
 
       if (oldState !== newState) {
         state = {

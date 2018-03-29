@@ -16,6 +16,7 @@ const Picture = styled(Image)`
   width: 60px;
   height: 60px;
   border-radius: 30px;
+  flex-shrink: 0;
 `
 
 const Container = styled.div`
@@ -29,6 +30,7 @@ const Content = styled.section`
   margin-left: 40px;
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 `
 
 const Name = styled.div`
