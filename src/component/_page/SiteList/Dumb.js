@@ -1,14 +1,12 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-import { HabitatList as List } from '~/component/HabitatList'
 import { variant, white } from '~/component/_abstract/palette'
+import { Card } from './Card'
 
 export const SiteList = ({ sites, goToSite, goToCreateSite }) => (
   <Container>
     {sites.map(site => (
-      <Site key={site.id} onClick={goToSite(site)}>
-        {site.name}
-      </Site>
+      <Site key={site.id} site={site} onClick={goToSite(site)} />
     ))}
 
     <AddButton onClick={goToCreateSite} />
@@ -49,7 +47,7 @@ const Container = styled.div`
   flex: 100px 1 1;
 `
 
-const Site = styled.div`
-  padding: 20px 0;
+const Site = styled(Card)`
+  margin: 20px 0;
   cursor: pointer;
 `
