@@ -1,21 +1,33 @@
 import { malFormatedError } from '../../../util'
-import { toGrid } from '../../grid'
+import { toGrid, fillGrid } from '../../grid'
 import { parseHabitat } from '../habitat'
 import type { Site, Habitat } from 'type'
 import type { Grid } from '../../grid'
 
-const parseSiteInfo = () => ({
-  name: '',
-  description: '',
-})
-
-export const parseSite = async ({ spreadsheetId, sheets }): Site => {
-  if (!sheets || !sheets[0]) throw malFormatedError()
+const parseSiteInfo = (grid: Grid) => {
+  fillGrid(1, 2)(grid)
 
   return {
-    ...parseSiteInfo(toGrid(sheets[0].data)),
+    name: grid[0][0],
+    description: grid[1][0],
+  }
+}
+
+export const parseSite = async ({ spreadsheetId, sheets }): Site => {
+  if (!sheets) throw malFormatedError()
+
+  const infoSheet = sheets.find(x => x.properties.title == 'data_info')
+
+  const habitatSheets = sheets.filter(
+    x =>
+      x.properties.title.slice(0, 5) === 'data_' &&
+      x.properties.title != 'data_info'
+  )
+
+  return {
+    ...parseSiteInfo(toGrid(infoSheet && infoSheet.data)),
     id: spreadsheetId,
-    habitats: sheets.slice(1).map(x => ({
+    habitats: habitatSheets.map(x => ({
       ...parseHabitat(toGrid(x.data)),
       siteId: spreadsheetId,
       id: x.properties.sheetId,
@@ -24,5 +36,16 @@ export const parseSite = async ({ spreadsheetId, sheets }): Site => {
 }
 
 export const formatSiteInfo = (site: Site) => {
-  return []
+  const grid = []
+  fillGrid(3, 3 + site.habitats.length)(grid)
+
+  grid[0][0] = site.name
+  grid[1][0] = site.description
+
+  site.habitats.forEach((habitat, i) => {
+    grid[3 + i][0] = habitat.info.codeCorineBiotipe
+    grid[3 + i][1] = habitat.info.name
+  })
+
+  return grid
 }

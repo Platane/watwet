@@ -8,7 +8,7 @@ const formatValue = x =>
   (typeof x === 'string' && { stringValue: x }) ||
   null
 
-export const setCells = (sheetId: string, old_cells: Grid, new_cells: Grid) => {
+export const setCells = (sheetId: number, old_cells: Grid, new_cells: Grid) => {
   const requests = []
 
   const h = Math.max(old_cells.length, new_cells.length)

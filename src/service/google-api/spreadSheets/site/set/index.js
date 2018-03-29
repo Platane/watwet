@@ -2,28 +2,53 @@ import deburr from 'lodash.deburr'
 import kebabCase from 'lodash.kebabcase'
 import { toPromise, getAllSheets } from '../../util'
 import { setSheets } from '../../common/setSheets'
+import { setCells } from '../../common/setCells'
+import { toGrid } from '../../common/grid'
+import { formatSiteInfo } from '../../common/parse/site'
 import { setFromCurrentSheet as setHabitatFromCurrentSheet } from '../../habitat/set'
-import type { Site } from 'type'
+import type { Site, Habitat } from 'type'
+
+const emptySheet = sheetId => ({
+  properties: { sheetId },
+  data: null,
+})
+
+const getHabitatSheetTitle = (habitat: Habitat) =>
+  'data_' +
+  kebabCase(deburr(habitat.info.name)) +
+  '_' +
+  habitat.id.toString(36).slice(0, 3)
 
 const formatSheets = (site: Site) =>
   [
     { sheetId: 0, title: 'data_info' },
     ...site.habitats.map((habitat, i) => ({
       sheetId: +habitat.id,
-
-      title: `data_${kebabCase(deburr(habitat.info.name))}_${habitat.id}`,
+      title: getHabitatSheetTitle(habitat),
     })),
   ].map((x, index) => ({ properties: { index, ...x } }))
 
+const setInfoFromCurrentSheet = (
+  { properties: { sheetId }, data },
+  site: Site
+) => setCells(sheetId, toGrid(data), formatSiteInfo(site))
+
 export const setFromCurrentSheets = (sheets, site: Site) => [
+  // sync the sheets
   ...setSheets(sheets, formatSheets(site)),
 
+  // sync the info sheet
+  ...setInfoFromCurrentSheet(
+    sheets.find(x => x.properties.sheetId == 0) || emptySheet(0),
+    site
+  ),
+
+  // sync the sheet for each habitat
   ...[].concat(
     ...site.habitats.map(habitat => {
-      const sheet = sheets.find(x => x.sheetId == habitat.id) || {
-        properties: { sheetId: habitat.id },
-        data: null,
-      }
+      const sheet =
+        sheets.find(x => x.properties.sheetId == habitat.id) ||
+        emptySheet(habitat.id)
 
       return setHabitatFromCurrentSheet(sheet, habitat)
     })
