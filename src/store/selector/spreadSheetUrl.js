@@ -12,7 +12,7 @@ export const selectSpreadSheetUrl = createSelector(
   habitatId,
   siteId,
   (habitatId, siteId) => {
-    if (!siteId) return 'https://docs.google.com/spreadsheets/u/0/?q=site-'
+    if (!siteId) return 'https://docs.google.com/spreadsheets/u/0/?q=site_'
 
     return `https://docs.google.com/spreadsheets/d/${siteId}#gid=${habitatId ||
       0}`

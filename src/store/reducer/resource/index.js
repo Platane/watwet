@@ -1,8 +1,36 @@
 import { set, merge } from '~/util/reduxHelper'
-import { selectProperties } from '~/util/object'
+import { selectProperties, isObject, isArray } from '~/util/object'
 import { removeDuplicatePrimitive } from '~/util/array'
 import { reduce as mutationReduce } from './mutation'
 import type { State } from './type'
+
+// replace string, substring and object key
+// #yolo
+const seekAndReplace = (o, a, b) => {
+  if (typeof o === 'string') return o.replace(a, b)
+
+  if (typeof o === 'number' && a == b) return b
+
+  if (isArray(o)) {
+    const copy = o.map(x => seekAndReplace(x, a, b))
+
+    return o.every((_, i) => o[i] == copy[i]) ? o : copy
+  }
+
+  if (isObject(o)) {
+    const copy = {}
+
+    for (let key in o) {
+      const key_ = key.replace(a, b)
+
+      copy[key_] = seekAndReplace(o[key], a, b)
+    }
+
+    return Object.keys(o).every(key => o[key] === copy[key]) ? o : copy
+  }
+
+  return o
+}
 
 export const defaultState = {
   mutated: {},
@@ -40,13 +68,15 @@ export const reduce = (state: State, action): State => {
         original: { ...state.original },
       }
 
+      // update the cache with fresh entities
       Object.keys(action)
-        .filter(key => !['type', 'fromMutation'].includes(key))
+        .filter(key => !['type', 'fromMutation', 'idChanged'].includes(key))
         .forEach(key => {
           state.dateFetched[key] = Date.now()
           state.original[key] = action[key]
         })
 
+      // remove the mutated version if the entities is the results of a merge
       Object.keys(action.fromMutation)
         .filter(key => action.fromMutation[key] == state.dateMutated[key])
         .forEach(key => {
@@ -56,6 +86,11 @@ export const reduce = (state: State, action): State => {
           state.dateMutated = { ...state.dateMutated }
           delete state.dateMutated[key]
         })
+
+      // sometimes we need to change the id
+      Object.keys(action.idChanged).forEach(previousId => {
+        state = seekAndReplace(state, previousId, action.idChanged[previousId])
+      })
 
       return state
     }

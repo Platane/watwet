@@ -1,7 +1,7 @@
 import { hydrate } from '~/store/action/onlineStorage'
 
 import {
-  list as listSites,
+  listId as listSitesId,
   get as getSite,
 } from '~/service/google-api/spreadSheets/site'
 import { get as getHabitatDirectory } from '~/service/google-api/spreadSheets/habitatDirectory'
@@ -40,8 +40,9 @@ export const init = store => {
           }
 
           case 'sites': {
-            const sites = await listSites()
-            store.dispatch(hydrate({ sites: sites.map(x => `site.${x.id}`) }))
+            store.dispatch(
+              hydrate({ sites: (await listSitesId()).map(id => `site.${id}`) })
+            )
             break
           }
 

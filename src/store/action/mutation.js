@@ -1,4 +1,4 @@
-import { genIUid } from '~/util/uid'
+import { genIUid, genUid } from '~/util/uid'
 import { normalizeHabitat } from '~/service/normalize'
 
 export const updateHabitat = habitat => ({
@@ -20,7 +20,7 @@ export const createHabitat = (siteId, habitat) => ({
 export const createSite = site => ({
   type: 'mutation:site:create',
   site: {
-    id: genIUid(),
+    id: genUid(),
     ...site,
     habitats: [],
   },

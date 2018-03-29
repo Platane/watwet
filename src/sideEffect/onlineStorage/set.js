@@ -1,7 +1,7 @@
 import { hydrate } from '~/store/action/onlineStorage'
 
 import {
-  list as listSites,
+  listId as listSitesId,
   set as setSite,
   get as getSite,
   create as createSite,
@@ -27,7 +27,6 @@ const priorityFn = key =>
 const sortFn = (a, b) => (priorityFn(a) < priorityFn(b) ? 1 : -1)
 
 export const init = async store => {
-  // let pending = {}
   let pending = false
 
   const update = async () => {
@@ -51,8 +50,35 @@ export const init = async store => {
 
     switch (entity) {
       case 'sites': {
-        // TODO create site
-        // const sites = await  listSites()
+        const siteKeys = state.resource.mutated.sites.filter(
+          key => !state.resource.original.sites.includes(key)
+        )
+
+        const idChanged = {}
+
+        for (let i = 0; i < siteKeys.length; i++) {
+          const previousId = siteKeys[i].split('.', 2)[1]
+
+          const name = state.resource.mutated[siteKeys[i]].name
+
+          const nextId = await createSite(name)
+
+          idChanged[previousId] = nextId
+        }
+
+        const fromMutation = {
+          [key]: state.resource.dateMutated[key],
+        }
+
+        store.dispatch(
+          hydrate(
+            { sites: (await listSitesId()).map(id => `site.${id}`) },
+            fromMutation,
+            idChanged
+          )
+        )
+
+        break
       }
 
       case 'site': {

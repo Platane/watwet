@@ -7,7 +7,7 @@ export const SiteList = ({ sites, goToSite, goToCreateSite }) => (
   <Container>
     {sites.map(site => (
       <Site key={site.id} onClick={goToSite(site)}>
-        {`${site.id}  ${site.name}`}
+        {site.name}
       </Site>
     ))}
 
@@ -44,7 +44,7 @@ const Container = styled.div`
   width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   margin: 20px;
   flex: 100px 1 1;
 `

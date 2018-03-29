@@ -1,5 +1,6 @@
 import { routeValidator } from '~/service/router/routeValidator'
 import { routes } from './routes'
+import { set } from '~/util/reduxHelper'
 import { keyToLabel } from '~/store/selector/currentLayer'
 import { selectCurrentHabitatId } from '~/store/selector/currentHabitat'
 import { selectCurrentSiteId } from '~/store/selector/currentSite'
@@ -61,6 +62,24 @@ export const reduceGlobal = (state, action) => {
           ...getRoute(`site/${action.site.id}`),
         },
       }
+
+    case 'resource:online:read': {
+      if (action.idChanged && action.idChanged[state.router.param.siteId])
+        return {
+          ...state,
+          router: {
+            ...state.router,
+            ...getRoute(
+              state.router.path.replace(
+                state.router.param.siteId,
+                action.idChanged[state.router.param.siteId]
+              )
+            ),
+          },
+        }
+
+      break
+    }
 
     case 'location:selectLayer':
       if (selectCurrentHabitatId(state)) {
