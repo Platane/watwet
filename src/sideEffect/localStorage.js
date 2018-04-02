@@ -48,6 +48,7 @@ const selectNonStaticResources = createSelector(
 
 export const init = store => {
   const persistUser = createPersist('watwet-user', selectCurrentUser)
+  const persistSetting = createPersist('watwet-setting', x => x.setting)
   const persistStaticResources = createPersist(
     'watwet-resources-static',
     selectStaticResources
@@ -61,17 +62,20 @@ export const init = store => {
     const state = store.getState()
 
     persistUser(state)
+    persistSetting(state)
     persistStaticResources(state)
     persistNonStaticResources(state)
   }
 
   const r = () => {
     const user = read('watwet-user')
+    const setting = read('watwet-setting')
     const resourcesStatic = read('watwet-resources-static')
     const resourcesNonStatic = read('watwet-resources-nonstatic')
 
     return {
       user,
+      setting,
       resource:
         resourcesStatic && resourcesNonStatic
           ? {

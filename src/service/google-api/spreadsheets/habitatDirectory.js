@@ -1,10 +1,8 @@
-import { HABITAT_NAME_ID } from '~/config'
-
-export const get = async () => {
+export const get = async (spreadsheetId: string) => {
   const gapi = window.gapi
 
   const res = await gapi.client.sheets.spreadsheets.values.get({
-    spreadsheetId: HABITAT_NAME_ID,
+    spreadsheetId,
     range: 'A2:C',
   })
 

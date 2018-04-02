@@ -8,7 +8,7 @@ export const siteId = createSelector(
 
 const habitatId = state => state.router.param.habitatId
 
-export const selectSpreadSheetUrl = createSelector(
+export const selectSpreadsheetUrl = createSelector(
   habitatId,
   siteId,
   (habitatId, siteId) => {

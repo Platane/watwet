@@ -5,9 +5,9 @@ import {
   set as setSite,
   get as getSite,
   create as createSite,
-} from '~/service/google-api/spreadSheets/site'
-import { set as setHabitat } from '~/service/google-api/spreadSheets/habitat'
-import { selectSpreadSheetApiReady } from '~/store/selector/spreadSheetApiReady'
+} from '~/service/google-api/spreadsheets/site'
+import { set as setHabitat } from '~/service/google-api/spreadsheets/habitat'
+import { selectSpreadsheetApiReady } from '~/store/selector/spreadsheetApiReady'
 import {
   selectVegetal_byId,
   selectDitionariesReady,
@@ -33,7 +33,7 @@ export const init = async store => {
     const state = store.getState()
 
     if (
-      !selectSpreadSheetApiReady(state) ||
+      !selectSpreadsheetApiReady(state) ||
       !selectDitionariesReady(state) ||
       pending
     )

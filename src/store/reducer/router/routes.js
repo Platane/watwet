@@ -2,6 +2,7 @@ import type { Route } from '~/service/router/type'
 
 export const routes: Route[] = [
   { path: '/', key: 'siteList' },
+  { path: '/setting', key: 'setting' },
   { path: '/site', key: 'siteList' },
   { path: '/site/create', key: 'siteCreate' },
   { path: '/site/:siteId', key: 'habitatList' },

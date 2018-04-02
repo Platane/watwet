@@ -31,7 +31,7 @@ export const selectHabitatDictionary = createSelector(
 )
 
 export const selectVegetalDictionary = state =>
-  state.resource.original.vegetalDictionary
+  state.resource.original.vegetalDictionary || []
 
 export const selectVegetal_byId = createSelector(
   selectVegetalDictionary,

@@ -3,10 +3,10 @@ import { hydrate } from '~/store/action/onlineStorage'
 import {
   listId as listSitesId,
   get as getSite,
-} from '~/service/google-api/spreadSheets/site'
-import { get as getHabitatDirectory } from '~/service/google-api/spreadSheets/habitatDirectory'
-import { get as getVegetalDictionary } from '~/service/google-api/spreadSheets/vegetalDictionary'
-import { selectSpreadSheetApiReady } from '~/store/selector/spreadSheetApiReady'
+} from '~/service/google-api/spreadsheets/site'
+import { get as getHabitatDirectory } from '~/service/google-api/spreadsheets/habitatDirectory'
+import { get as getVegetalDictionary } from '~/service/google-api/spreadsheets/vegetalDictionary'
+import { selectSpreadsheetApiReady } from '~/store/selector/spreadsheetApiReady'
 import { normalizeSite } from '~/service/normalize'
 
 export const init = store => {
@@ -15,7 +15,7 @@ export const init = store => {
   const update = async () => {
     const state = store.getState()
 
-    if (!selectSpreadSheetApiReady(state)) return
+    if (!selectSpreadsheetApiReady(state)) return
 
     const { required, original } = state.resource
 
@@ -28,13 +28,17 @@ export const init = store => {
 
         switch (entity) {
           case 'habitatDictionary': {
-            const habitatDictionary = await getHabitatDirectory()
+            const habitatDictionary = await getHabitatDirectory(
+              state.setting.habitatDictionarySpreadsheetId
+            )
             store.dispatch(hydrate({ habitatDictionary }))
             break
           }
 
           case 'vegetalDictionary': {
-            const vegetalDictionary = await getVegetalDictionary()
+            const vegetalDictionary = await getVegetalDictionary(
+              state.setting.vegetalDictionarySpreadsheetId
+            )
             store.dispatch(hydrate({ vegetalDictionary }))
             break
           }

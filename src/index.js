@@ -25,12 +25,12 @@ if (SENTRY_DSN) {
 
 // init store
 const sideEffects = [
+  initLocalStorage,
+  initSentryIdentity,
   initAuth,
   initNavigator,
-  initLocalStorage,
   initServiceWorker,
   initOnlineStorage,
-  initSentryIdentity,
   initOfflineDetector,
   initUi,
 ]
