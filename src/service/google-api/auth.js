@@ -16,6 +16,7 @@ export const getCurrentUser = (): User | null => {
   return {
     id: profile.getId(),
     name: profile.getName(),
+    email: profile.getEmail(),
     picture_url: profile.getImageUrl(),
   }
 }

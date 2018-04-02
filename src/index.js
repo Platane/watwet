@@ -11,6 +11,7 @@ import { init as initNavigator } from '~/sideEffect/navigator'
 import { init as initLocalStorage } from '~/sideEffect/localStorage'
 import { init as initOnlineStorage } from '~/sideEffect/onlineStorage'
 import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
+import { init as initSentryIdentity } from '~/sideEffect/sentryIdentity'
 import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 
 // init raven
@@ -30,6 +31,7 @@ const sideEffects = [
   initLocalStorage,
   initServiceWorker,
   initOnlineStorage,
+  initSentryIdentity,
   initOfflineDetector,
 ]
 Raven.context(() => create(sideEffects))
