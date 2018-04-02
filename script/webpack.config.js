@@ -65,19 +65,12 @@ module.exports = {
   },
 
   plugins: [
-    // production &&
-    //   new BabiliPlugin(
-    //     {},
-    //     {
-    //       sourceMap: false,
-    //       comments: false,
-    //     }
-    //   ),
-
     new WebpackAssetsManifest({
       output: path.resolve(__dirname, '../dist', 'assetManifest.json'),
     }),
   ].filter(Boolean),
+
+  devtool: production ? 'source-map' : false,
 
   devServer: {
     port: 8082,
