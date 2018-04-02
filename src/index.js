@@ -25,7 +25,6 @@ if (SENTRY_DSN) {
 
 // init store
 const sideEffects = [
-  initUi,
   initAuth,
   initNavigator,
   initLocalStorage,
@@ -33,5 +32,6 @@ const sideEffects = [
   initOnlineStorage,
   initSentryIdentity,
   initOfflineDetector,
+  initUi,
 ]
 Raven.context(() => create(sideEffects))
