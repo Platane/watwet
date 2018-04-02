@@ -49,6 +49,13 @@ export const normalizeHabitat = (
   ),
 })
 
+const vegetalSortFn = (a, b) => {
+  if (a.representation > b.representation) return -1
+  if (a.representation < b.representation) return 1
+
+  return a.id < b.id ? 1 : -1
+}
+
 const hydrateHabitat = (vegetal_byId: { [string]: Vegetal }) => (
   habitat: Habitat_Flat
 ): Habitat => ({
@@ -59,7 +66,8 @@ const hydrateHabitat = (vegetal_byId: { [string]: Vegetal }) => (
       layer: x.layer,
       representation: x.representation,
     }))
-    .filter(x => x.vegetal),
+    .filter(x => x.vegetal)
+    .sort(vegetalSortFn),
 })
 
 export const getHabitat = (vegetal_byId, cache) => habitatId => {
