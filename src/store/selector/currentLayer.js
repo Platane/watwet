@@ -7,7 +7,7 @@ const d = {
 const _d = {}
 for (let i in d) _d[d[i]] = i
 
-export const filterVegetal = key =>
+export const filterPopulation = key =>
   key ? ({ layer }) => key === layer : () => true
 
 export const keyToLabel = key => d[key]

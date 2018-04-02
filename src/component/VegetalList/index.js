@@ -10,13 +10,13 @@ export const VegetalList = ({
   onChangeRepresentation,
 }) => (
   <Container style={{ height: `${population.length * 50}px` }}>
-    {population.map(({ vegetal, representation }, i) => (
+    {population.map(({ layer, vegetal, representation }, i) => (
       <RowContainer
         key={vegetal.id}
         style={{ transform: `translateY(${i * 50}px)` }}
       >
         <Row key={vegetal.id}>
-          <LayerBadge size={30} layer={vegetal.layer} />
+          <LayerBadge size={30} layer={layer} />
 
           <Name>{vegetal.name_la}</Name>
 

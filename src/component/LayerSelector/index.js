@@ -17,8 +17,11 @@ const setLayerValue = (onChange, layers, key) => x =>
 export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
   <Container>
     {layerLabels.map(({ key, label, color }) => (
-      <Layer key={key}>
-        <Left onClick={() => onSelect(currentLayer == key ? null : key)}>
+      <Layer
+        key={key}
+        onClick={() => onSelect(currentLayer == key ? null : key)}
+      >
+        <Left>
           <Label selected={currentLayer == key}>{label}</Label>
           <LayerBadge
             selected={currentLayer == key}
@@ -29,26 +32,16 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
           />
         </Left>
         <Rigth>
-          <Slidable
-            downFn={({ kx }) => setLayerValue(onChange, layers, key)(kx * 100)}
-            moveFn={({ kx }) => setLayerValue(onChange, layers, key)(kx * 100)}
-          >
-            <BarContainer>
-              <Bar
-                selected={currentLayer == key}
-                style={{
-                  width: `${100 * layers[key]}%`,
-                  backgroundColor: color,
-                }}
-              />
-            </BarContainer>
-          </Slidable>
-          <Input
-            type="number"
-            value={Math.round(layers[key] * 100)}
-            step={1}
-            onChange={e => setLayerValue(onChange, layers, key)(e.target.value)}
-          />
+          <BarContainer>
+            <Bar
+              selected={currentLayer == key}
+              style={{
+                width: `${100 * layers[key]}%`,
+                backgroundColor: color,
+              }}
+            />
+          </BarContainer>
+          <Input type="number" value={Math.round(layers[key] * 100)} step={1} />
         </Rigth>
       </Layer>
     ))}

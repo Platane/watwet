@@ -4,7 +4,7 @@ import styled from 'preact-emotion'
 import { HabitatHeader } from '~/component/HabitatHeader'
 import { LayerSelector } from '~/component/LayerSelector'
 import { VegetalListWithSearch } from '~/component/VegetalListWithSearch'
-import { filterVegetal } from '~/store/selector/currentLayer'
+import { filterPopulation } from '~/store/selector/currentLayer'
 
 export const Habitat = ({
   currentLayer,
@@ -27,10 +27,8 @@ export const Habitat = ({
 
       <VegetalListWithSearch
         currentLayer={currentLayer}
-        vegetals={vegetals.filter(filterVegetal(currentLayer))}
-        population={habitat.population.filter(x =>
-          filterVegetal(currentLayer)(x.vegetal)
-        )}
+        vegetals={vegetals}
+        population={habitat.population.filter(filterPopulation(currentLayer))}
         population_unfilter={habitat.population}
         onChange={population => updateHabitat({ ...habitat, population })}
       />
