@@ -15,7 +15,7 @@ import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
 
 // init raven
 if (SENTRY_DSN) {
-  Raven.config(SENTRY_DSN, { release: process.env.VERSION }).install()
+  Raven.config(SENTRY_DSN, { release: process.env.VERSION || 'dev' }).install()
   Raven.setTagsContext({
     host: window.location && window.location.hostname,
   })

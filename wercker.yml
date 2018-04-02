@@ -9,10 +9,12 @@ build:
         npm install -g yarn
         export YARN_CACHE=$WERCKER_CACHE_DIR/yarn
         HOME=$YARN_CACHE yarn --pure-lockfile
-
+        
     - script:
       name: build
-      code: yarn build
+      code: |
+        export VERSION=`node -e "console.log(require('./package.json').version+'-'+(process.env.WERCKER_GIT_COMMIT||'').slice(0,10))"`
+        yarn build
 
     - script:
       name: test
