@@ -13,7 +13,6 @@ import { Setting } from '~/component/_page/Setting'
 import { Habitat } from '~/component/_page/Habitat'
 import { Login } from '~/component/_page/Login'
 import { variant } from '~/component/_abstract/palette'
-import cssReset from '../_abstract/cssReset'
 
 export const Content = ({ anonym, routerKey, routerParam }) => {
   if (anonym) return <Login />
@@ -42,17 +41,16 @@ export const Content = ({ anonym, routerKey, routerParam }) => {
   }
 }
 
-export const App = props =>
-  cssReset() || (
-    <Container>
-      <Header />
-      <ContentWrap>
-        <Wallpaper />
-        <Content {...props} />
-      </ContentWrap>
-      <Footer />
-    </Container>
-  )
+export const App = props => (
+  <Container>
+    <Header />
+    <ContentWrap>
+      <Wallpaper />
+      <Content {...props} />
+    </ContentWrap>
+    <Footer />
+  </Container>
+)
 
 const ContentWrap = styled.div`
   flex: 0px 1 1;

@@ -1,5 +1,6 @@
 import { connect } from 'preact-redux'
 import { App as Dumb } from './Dumb'
+import { withCssReset } from '~/component/_abstract/cssReset'
 
 const injectState = connect(state => ({
   routerKey: state.router.key,
@@ -7,4 +8,4 @@ const injectState = connect(state => ({
   anonym: !state.auth.user,
 }))
 
-export const App = injectState(Dumb)
+export const App = withCssReset(injectState(Dumb))
