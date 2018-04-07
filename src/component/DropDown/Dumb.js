@@ -1,9 +1,10 @@
 import { h } from 'preact'
-import styled from 'preact-emotion'
+import styled, { css } from 'preact-emotion'
 import { white } from '~/component/_abstract/palette'
 
 export const DropDown = ({
   open,
+  side,
   close,
   opened,
   children,
@@ -14,11 +15,15 @@ export const DropDown = ({
     {children}
     {opened && (
       <PanelWrapper>
-        <Panel>{h(inside)}</Panel>
+        <Panel side={side}>{h(inside)}</Panel>
       </PanelWrapper>
     )}
   </Body>
 )
+
+DropDown.defaultProps = {
+  side: 'right',
+}
 
 const Body = styled.div`
   outline-color: transparent;
@@ -29,7 +34,17 @@ const PanelWrapper = styled.div`
 const Panel = styled.div`
   position: absolute;
   top: 5px;
-  right: 0;
+  ${props =>
+    props.side == 'left' &&
+    css`
+      left: 0;
+    `};
+  ${props =>
+    props.side == 'right' &&
+    css`
+      right: 0;
+    `};
+
   background-color: ${white};
   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.3);
   border-radius: 2px;

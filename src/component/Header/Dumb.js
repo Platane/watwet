@@ -1,32 +1,19 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { white, variant, grey } from '~/component/_abstract/palette'
-import { UserMenu } from './UserMenu'
-import { DropDown } from '~/component/DropDown'
+import { UserButton } from './User'
+import { SyncIndicator } from './SyncIndicator'
 import { Gear } from '~/component/Icon/Gear'
 
-const UserButton = ({ user }) => (
-  <DropDown inside={UserMenu}>
-    <Portrait style={{ backgroundImage: `url(${user.picture_url})` }} />
-  </DropDown>
-)
-
-const Portrait = styled.div`
-  background-color: ${grey};
-  background-position: center;
-  background-size: cover;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-`
-
-export const Header = ({ spreadsheetUrl, user, goToSetting }) => (
+export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
   <Container>
     <Content>
+      <HomeButton onClick={goToHome}>Home</HomeButton>
       <a target="blank" href={spreadsheetUrl}>
         view on google doc
       </a>
       <Left>
+        <SyncIndicator />
         {user && <UserButton user={user} />}
         <SettingButton onClick={goToSetting}>
           <GearIcon color={white} />
@@ -36,6 +23,15 @@ export const Header = ({ spreadsheetUrl, user, goToSetting }) => (
   </Container>
 )
 
+const HomeButton = styled.div`
+  margin-right: 16px;
+
+  cursor: pointer;
+
+  &:active {
+    transform: scale(0.9, 0.9);
+  }
+`
 const SettingButton = styled.div`
   margin-left: 16px;
 

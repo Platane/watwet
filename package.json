@@ -3,6 +3,7 @@
   "description": "Amazing app",
   "version": "0.1.0",
   "dependencies": {
+    "date-fns": "1.29.0",
     "emotion": "9.0.2",
     "lodash.deburr": "4.1.0",
     "lodash.kebabcase": "4.1.1",
@@ -12,6 +13,7 @@
     "preact-redux": "2.0.3",
     "prop-types": "15.6.1",
     "raven-js": "3.23.3",
+    "react-propstransition": "2.0.6",
     "react-simplest-typeahead": "1.1.0",
     "redux": "3.7.2",
     "supports-webp": "1.0.5",
@@ -44,13 +46,13 @@
     "webpack-dev-server": "3.1.1"
   },
   "jest": {
-    "testMatch": [
-      "**/__tests__/**/*.(spec|test).js"
-    ]
+    "testMatch": ["**/__tests__/**/*.(spec|test).js"]
   },
   "scripts": {
-    "start": "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
+    "start":
+      "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose",
-    "build": "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js --mode production && node ./script/rewriteFileName.js && node ./script/buildManifest.js"
+    "build":
+      "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js --mode production && node ./script/rewriteFileName.js && node ./script/buildManifest.js"
   }
 }

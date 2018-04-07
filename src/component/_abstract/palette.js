@@ -12,6 +12,8 @@ export const variant = [
   'hsl(234, 96%, 69%)',
 ]
 
+export const vibrant = ['#6B0848', '#A40A3C', '#EC610A', '#FFC300']
+
 export const vibrant1 = 'hsl(25, 79%, 57%)'
 export const vibrant2 = 'hsl(9, 84%, 27%)'
 

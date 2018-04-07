@@ -2268,7 +2268,7 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
-date-fns@^1.27.2:
+date-fns@^1.27.2, date-fns@^1.29.0:
   version "1.29.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.29.0.tgz#12e609cdcb935127311d04d33334e2960a2a54e6"
 
@@ -5794,6 +5794,10 @@ react-dom@>=16:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-propstransition@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/react-propstransition/-/react-propstransition-2.0.6.tgz#d6c695192a95546bdd314c6d3bef52904c565952"
 
 react-simplest-typeahead@1.1.0:
   version "1.1.0"
