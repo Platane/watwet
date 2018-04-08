@@ -27,15 +27,17 @@ export class Link extends Component {
   }
 
   render() {
-    // return this.props.children
-
-    const child = React.Children.only(this.props.children)
     const props = {
       href: this.props.href,
       target: this.props.target,
       onClick: this.linkClicked,
     }
 
-    return React.cloneElement(child, props)
+    // const child = React.Children.only(this.props.children)
+    // return React.cloneElement(child, props)
+
+    Object.assign(this.props.children[0].attributes, props)
+
+    return this.props.children[0]
   }
 }
