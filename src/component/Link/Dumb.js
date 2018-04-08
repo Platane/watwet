@@ -1,7 +1,14 @@
 import React from 'react'
 import { h, Component } from 'preact'
+import { PATHNAME_BASE } from '~/config'
 
 const isExternalUrl = url => !!url.match(/^https?:\/\//)
+
+const prefix = href =>
+  '/' +
+  [...PATHNAME_BASE.split('/'), ...href.split('/')].filter(Boolean).join('/')
+
+const normalize = href => (isExternalUrl(href) ? href : prefix(href))
 
 export class Link extends Component {
   linkClicked = e => {
@@ -28,7 +35,7 @@ export class Link extends Component {
 
   render() {
     const props = {
-      href: this.props.href,
+      href: normalize(this.props.href),
       target: this.props.target,
       onClick: this.linkClicked,
     }
