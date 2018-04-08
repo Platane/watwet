@@ -53,13 +53,17 @@ export const SearchBar = ({ value, options, onChange, ...props }) => (
     options={options}
     onChange={onChange}
     renderOption={renderOption}
-    placeholder="habitat name"
-    cusmtomClassName={cusmtomClassName}
+    placeholder="canonical name"
+    customClassName={customClassName}
   />
 )
 
-const cusmtomClassName = {
-  input: css``,
+const customClassName = {
+  input: css`
+    padding: 14px 20px;
+    border: none;
+    border-radius: 2px;
+  `,
   options: css``,
   typeahead: css``,
 }

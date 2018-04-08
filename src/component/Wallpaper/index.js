@@ -6,7 +6,7 @@ import {
 } from '~/component/Icon/PineTree'
 import { paths as paths_bush, box as box_bush } from '~/component/Icon/Bush'
 import { paths as paths_herb, box as box_herb } from '~/component/Icon/Herb'
-import { variant, trio, white } from '~/component/_abstract/palette'
+import { vibrant, variant, trio, white } from '~/component/_abstract/palette'
 import { selectCurrentLayer } from '~/store/selector/currentLayer'
 import { connect } from 'preact-redux'
 
@@ -64,22 +64,22 @@ const getColor = state => {
     case 'siteList':
     case 'siteCreate':
       return {
-        color: '#123ad2',
+        color: vibrant[0],
       }
 
     case 'habitatList':
       return {
-        color: variant[0],
+        color: vibrant[2],
       }
 
     case 'habitatCreate':
       return {
-        color: variant[3],
+        color: vibrant[3],
       }
 
     default:
       return {
-        color: variant[1],
+        color: vibrant[1],
       }
   }
 }

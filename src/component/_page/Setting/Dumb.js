@@ -89,7 +89,15 @@ const Button = styled.button`
 
 const LargeInput = styled.input`
   min-width: 360px;
-  padding: 4px;
+  padding: 6px;
+  border-radius: 2px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  transition: background-color 260ms ease;
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.16);
+  }
 `
 
 const SectionFooter = styled.footer`

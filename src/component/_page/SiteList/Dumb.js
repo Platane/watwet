@@ -1,15 +1,20 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { variant, white } from '~/component/_abstract/palette'
+import { Link } from '~/component/Link'
 import { Card } from './Card'
 
-export const SiteList = ({ sites, goToSite, goToCreateSite }) => (
+export const SiteList = ({ sites }) => (
   <Container>
     {sites.map(site => (
-      <Site key={site.id} site={site} onClick={goToSite(site)} />
+      <Link key={site.id} href={`/site/${site.id}`}>
+        <Site key={site.id} site={site} />
+      </Link>
     ))}
 
-    <AddButton onClick={goToCreateSite} />
+    <Link href={`/site/create`}>
+      <AddButton />
+    </Link>
   </Container>
 )
 
@@ -43,11 +48,15 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
+  margin: 10px auto;
   flex: 100px 1 1;
+
+  @media (max-width: 600px) {
+    width: 100%;
+  }
 `
 
 const Site = styled(Card)`
-  margin: 20px 0;
+  margin: 10px 0;
   cursor: pointer;
 `

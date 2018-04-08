@@ -3,6 +3,7 @@ import styled, { keyframes } from 'preact-emotion'
 
 import { DropZone as DropZone_ } from '~/component/DropZone'
 import { Image as Image_ } from '~/component/Image'
+import { Photo } from '~/component/Icon/Photo'
 
 export const InputImage = ({
   step,
@@ -17,6 +18,8 @@ export const InputImage = ({
   <Body style={style} className={className}>
     {step === 'selectFile' && value && <Image src={value} />}
 
+    {step === 'selectFile' && !value && <IconPhoto color="#fff" />}
+
     {step === 'uploading' && dataUrl && <Image src={dataUrl} />}
 
     {(step === 'selectFile' || step === 'uploading') && (
@@ -28,6 +31,12 @@ export const InputImage = ({
     )}
   </Body>
 )
+
+const IconPhoto = styled(Photo)`
+  width: 50px;
+  height: 50px;
+  z-index: 2;
+`
 
 const PendingLabel = styled.div`
   background-color: #3336;
@@ -50,7 +59,7 @@ const Body = styled.div`
   width: 280px;
   height: 180px;
   position: relative;
-  border: solid 1px #000;
+
   display: flex;
   flex-direction: column;
   justify-content: center;

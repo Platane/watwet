@@ -18,6 +18,12 @@ export const injectReset = () => {
         margin: 0;
       }
       
+      input,
+      textarea {
+        font-family: Lato,Avenir Next,Helvetica Neue,sans-serif;
+        color: ${black};
+      }
+      
       html,
       body {
         color: ${black};

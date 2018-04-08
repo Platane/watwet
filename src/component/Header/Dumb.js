@@ -1,6 +1,6 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-import { white, variant, grey } from '~/component/_abstract/palette'
+import { white, vibrant, grey } from '~/component/_abstract/palette'
 import { UserButton } from './User'
 import { SyncIndicator } from './SyncIndicator'
 import { Gear } from '~/component/Icon/Gear'
@@ -44,6 +44,11 @@ const Spacer = styled.div`
 const SettingButton = styled.a`
   display: block;
 
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: auto;
+
   &:active {
     transform: scale(0.9, 0.9);
   }
@@ -80,9 +85,10 @@ const Content = styled.div`
   margin-right: auto;
 `
 const Container = styled.div`
-  background-color: ${variant[2]};
+  background-color: ${vibrant[2]};
   box-shadow: 0 -5px 10px 5px rgba(0, 0, 0, 0.3);
   width: 100%;
   display: flex;
   flex-direction: row;
+  color: ${white};
 `

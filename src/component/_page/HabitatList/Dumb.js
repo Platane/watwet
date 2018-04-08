@@ -1,22 +1,18 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { HabitatList as List } from '~/component/HabitatList'
+import { Link } from '~/component/Link'
 import { variant, white } from '~/component/_abstract/palette'
 
-export const HabitatList = ({
-  siteId,
-  habitats,
-  goToHabitat,
-  goToCreateHabitat,
-}) => (
+export const HabitatList = ({ siteId, habitats }) => (
   <Container>
-    {habitats && (
-      <List onClickHabitat={goToHabitat(siteId)} habitats={habitats} />
-    )}
+    {habitats && <List siteId={siteId} habitats={habitats} />}
 
     {habitats && habitats.length == 0 && 'there is no habitat for this site'}
 
-    <AddButton onClick={goToCreateHabitat(siteId)} />
+    <Link href={`/site/${siteId}/habitat/create`}>
+      <AddButton />
+    </Link>
   </Container>
 )
 
@@ -50,6 +46,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 20px;
+  margin: 0 auto;
   flex: 100px 1 1;
 `

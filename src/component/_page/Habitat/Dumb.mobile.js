@@ -48,6 +48,6 @@ const Content = styled.div`
   align-items: center;
   width: 90%;
   max-width: 480px;
-  margin: 20px;
+  margin: 0 auto;
   min-height: 600px;
 `

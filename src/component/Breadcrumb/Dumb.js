@@ -34,7 +34,7 @@ const Fragment = styled.a`
   position: relative;
   
   font-size: 14px;
-  color: ${black};
+  color: inherit;
   text-decoration: none;
 
 
