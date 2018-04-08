@@ -1,17 +1,11 @@
 import { createSelector } from 'reselect'
-import { selectCurrentSite } from './currentSite'
-
-export const siteId = createSelector(
-  selectCurrentSite,
-  site => (site && site.id) || null
-)
-
-const habitatId = state => state.router.param.habitatId
+import { selectCurrentSiteId } from './currentSite'
+import { selectCurrentHabitatId } from './currentHabitat'
 
 export const selectSpreadsheetUrl = createSelector(
-  habitatId,
-  siteId,
-  (habitatId, siteId) => {
+  selectCurrentSiteId,
+  selectCurrentHabitatId,
+  (siteId, habitatId) => {
     if (!siteId) return 'https://docs.google.com/spreadsheets/u/0/?q=site_'
 
     return `https://docs.google.com/spreadsheets/d/${siteId}#gid=${habitatId ||
