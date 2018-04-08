@@ -32,7 +32,7 @@ const getLayout = n => {
 export const Mosaic = ({ srcs, ...props }) => (
   <Container {...props}>
     {getLayout(srcs.length).map((style, i) => (
-      <Fragment key={i} style={style} src={srcs[i]} />
+      <Fragment key={i} style={style} src={srcs[i]} size="small" />
     ))}
   </Container>
 )

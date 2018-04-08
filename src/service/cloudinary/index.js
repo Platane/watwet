@@ -6,6 +6,7 @@ const pr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1
 const trimExtension = x => (x || '').replace(/(\.[a-z]+)$/, '')
 
 const getDim = size =>
+  (size === 'xsmall' && 100) ||
   (size === 'small' && 300) ||
   (size === 'medium' && 600) ||
   (size === 'large' && 900) ||
@@ -24,7 +25,11 @@ const buildTransformString = ({ size = 'medium' }) =>
 export const isCloudinary = (url: any) =>
   !!(url || '').match(/^(https?:\/\/)?(\w+\.)*cloudinary\.com\//)
 
-export const createTransform = (options = {}) => (url: string) => {
+type Option = {
+  size?: 'xsmall' | 'small' | 'medium' | 'large' | 'xlarge' | 'xxlarge',
+}
+
+export const createTransform = (options: Option = {}) => (url: string) => {
   if (!isCloudinary(url)) return url
 
   const o = url_parse(url)

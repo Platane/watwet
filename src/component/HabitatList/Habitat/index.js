@@ -4,7 +4,7 @@ import { Image } from '~/component/Image'
 
 export const Habitat = ({ info, population, onClick }) => (
   <Container onClick={onClick}>
-    <Picture src={info.picture_url} />
+    <Picture src={info.picture_url} size="small" />
     <Content>
       <Name>{info.name}</Name>
       <VegetalCount>{`${population.length} species`}</VegetalCount>
@@ -25,6 +25,7 @@ const Container = styled.div`
   align-items: center;
   margin: 20px;
   min-width: 300px;
+  cursor: pointer;
 `
 const Content = styled.section`
   margin-left: 40px;

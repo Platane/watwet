@@ -1,5 +1,5 @@
 import { h } from 'preact'
-import styled from 'preact-emotion'
+import styled, { keyframes } from 'preact-emotion'
 
 import { DropZone as DropZone_ } from '~/component/DropZone'
 import { Image as Image_ } from '~/component/Image'
@@ -24,10 +24,19 @@ export const InputImage = ({
     )}
 
     {step === 'uploading' && (
-      <span>{`uploading ${Math.round(progress * 100)}%`}</span>
+      <PendingLabel>{`uploading ${Math.round(progress * 100)}%`}</PendingLabel>
     )}
   </Body>
 )
+
+const PendingLabel = styled.div`
+  background-color: #3336;
+  padding: 16px;
+  border-radius: 4px;
+  z-index: 2;
+  color: #fff;
+  text-shadow: 2px 1px 4px #333, -2px 1px 6px #333;
+`
 
 const DropZone = styled(DropZone_)`
   position: absolute !important;
@@ -42,6 +51,10 @@ const Body = styled.div`
   height: 180px;
   position: relative;
   border: solid 1px #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
 
 const Image = styled(Image_)`
