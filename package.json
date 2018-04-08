@@ -53,6 +53,6 @@
       "webpack-dev-server --inline --devtool source-map -d --config ./script/webpack.config.js",
     "test": "NODE_ENV=test jest --verbose",
     "build":
-      "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js --mode production && node ./script/rewriteFileName.js && node ./script/buildManifest.js"
+      "rm -rf dist && mkdir dist && NODE_ENV=production babel --out-file ./dist/sw.js ./src/service/serviceWorker/sw.js && NODE_ENV=production webpack --config ./script/webpack.config.js --mode production --json > dist/stats.json && node ./script/rewriteFileName.js && node ./script/buildManifest.js"
   }
 }
