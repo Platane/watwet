@@ -20,10 +20,8 @@ export const SyncIndicator = ({
     <Transition toTransition={!offline && mutated} delay={1200}>
       {({ next, previous, transition }) => (
         <Info>
-          <IconWrapper>
-            {!next && transition && <OkIcon />}
-            {next && <SpinIcon />}
-          </IconWrapper>
+          {!next && transition && <OkIcon />}
+          {next && <SpinIcon />}
 
           <Label>
             {offline && 'offline,'}
@@ -43,7 +41,10 @@ export const SyncIndicator = ({
   ) : null
 
 const Label = styled.span`
-  min-width: 160px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  min-width: 100px;
   font-size: 12px;
 `
 const Info = styled.div`

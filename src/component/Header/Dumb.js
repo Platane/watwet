@@ -4,38 +4,53 @@ import { white, variant, grey } from '~/component/_abstract/palette'
 import { UserButton } from './User'
 import { SyncIndicator } from './SyncIndicator'
 import { Gear } from '~/component/Icon/Gear'
+import { Drive } from '~/component/Icon/Drive'
+import { Link } from '~/component/Link'
+import { Breadcrumb } from '~/component/Breadcrumb'
 
 export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
   <Container>
     <Content>
-      <HomeButton onClick={goToHome}>Home</HomeButton>
-      <a target="blank" href={spreadsheetUrl}>
-        view on google doc
-      </a>
+      <Breadcrumb />
+      <Spacer />
       <Left>
+        {spreadsheetUrl && (
+          <Link target="blank" href={spreadsheetUrl}>
+            <a title="view on google doc">
+              <DriveIcon />
+            </a>
+          </Link>
+        )}
+        <Spacer />
         <SyncIndicator />
+        <Spacer />
         {user && <UserButton user={user} />}
-        <SettingButton onClick={goToSetting}>
-          <GearIcon color={white} />
-        </SettingButton>
+        <Spacer />
+        <Link href="/setting">
+          <SettingButton>
+            <GearIcon color={white} />
+          </SettingButton>
+        </Link>
       </Left>
     </Content>
   </Container>
 )
 
-const HomeButton = styled.div`
-  margin-right: 16px;
+const Spacer = styled.div`
+  width: 8px;
+  height: 8px;
+`
 
-  cursor: pointer;
+const SettingButton = styled.a`
+  display: block;
 
   &:active {
     transform: scale(0.9, 0.9);
   }
 `
-const SettingButton = styled.div`
-  margin-left: 16px;
-
-  cursor: pointer;
+const DriveIcon = styled(Drive)`
+  width: 22px;
+  height: 22px;
 
   &:active {
     transform: scale(0.9, 0.9);
