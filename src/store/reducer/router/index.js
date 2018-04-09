@@ -43,7 +43,7 @@ export const reduceGlobal = (state, action) => {
       const site = state.resource.mutated[`site.${action.siteId}`]
       const habitatId = site.habitats[site.habitats.length - 1].split('.', 2)[1]
 
-      return {
+      state = {
         ...state,
         router: {
           hash: {},
@@ -51,6 +51,7 @@ export const reduceGlobal = (state, action) => {
           ...getRoute(`site/${site.id}/habitat/${habitatId}`),
         },
       }
+      break
     }
 
     case 'mutation:site:create':
@@ -81,14 +82,14 @@ export const reduceGlobal = (state, action) => {
       break
     }
 
-    case 'location:selectLayer':
+    case 'location:selectLayer': {
       if (selectCurrentHabitatId(state)) {
         const strate = keyToLabel(action.layer)
 
         const siteId = selectCurrentSiteId(state)
         const habitatId = selectCurrentHabitatId(state)
 
-        return {
+        state = {
           ...state,
           router: {
             hash: {},
@@ -97,7 +98,12 @@ export const reduceGlobal = (state, action) => {
           },
         }
       }
+      break
+    }
   }
+
+  if (state.router.key == 'habitat' && !state.router.query.strate)
+    state = set(state, ['router', 'query', 'strate'], 'arboree')
 
   return state
 }

@@ -9,7 +9,7 @@ export const Card = ({ site, ...props }) => (
     <Mosaic srcs={site.habitats.map(x => x.info.picture_url).filter(Boolean)} />
     <Content>
       <Name>{site.name}</Name>
-      <Description>{site.name}</Description>
+      <Description>{site.description}</Description>
     </Content>
   </Container>
 )

@@ -43,8 +43,8 @@ const LayerBadge = styled(LayerBadge_)`
 `
 
 const popAnimation = keyframes`
-  0%{ transform: scale(0.8,0.8); opacity:0}
-  50%{ transform: scale(1.03,1.03); opacity:1}
+  0%{ transform: scale(0.92,0.92); opacity:0}
+  50%{ transform: scale(1.02,1.02); opacity:1}
   100%{ transform: scale(1,1); opacity:1}
 `
 

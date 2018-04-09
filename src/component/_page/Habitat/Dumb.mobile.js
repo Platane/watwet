@@ -23,7 +23,7 @@ export const Habitat = ({
         onSelect={selectLayer}
       />
 
-      <div style={{ height: '60px' }} />
+      <div style={{ height: '64px', width: '32px' }} />
 
       <VegetalListWithSearch
         currentLayer={currentLayer}
@@ -44,10 +44,15 @@ const Container = styled.div`
 
 const Content = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 90%;
-  max-width: 480px;
+  flex-direction: row;
+  width: calc(100% - 32px);
+  max-width: 1100px;
   margin: 0 auto;
-  min-height: 600px;
+
+  @media (max-width: 800px) {
+    align-items: center;
+    min-height: 600px;
+    max-width: 480px;
+    flex-direction: column;
+  }
 `

@@ -17,10 +17,7 @@ const setLayerValue = (onChange, layers, key) => x =>
 export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
   <Container>
     {layerLabels.map(({ key, label, color }) => (
-      <Layer
-        key={key}
-        onClick={() => onSelect(currentLayer == key ? null : key)}
-      >
+      <Layer key={key} onClick={() => onSelect(key)}>
         <Left>
           <Label selected={currentLayer == key}>{label}</Label>
           <LayerBadge
@@ -41,7 +38,7 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
               }}
             />
           </BarContainer>
-          <Input type="number" value={Math.round(layers[key] * 100)} step={1} />
+          <LabelPercent>{Math.round(layers[key] * 100)}</LabelPercent>
         </Rigth>
       </Layer>
     ))}
@@ -112,15 +109,8 @@ const BarContainer = styled.div`
   width: 100px;
   position: relative;
 `
-const Input = styled.input`
+const LabelPercent = styled.span`
   height: 30px;
   width: 60px;
   padding: 6px;
-  border-radius: 2px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
-  transition: background-color 260ms ease;
-  &:focus {
-    background-color: rgba(255, 255, 255, 0.16);
-  }
 `
