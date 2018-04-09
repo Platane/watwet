@@ -7,7 +7,7 @@ import { Name } from './Name'
 export const CreateHabitat = ({ info, onChange, onSubmit }) => (
   <Container>
     <InputImage
-      onChange={picture_url => onChange({ ...info, picture_url })}
+      onChange={picture_url => onChange({ picture_url })}
       value={info.picture_url}
     />
 
@@ -102,6 +102,6 @@ const Container = styled.div`
   z-index: 2;
   position: relative;
   margin: 20px auto;
-  min-width: 800px;
+  max-width: 800px;
   width: calc(100% - 40px);
 `

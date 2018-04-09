@@ -12,5 +12,5 @@ export type State = {
   original: Object,
   dateFetched: { [string]: number },
   dateMutated: { [string]: number },
-  shouldFetch: string[],
+  shouldFetch: { [string]: string },
 }

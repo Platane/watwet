@@ -2,20 +2,20 @@ import { h, Component } from 'preact'
 
 export default C =>
   class createHabitatState extends Component {
-    state = { info: {} }
+    state = {}
 
-    onChange = info => this.setState({ info: { ...this.state.info, ...info } })
+    onChange = info => this.setState(info)
 
     onSubmit = () =>
       this.props.createHabitat(this.props.siteId, {
-        info: this.state.info,
+        info: this.state,
       })
 
     render() {
       return (
         <C
           {...this.props}
-          {...this.state}
+          info={this.state}
           onSubmit={this.onSubmit}
           onChange={this.onChange}
         />

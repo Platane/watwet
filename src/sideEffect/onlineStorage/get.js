@@ -17,12 +17,12 @@ export const init = store => {
 
     if (!selectSpreadsheetApiReady(state)) return
 
-    const { required, original } = state.resource
+    const { shouldFetch, original } = state.resource
 
-    required
-      .filter(key => !original[key] && !pending[key])
+    Object.keys(shouldFetch)
+      .filter(key => !pending[key])
       .forEach(async key => {
-        pending[key] = Date.now()
+        pending[key] = shouldFetch[key]
 
         const [entity, id] = key.split('.', 2)
 

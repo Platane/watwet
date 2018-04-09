@@ -1,6 +1,7 @@
 import { set, merge } from '~/util/reduxHelper'
 import { selectProperties, isObject, isArray } from '~/util/object'
 import { removeDuplicatePrimitive } from '~/util/array'
+import { genUid } from '~/util/uid'
 import { reduce as mutationReduce } from './mutation'
 import type { State } from './type'
 
@@ -61,6 +62,17 @@ export const reduce = (state: State, action): State => {
         ])(action.resource || {}),
       }
 
+    case 'resource:forceRefetch': {
+      const shouldFetch = { ...state.shouldFetch }
+
+      action.shouldFetch.forEach(key => (shouldFetch[key] = genUid()))
+
+      return {
+        ...state,
+        shouldFetch,
+      }
+    }
+
     case 'resource:online:read': {
       state = {
         ...state,
@@ -74,6 +86,9 @@ export const reduce = (state: State, action): State => {
         .forEach(key => {
           state.dateFetched[key] = Date.now()
           state.original[key] = action[key]
+
+          state.shouldFetch = { ...state.shouldFetch }
+          delete state.shouldFetch[key]
         })
 
       // remove the mutated version if the entities is the results of a merge
@@ -117,14 +132,41 @@ export const reduce = (state: State, action): State => {
 }
 
 export const reduceGlobal = (state, action) => {
-  const siteKeys = state.resource.original.sites || []
+  // require the sites
+  {
+    const siteKeys = state.resource.original.sites || []
 
-  if (siteKeys.some(key => !state.resource.required.includes(key)))
-    state = set(
-      state,
-      ['resource', 'required'],
-      removeDuplicatePrimitive([...state.resource.required, ...siteKeys])
-    )
+    if (siteKeys.some(key => !state.resource.required.includes(key)))
+      state = set(
+        state,
+        ['resource', 'required'],
+        removeDuplicatePrimitive([...state.resource.required, ...siteKeys])
+      )
+  }
+
+  // update shouldFetch
+  {
+    if (state.init.localStorage) {
+      const { shouldFetch, original, dateFetched, required } = state.resource
+
+      const getExpirationDate = key =>
+        ['vegetalDictionary', 'habitatDictionary'].includes(key)
+          ? Infinity
+          : 15 * 60 * 1000
+
+      const changed = required.filter(
+        key =>
+          !original[key] ||
+          Date.now() - dateFetched[key] > getExpirationDate(key)
+      )
+
+      if (changed.length) {
+        const o = { ...shouldFetch }
+        changed.forEach(key => (o[key] = genUid()))
+        state = set(state, ['resource', 'shouldFetch'], o)
+      }
+    }
+  }
 
   return state
 }

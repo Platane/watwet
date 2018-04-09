@@ -19,8 +19,8 @@ const injectState = connect(
       'https://docs.google.com/spreadsheets/d/' +
       state.setting.vegetalDictionarySpreadsheetId,
 
-    habitatDictionaryLoaded: !!selectHabitatDictionary(state).length,
-    vegetalDictionaryLoaded: !!selectVegetalDictionary(state).length,
+    habitatDictionaryLoaded: !state.resource.shouldFetch['habitatDictionary'],
+    vegetalDictionaryLoaded: !state.resource.shouldFetch['vegetalDictionary'],
   }),
   settingActions
 )

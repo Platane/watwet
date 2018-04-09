@@ -31,9 +31,8 @@ export const reduceEnhancer = reduce => (state, action) => {
   let newState = reduce(state, action)
 
   if (
-    action.type == 'setting:forceRefresh:vegetalDictionary' ||
     newState.setting.vegetalDictionarySpreadsheetId !=
-      state.setting.vegetalDictionarySpreadsheetId
+    state.setting.vegetalDictionarySpreadsheetId
   )
     newState = set(
       newState,
@@ -42,9 +41,8 @@ export const reduceEnhancer = reduce => (state, action) => {
     )
 
   if (
-    action.type == 'setting:forceRefresh:habitatDictionary' ||
     newState.setting.habitatDictionarySpreadsheetId !=
-      state.setting.habitatDictionarySpreadsheetId
+    state.setting.habitatDictionarySpreadsheetId
   )
     newState = set(
       newState,

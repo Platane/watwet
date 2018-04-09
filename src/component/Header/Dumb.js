@@ -54,8 +54,8 @@ const SettingButton = styled.a`
   }
 `
 const DriveIcon = styled(Drive)`
-  width: 22px;
-  height: 22px;
+  width: 18px;
+  height: 18px;
 
   &:active {
     transform: scale(0.9, 0.9);

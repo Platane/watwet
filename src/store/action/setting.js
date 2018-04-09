@@ -8,9 +8,11 @@ export const resetSetting = () => ({
 })
 
 export const forceHabitatDictionaryRefresh = () => ({
-  type: 'setting:forceRefresh:habitatDictionary',
+  type: 'resource:forceRefetch',
+  shouldFetch: ['habitatDictionary'],
 })
 
 export const forceVegetalDictionaryRefresh = () => ({
-  type: 'setting:forceRefresh:vegetalDictionary',
+  type: 'resource:forceRefetch',
+  shouldFetch: ['vegetalDictionary'],
 })
