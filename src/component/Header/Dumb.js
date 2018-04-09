@@ -24,6 +24,7 @@ export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
         <Spacer />
         <SyncIndicator />
         <Spacer />
+        <Spacer />
         {user && <UserButton user={user} />}
         <Spacer />
         <Link href="/setting">
@@ -37,8 +38,8 @@ export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
 )
 
 const Spacer = styled.div`
-  width: 8px;
-  height: 8px;
+  width: 16px;
+  height: 16px;
 `
 
 const SettingButton = styled.a`

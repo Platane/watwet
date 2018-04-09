@@ -128,7 +128,7 @@ export const init = async store => {
     update()
   }
 
-  const throttledUpdate = throttle(1000)(update)
+  const throttledUpdate = throttle(2000)(update)
 
   throttledUpdate()
 

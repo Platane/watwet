@@ -1,6 +1,9 @@
 import { connect } from 'preact-redux'
 import { SyncIndicator as Dumb } from './Dumb'
-import { logout } from '~/store/action/auth'
+import {
+  forceRefreshSite,
+  forceRefreshSites,
+} from '~/store/action/onlineStorage'
 import { selectCurrentUser } from '~/store/selector/currentUser'
 import { selectCurrentSiteId } from '~/store/selector/currentSite'
 import { selectCurrentHabitatId } from '~/store/selector/currentHabitat'
@@ -21,13 +24,20 @@ const injectState = connect(state => {
 
   const mutated = state.resource.mutated[currentKey]
 
+  const offline = selectOffline(state)
+
+  const fetching =
+    !offline &&
+    !!state.resource.shouldFetch[(path[0] && `site.${path[0]}`) || 'sites']
+
   return {
     display: ['habitatList', 'habitat', 'site', 'siteList'].includes(
       state.router.key
     ),
-    offline: selectOffline(state),
     path,
+    offline,
     mutated,
+    fetching,
     lastSyncDate,
   }
 })

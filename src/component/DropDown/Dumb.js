@@ -57,6 +57,15 @@ const Panel = styled.div`
     border-right: solid 5px transparent;
     position: absolute;
     top: -5px;
-    right: 10px;
+    ${props =>
+      props.side == 'left' &&
+      css`
+        left: 10px;
+      `};
+    ${props =>
+      props.side == 'right' &&
+      css`
+        right: 10px;
+      `};
   }
 `

@@ -4,38 +4,39 @@ import { variant, grey } from '~/component/_abstract/palette'
 import { Transition } from 'react-propstransition'
 import { DropDown } from '~/component/DropDown'
 import { TimeAgo } from '~/component/TimeAgo'
-
-const Panel = () => <span>hello</span>
-
-// <DropDown inside={Panel}>
+import { Panel } from './Panel'
 
 export const SyncIndicator = ({
   display,
-  path,
   lastSyncDate,
   mutated,
+  fetching,
   offline,
 }) =>
   display ? (
     <Transition toTransition={!offline && mutated} delay={1200}>
       {({ next, previous, transition }) => (
-        <Info>
-          {!next && transition && <OkIcon />}
-          {next && <SpinIcon />}
+        <DropDown inside={Panel} side="left">
+          <Info>
+            {!next && transition && <OkIcon />}
+            {(next || fetching) && <SpinIcon />}
 
-          <Label>
-            {offline && 'offline,'}
+            <Label>
+              {offline && 'offline, '}
 
-            {next && 'saving …'}
+              {next && 'saving …'}
 
-            {!next && transition && 'saved'}
+              {fetching && 'loading …'}
 
-            {(offline || (!next && !transition)) && 'last sync '}
-            {(offline || (!next && !transition)) && (
-              <TimeAgo date={lastSyncDate} />
-            )}
-          </Label>
-        </Info>
+              {!next && transition && 'saved'}
+
+              {(offline || (!fetching && !next && !transition)) && 'last sync '}
+              {(offline || (!fetching && !next && !transition)) && (
+                <TimeAgo date={lastSyncDate} />
+              )}
+            </Label>
+          </Info>
+        </DropDown>
       )}
     </Transition>
   ) : null
@@ -53,6 +54,7 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   height: 32px;
+  cursor: pointer;
 `
 
 const spin = keyframes`
