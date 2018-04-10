@@ -1,6 +1,6 @@
 import { habitatDiff } from '~/service/diff/habitat'
 import { createSelector } from 'reselect'
-import { selectCurrentHabitatId } from '../currentHabitat'
+import { selectCurrentHabitatId, selectCurrentHabitat } from '../currentHabitat'
 import { getHabitat } from '~/service/normalize'
 import { selectVegetal_byId } from '../dictionaries'
 
@@ -8,14 +8,14 @@ export const selectCurrentHabitatDiff = createSelector(
   state => state.resource,
   selectVegetal_byId,
   selectCurrentHabitatId,
-  (cache, vegetal_byId, habitatId) => {
+  selectCurrentHabitat,
+  (cache, vegetal_byId, habitatId, b) => {
     if (!habitatId) return []
 
     const originalCache = { ...cache, mutated: {} }
 
     const a = getHabitat(vegetal_byId, originalCache)(habitatId)
-    const b = getHabitat(vegetal_byId, cache)(habitatId)
 
-    return habitatDiff(a, b)
+    return (a && b && habitatDiff(a, b)) || []
   }
 )

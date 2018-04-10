@@ -1,22 +1,44 @@
 import { h, Component } from 'preact'
 import styled, { css, keyframes } from 'preact-emotion'
 import { variant, grey, black } from '~/component/_abstract/palette'
+import { Drive } from '~/component/Icon/Drive'
+import { Link } from '~/component/Link'
 
 const createRefresh = ({ path, forceRefreshSite, forceRefreshSites }) => e => {
-  e.stopPropagation()
-  e.preventDefault()
-
   if (path[0]) forceRefreshSite(path[0])
   else forceRefreshSites()
 }
 
-export const Panel = ({ offline, fetching, diff, ...props }) => (
+const preventDefault = e => {
+  e.stopPropagation()
+  e.preventDefault()
+}
+
+export const Panel = ({
+  spreadsheetUrl,
+  offline,
+  fetching,
+  diff,
+  ...props
+}) => (
   <Container>
+    <section style={{ marginBottom: '32px' }}>
+      {spreadsheetUrl && (
+        <Link href={spreadsheetUrl} target="blank">
+          <a onMouseDown={preventDefault} onTouchStart={preventDefault}>
+            <DriveIcon />
+            <span>view of google drive</span>
+          </a>
+        </Link>
+      )}
+    </section>
+
     {!offline &&
       !fetching && (
         <Button
-          onMouseDown={createRefresh(props)}
-          onTouchStart={createRefresh(props)}
+          onMouseDown={preventDefault}
+          onTouchStart={preventDefault}
+          onClick={createRefresh(props)}
         >
           refresh
         </Button>
@@ -36,6 +58,13 @@ export const Panel = ({ offline, fetching, diff, ...props }) => (
       )}
   </Container>
 )
+
+const DriveIcon = styled(Drive)`
+  width: 18px;
+  height: 18px;
+
+  margin-right: 16px;
+`
 
 const Button = styled.button`
   display: block;

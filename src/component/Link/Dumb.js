@@ -12,6 +12,8 @@ const normalize = href => (isExternalUrl(href) ? href : prefix(href))
 
 export class Link extends Component {
   linkClicked = e => {
+    this.props.onClick && this.props.onClick(e)
+
     if (
       e.currentTarget.nodeName === 'A' &&
       (e.metaKey ||

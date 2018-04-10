@@ -8,7 +8,9 @@ export const create = async (title: string): Promise<string> => {
 
   const { result } = await toPromise(
     gapi.client.sheets.spreadsheets.create({
-      properties: { title: `site_${kebabCase(deburr(title.toLowerCase()))}` },
+      properties: {
+        title: `ww-site-${kebabCase(deburr(title.toLowerCase()))}`,
+      },
     })
   )
 

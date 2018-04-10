@@ -5,6 +5,8 @@ import { Transition } from 'react-propstransition'
 import { DropDown } from '~/component/DropDown'
 import { TimeAgo } from '~/component/TimeAgo'
 import { Panel } from './Panel'
+import { Drive } from '~/component/Icon/Drive'
+import { Link } from '~/component/Link'
 
 export const SyncIndicator = ({
   display,
@@ -12,12 +14,25 @@ export const SyncIndicator = ({
   mutated,
   fetching,
   offline,
+  spreadsheetUrl,
 }) =>
   display ? (
-    <Transition toTransition={!offline && mutated} delay={1200}>
-      {({ next, previous, transition }) => (
-        <DropDown inside={Panel} side="left">
+    <DropDown inside={Panel} side="left">
+      <Transition toTransition={mutated} delay={1200}>
+        {({ next, previous, transition }) => (
           <Info>
+            {spreadsheetUrl && (
+              <Link
+                target="blank"
+                href={spreadsheetUrl}
+                onClick={e => e.stopPropagation()}
+              >
+                <a title="view on google doc">
+                  <DriveIcon />
+                </a>
+              </Link>
+            )}
+
             {!next && transition && <OkIcon />}
             {(next || fetching) && <SpinIcon />}
 
@@ -36,9 +51,9 @@ export const SyncIndicator = ({
               )}
             </Label>
           </Info>
-        </DropDown>
-      )}
-    </Transition>
+        )}
+      </Transition>
+    </DropDown>
   ) : null
 
 const Label = styled.span`
@@ -66,6 +81,16 @@ const pop = keyframes`
   0%{ opacity:0; transform: scale(0.4,0.4)};
   70%{ opacity:1; transform: scale(1.25,1.25)};
   100%{ opacity:1; transform: scale(1,1)};
+`
+
+const DriveIcon = styled(Drive)`
+  width: 18px;
+  height: 18px;
+  margin-right: 16px;
+
+  &:active {
+    transform: scale(0.9, 0.9);
+  }
 `
 
 const SpinIcon = styled.span`

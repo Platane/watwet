@@ -4,7 +4,6 @@ import { white, vibrant, grey } from '~/component/_abstract/palette'
 import { UserButton } from './User'
 import { SyncIndicator } from './SyncIndicator'
 import { Gear } from '~/component/Icon/Gear'
-import { Drive } from '~/component/Icon/Drive'
 import { Link } from '~/component/Link'
 import { Breadcrumb } from '~/component/Breadcrumb'
 
@@ -14,14 +13,6 @@ export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
       <Breadcrumb />
       <Spacer />
       <Left>
-        {spreadsheetUrl && (
-          <Link target="blank" href={spreadsheetUrl}>
-            <a title="view on google doc">
-              <DriveIcon />
-            </a>
-          </Link>
-        )}
-        <Spacer />
         <SyncIndicator />
         <Spacer />
         <Spacer />
@@ -49,14 +40,6 @@ const SettingButton = styled.a`
   flex-direction: row;
   align-items: center;
   margin-left: auto;
-
-  &:active {
-    transform: scale(0.9, 0.9);
-  }
-`
-const DriveIcon = styled(Drive)`
-  width: 18px;
-  height: 18px;
 
   &:active {
     transform: scale(0.9, 0.9);
