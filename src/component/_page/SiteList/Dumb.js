@@ -1,11 +1,14 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
-import { variant, white } from '~/component/_abstract/palette'
+import { vibrant, white } from '~/component/_abstract/palette'
 import { Link } from '~/component/Link'
 import { Card } from './Card'
 
 export const SiteList = ({ sites }) => (
   <Container>
+    {sites &&
+      sites.length == 0 && <EmptyState>there is no site here</EmptyState>}
+
     {sites.map(site => (
       <Link key={site.id} href={`/site/${site.id}`}>
         <Site key={site.id} site={site} />
@@ -17,6 +20,10 @@ export const SiteList = ({ sites }) => (
     </Link>
   </Container>
 )
+
+const EmptyState = styled.div`
+  padding: 64px;
+`
 
 const AddButton = styled.div`
   width: 60px;
@@ -31,7 +38,7 @@ const AddButton = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${variant[3]};
+  background-color: ${vibrant[2]};
   color: ${white};
   font-size: 40px;
   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.3);
@@ -47,7 +54,7 @@ const Container = styled.div`
   width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   margin: 10px auto;
   flex: 100px 1 1;
 
