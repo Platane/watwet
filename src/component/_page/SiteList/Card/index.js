@@ -13,6 +13,7 @@ export const Card = ({ site, ...props }) => (
       <Description>
         <TextWithLineBreak>{site.description}</TextWithLineBreak>
       </Description>
+      <HabitatCount>{`${site.habitats.length} habitats`}</HabitatCount>
     </Content>
   </Container>
 )
@@ -37,11 +38,23 @@ const Name = styled.h2`
   text-overflow: ellipsis;
 `
 const Description = styled.p``
+
+const HabitatCount = styled.div`
+  font-size: 0.8em;
+  margin-left: auto;
+  margin-top: auto;
+  position: relative;
+  left: 4px;
+  top: 8px;
+`
+
 const Content = styled.div`
   width: 100%;
   height: 100%;
   padding: 16px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 `
 const Mosaic = styled(Mosaic_)`
   flex-shrink: 0;

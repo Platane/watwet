@@ -41,7 +41,7 @@ const AddButton = styled.div`
 const Container = styled.div`
   z-index: 2;
   position: relative;
-  max-width: 800px;
+  max-width: 480px;
   width: calc(100% - 40px);
   display: flex;
   flex-direction: column;
