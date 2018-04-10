@@ -4,8 +4,13 @@ import { grey, vibrant } from '~/component/_abstract/palette'
 import { InputImage as InputImage_ } from '~/component/InputImage'
 import { Name } from './Name'
 
-export const CreateHabitat = ({ info, onChange, onSubmit }) => (
+export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
   <Container>
+    <PageTitle>{`Create new habitat in ${(site && site.name) ||
+      '-'}`}</PageTitle>
+
+    <Separator />
+
     <InputImage
       onChange={picture_url => onChange({ picture_url })}
       value={info.picture_url}
@@ -15,36 +20,40 @@ export const CreateHabitat = ({ info, onChange, onSubmit }) => (
 
     <Name {...info} onChange={onChange} />
 
-    <Separator />
+    <form onSubmit={onSubmit}>
+      <Separator />
 
-    <InputName
-      type="text"
-      placeholder="displayed name"
-      value={info.name}
-      onChange={e => onChange({ name: e.target.value })}
-    />
+      <Input
+        type="text"
+        placeholder="displayed name"
+        value={info.name}
+        onChange={e => onChange({ name: e.target.value })}
+      />
 
-    <Separator />
+      <Separator />
 
-    <Textarea
-      value={info.description}
-      placeholder="description"
-      onChange={e => onChange({ description: e.target.value })}
-    />
+      <Textarea
+        value={info.description}
+        placeholder="description"
+        onChange={e => onChange({ description: e.target.value })}
+      />
 
-    <Separator />
+      <Separator />
 
-    <Textarea
-      value={info.location}
-      placeholder="location"
-      onChange={e => onChange({ location: e.target.value })}
-    />
+      <Textarea
+        value={info.location}
+        placeholder="location"
+        onChange={e => onChange({ location: e.target.value })}
+      />
 
-    <Separator />
+      <Separator />
 
-    <SubmitButton onClick={onSubmit}>Create</SubmitButton>
+      <SubmitButton type="submit">Create</SubmitButton>
+    </form>
   </Container>
 )
+
+const PageTitle = styled.h1``
 
 const Separator = styled.div`
   width: 20px;
@@ -52,20 +61,7 @@ const Separator = styled.div`
   flex-shrink: 0;
 `
 
-const Info = styled.div`
-  width: 100%;
-`
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-
-  @media (max-width: 600px) {
-    flex-direction: column;
-  }
-`
-
-const InputName = styled.input`
+const Input = styled.input`
   padding: 14px 20px;
   border: none;
   border-radius: 2px;

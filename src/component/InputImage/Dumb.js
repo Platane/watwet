@@ -35,7 +35,6 @@ export const InputImage = ({
 const IconPhoto = styled(Photo)`
   width: 50px;
   height: 50px;
-  z-index: 2;
 `
 
 const PendingLabel = styled.div`
@@ -53,6 +52,7 @@ const DropZone = styled(DropZone_)`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
 `
 
 const Body = styled.div`

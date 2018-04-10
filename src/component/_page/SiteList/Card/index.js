@@ -3,13 +3,16 @@ import styled from 'preact-emotion'
 import { HabitatList as List } from '~/component/HabitatList'
 import { white } from '~/component/_abstract/palette'
 import { Mosaic as Mosaic_ } from '~/component/Mosaic'
+import { TextWithLineBreak } from '~/component/TextWithLineBreak'
 
 export const Card = ({ site, ...props }) => (
   <Container {...props}>
     <Mosaic srcs={site.habitats.map(x => x.info.picture_url).filter(Boolean)} />
     <Content>
       <Name>{site.name}</Name>
-      <Description>{site.description}</Description>
+      <Description>
+        <TextWithLineBreak>{site.description}</TextWithLineBreak>
+      </Description>
     </Content>
   </Container>
 )

@@ -6,10 +6,12 @@ export default C =>
 
     onChange = info => this.setState(info)
 
-    onSubmit = () =>
+    onSubmit = e => {
+      e.preventDefault()
       this.props.createHabitat(this.props.siteId, {
         info: this.state,
       })
+    }
 
     render() {
       return (

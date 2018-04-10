@@ -6,7 +6,10 @@ export default C =>
 
     onChange = site => this.setState({ ...site })
 
-    onSubmit = () => this.props.createSite(this.state)
+    onSubmit = e => {
+      e.preventDefault()
+      this.props.createSite(this.state)
+    }
 
     render() {
       return (

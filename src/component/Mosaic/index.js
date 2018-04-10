@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { Image } from '~/component/Image'
+import { grey } from '~/component/_abstract/palette'
 
 const getLayout = n => {
   switch (Math.min(n, 4)) {
@@ -42,6 +43,7 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  background-color: ${grey};
 `
 
 const Fragment = styled(Image)``
