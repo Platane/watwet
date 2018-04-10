@@ -9,6 +9,8 @@ export const list = async () => {
     q:
       "mimeType='application/vnd.google-apps.spreadsheet' and name contains 'ww-site-' and trashed = false",
     spaces: 'drive',
+    pageSize: 1000,
+    orderBy: 'modifiedTime desc',
   })
 
   return res.result.files
