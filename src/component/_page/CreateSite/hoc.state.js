@@ -16,7 +16,7 @@ export default C =>
         <C
           {...this.props}
           {...this.state}
-          onSubmit={this.onSubmit}
+          onSubmit={this.state.name && this.onSubmit}
           onChange={this.onChange}
         />
       )

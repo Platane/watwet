@@ -1,10 +1,16 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import styled, { keyframes } from 'preact-emotion'
 import { grey, vibrant } from '~/component/_abstract/palette'
 import { InputImage as InputImage_ } from '~/component/InputImage'
 import { Name } from './Name'
 
-export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
+export const CreateHabitat = ({
+  info,
+  site,
+  onChange,
+  onSubmit,
+  onStartUpload,
+}) => (
   <Container>
     <PageTitle>{`Create new habitat in ${(site && site.name) ||
       '-'}`}</PageTitle>
@@ -12,6 +18,7 @@ export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
     <Separator />
 
     <InputImage
+      onStartUpload={onStartUpload}
       onChange={picture_url => onChange({ picture_url })}
       value={info.picture_url}
     />
@@ -27,7 +34,7 @@ export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
         type="text"
         placeholder="displayed name"
         value={info.name}
-        onChange={e => onChange({ name: e.target.value })}
+        onInput={e => onChange({ name: e.target.value })}
       />
 
       <Separator />
@@ -35,7 +42,7 @@ export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
       <Textarea
         value={info.description}
         placeholder="description"
-        onChange={e => onChange({ description: e.target.value })}
+        onInput={e => onChange({ description: e.target.value })}
       />
 
       <Separator />
@@ -43,12 +50,12 @@ export const CreateHabitat = ({ info, site, onChange, onSubmit }) => (
       <Textarea
         value={info.location}
         placeholder="location"
-        onChange={e => onChange({ location: e.target.value })}
+        onInput={e => onChange({ location: e.target.value })}
       />
 
       <Separator />
 
-      <SubmitButton type="submit">Create</SubmitButton>
+      {onSubmit && <SubmitButton type="submit">Create</SubmitButton>}
     </form>
   </Container>
 )
@@ -90,7 +97,13 @@ const Textarea = styled.textarea`
   resize: none;
 `
 
+const pop = keyframes`
+  0%{opacity:0; transform: translateY(40px)}
+  100%{opacity:1; transform: translateY(0)}
+`
+
 const SubmitButton = styled.button`
+  animation: ${pop} 180ms ease;
   padding: 20px;
 `
 

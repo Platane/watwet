@@ -1,5 +1,5 @@
 import { h, Component } from 'preact'
-import styled from 'preact-emotion'
+import styled, { keyframes } from 'preact-emotion'
 
 export const CreateSite = ({ name, description, onChange, onSubmit }) => (
   <Container>
@@ -11,7 +11,7 @@ export const CreateSite = ({ name, description, onChange, onSubmit }) => (
       type="text"
       placeholder="name"
       value={name}
-      onChange={e => onChange({ name: e.target.value })}
+      onInput={e => onChange({ name: e.target.value })}
     />
 
     <Separator />
@@ -24,7 +24,7 @@ export const CreateSite = ({ name, description, onChange, onSubmit }) => (
 
     <Separator />
 
-    <SubmitButton onClick={onSubmit}>Create</SubmitButton>
+    {onSubmit && <SubmitButton onClick={onSubmit}>Create</SubmitButton>}
   </Container>
 )
 
@@ -54,7 +54,13 @@ const Textarea = styled.textarea`
   resize: none;
 `
 
+const pop = keyframes`
+  0%{opacity:0; transform: translateY(40px)}
+  100%{opacity:1; transform: translateY(0)}
+`
+
 const SubmitButton = styled.button`
+  animation: ${pop} 180ms ease;
   padding: 20px;
 `
 

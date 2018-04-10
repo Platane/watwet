@@ -18,6 +18,8 @@ export const injectState = C =>
     state: State = { step: 'selectFile' }
 
     onChangeFile = file => {
+      if (this.props.onStartUpload) this.props.onStartUpload()
+
       this.setState({ step: 'uploading', file, progress: 0, dataUrl: null })
 
       readFileAsDataUrl(file).then(dataUrl => {

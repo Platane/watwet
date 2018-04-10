@@ -2,14 +2,20 @@ import { h, Component } from 'preact'
 
 export default C =>
   class createHabitatState extends Component {
-    state = {}
+    state = { uploading: false, info: {} }
 
-    onChange = info => this.setState(info)
+    onChange = info =>
+      this.setState({
+        uploading: this.state.uploading && !info.picture_url,
+        info: { ...this.state.info, ...info },
+      })
+
+    onStartUpload = () => this.setState({ uploading: true })
 
     onSubmit = e => {
       e.preventDefault()
       this.props.createHabitat(this.props.siteId, {
-        info: this.state,
+        info: this.state.info,
       })
     }
 
@@ -17,9 +23,14 @@ export default C =>
       return (
         <C
           {...this.props}
-          info={this.state}
-          onSubmit={this.onSubmit}
+          {...this.state}
+          onSubmit={
+            this.state.info.codeCorineBiotipe &&
+            !this.state.uploading &&
+            this.onSubmit
+          }
           onChange={this.onChange}
+          onStartUpload={this.onStartUpload}
         />
       )
     }
