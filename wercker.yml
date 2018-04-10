@@ -24,10 +24,7 @@ build:
       name: prepare
       code: |
         mv dist gh-pages
-
-deploy-pages:
-  steps:
-
+    
     - script:
       name: set up permalink
       cwd: gh-pages
@@ -36,7 +33,14 @@ deploy-pages:
         echo 'permalink: /404.html' >> 404.html
         echo '---' >> 404.html
         cat index.html >> 404.html
-
+        
+    - script:
+      name: google property verification
+      code: |
+        mv src/asset/staticPages/* gh-pages/
+    
+deploy-pages:
+  steps:
     - takuma7/gh-pages:
         token: $GH_TOKEN
         basedir: gh-pages
