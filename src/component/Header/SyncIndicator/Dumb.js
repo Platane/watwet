@@ -45,10 +45,13 @@ export const SyncIndicator = ({
 
               {!next && transition && 'saved'}
 
-              {(offline || (!fetching && !next && !transition)) && 'last sync '}
-              {(offline || (!fetching && !next && !transition)) && (
-                <TimeAgo date={lastSyncDate} />
-              )}
+              {(offline || (!fetching && !next && !transition)) &&
+                lastSyncDate && (
+                  <span>
+                    <span>last sync </span>
+                    <TimeAgo date={lastSyncDate} />
+                  </span>
+                )}
             </Label>
           </Info>
         )}
