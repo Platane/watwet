@@ -36,7 +36,7 @@ export const VegetalList = ({
 
 const Container = styled.div`
   position: relative;
-  margin-bottom: 200px;
+  margin-bottom: 260px;
 `
 const LayerBadge = styled(LayerBadge_)`
   flex-shrink: 0;

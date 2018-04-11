@@ -1,7 +1,7 @@
 import { parseHabitat, formatHabitat } from '../index'
 import { habitats } from '~/__fixtures__/habitats'
 
-it('format / parse should be idempotent', () => {
+it('format / parse should be identity', () => {
   const i = habitats[0]
   const o = parseHabitat(formatHabitat(i))
 
