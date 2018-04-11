@@ -4,6 +4,7 @@
 export const white = '#fefefe'
 export const grey = '#444140'
 export const black = '#000'
+export const water = '#6473fc'
 
 export const variant = [
   'hsl(35, 100%, 77%)',

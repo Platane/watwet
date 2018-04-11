@@ -3,6 +3,8 @@ import styled, { keyframes } from 'preact-emotion'
 import { set } from '~/util/reduxHelper'
 import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
 import { InputNumber } from '~/component/InputNumber'
+import { Drop } from '~/component/Icon/Drop'
+import { water } from '~/component/_abstract/palette'
 
 export const VegetalList = ({
   population,
@@ -19,6 +21,8 @@ export const VegetalList = ({
           <Row key={vegetal.id}>
             <LayerBadge size={30} layer={layer} />
 
+            {vegetal.wet && <DropIcon color={water} />}
+
             <Name>{vegetal.name_la}</Name>
 
             <InputNumber
@@ -33,6 +37,14 @@ export const VegetalList = ({
       .reverse()}
   </Container>
 )
+
+const DropIcon = styled(Drop)`
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 16px;
+  top: 22px;
+`
 
 const Container = styled.div`
   position: relative;

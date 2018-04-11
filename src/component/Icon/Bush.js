@@ -13,9 +13,3 @@ export const Bush = ({ color1, color2, ...props }) => (
     <path fill={color2} d={paths[1]} />
   </svg>
 )
-
-// export const Bush = ({ color1, color2, ...props }) => (
-//   <svg viewBox="0 0 10 10" {...props}>
-//     <rect fill={color1} x="0" y="0" width="10" height="10" />
-//   </svg>
-// )
