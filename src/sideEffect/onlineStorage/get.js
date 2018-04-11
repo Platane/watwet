@@ -1,4 +1,4 @@
-import { hydrate } from '~/store/action/onlineStorage'
+import { hydrate, fetchError } from '~/store/action/onlineStorage'
 
 import {
   listId as listSitesId,
@@ -26,35 +26,46 @@ export const init = store => {
 
         const [entity, id] = key.split('.', 2)
 
+        let promise
+
         switch (entity) {
-          case 'habitatDictionary': {
-            const habitatDictionary = await getHabitatDirectory(
+          case 'habitatDictionary':
+            promise = getHabitatDirectory(
               state.setting.habitatDictionarySpreadsheetId
             )
-            store.dispatch(hydrate({ habitatDictionary }))
+              .then(habitatDictionary =>
+                store.dispatch(hydrate({ habitatDictionary }))
+              )
+              .catch()
             break
-          }
 
-          case 'vegetalDictionary': {
-            const vegetalDictionary = await getVegetalDictionary(
+          case 'vegetalDictionary':
+            promise = getVegetalDictionary(
               state.setting.vegetalDictionarySpreadsheetId
-            )
-            store.dispatch(hydrate({ vegetalDictionary }))
-            break
-          }
-
-          case 'sites': {
-            store.dispatch(
-              hydrate({ sites: (await listSitesId()).map(id => `site.${id}`) })
+            ).then(vegetalDictionary =>
+              store.dispatch(hydrate({ vegetalDictionary }))
             )
             break
-          }
 
-          case 'site': {
-            store.dispatch(hydrate(normalizeSite(await getSite(id))))
+          case 'sites':
+            promise = listSitesId()
+              .then(res => res.map(id => `site.${id}`))
+              .then(sites => hydrate({ sites }))
             break
-          }
+
+          case 'site':
+            promise = getSite(id).then(site =>
+              store.dispatch(hydrate(normalizeSite(site)))
+            )
+            break
         }
+
+        if (promise)
+          promise.catch(error =>
+            store.dispatch(fetchError(error, key, shouldFetch[key]))
+          )
+
+        await promise
 
         pending[key] = null
       })

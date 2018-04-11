@@ -4,6 +4,7 @@ import styled from 'preact-emotion'
 import { RepartitionBar } from '~/component/RepartitionBar'
 import { Header } from '~/component/Header'
 import { Footer } from '~/component/Footer'
+import { ToastZone } from '~/component/ToastZone'
 import { Wallpaper } from '~/component/Wallpaper'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
 import { CreateSite } from '~/component/_page/CreateSite'
@@ -49,6 +50,7 @@ export const App = props => (
       <Content {...props} />
     </ContentWrap>
     <Footer />
+    <ToastZone />
   </Container>
 )
 

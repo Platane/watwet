@@ -25,6 +25,7 @@ import {
   defaultState as authDefaultState,
   reducer2 as authGlobal,
 } from './auth'
+import { reduce as error, defaultState as errorDefaultState } from './error'
 import { reduce as init, defaultState as initDefaultState } from './init'
 
 export const reduce = chainReducer(
@@ -34,6 +35,7 @@ export const reduce = chainReducer(
       offline,
       setting,
       router,
+      error,
       auth,
       init,
     })
@@ -48,6 +50,7 @@ export const defaultState = {
   resource: resourceDefaultState,
   offline: offlineDefaultState,
   router: routerDefaultState,
+  error: errorDefaultState,
   auth: authDefaultState,
   init: initDefaultState,
 }

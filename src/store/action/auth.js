@@ -1,6 +1,6 @@
-export const authFail = err => ({
+export const authFail = error => ({
   type: 'auth:fail',
-  err,
+  error,
 })
 
 export const authSuccess = user => ({

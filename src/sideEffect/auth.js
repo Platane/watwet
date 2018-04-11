@@ -12,7 +12,11 @@ export const init = store => {
     if (!preparing && !prepared && state.init.network && !state.offline) {
       preparing = true
 
-      await prepare()
+      try {
+        await prepare()
+      } catch (err) {
+        store.dispatch(authFail(err))
+      }
 
       preparing = false
       prepared = true
