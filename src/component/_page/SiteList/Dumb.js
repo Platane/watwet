@@ -31,11 +31,14 @@ const A = styled.a`
   width: 100%;
   transition: transform 100ms ease;
 
+  color: inherit;
+
   &:visited {
     color: inherit;
   }
 
   &:active {
+    color: inherit;
     transform: scale(0.98, 0.98);
   }
 `

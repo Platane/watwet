@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import styled, { keyframes } from 'preact-emotion'
 import { set } from '~/util/reduxHelper'
 import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
-import { clampU } from '~/util/math'
+import { InputNumber } from '~/component/InputNumber'
 
 export const VegetalList = ({
   population,
@@ -10,33 +10,33 @@ export const VegetalList = ({
   onChangeRepresentation,
 }) => (
   <Container style={{ height: `${population.length * 50}px` }}>
-    {population.map(({ layer, vegetal, representation }, i) => (
-      <RowContainer
-        key={vegetal.id}
-        style={{ transform: `translateY(${i * 50}px)` }}
-      >
-        <Row key={vegetal.id}>
-          <LayerBadge size={30} layer={layer} />
+    {population
+      .map(({ layer, vegetal, representation }, i) => (
+        <RowContainer
+          key={vegetal.id}
+          style={{ transform: `translateY(${i * 50}px)` }}
+        >
+          <Row key={vegetal.id}>
+            <LayerBadge size={30} layer={layer} />
 
-          <Name>{vegetal.name_la}</Name>
+            <Name>{vegetal.name_la}</Name>
 
-          <Input
-            type="number"
-            value={Math.round(representation * 100)}
-            onBlur={e =>
-              onChangeRepresentation(vegetal.id, clampU(e.target.value / 100))
-            }
-          />
+            <InputNumber
+              onChange={x => onChangeRepresentation(vegetal.id, x)}
+              value={representation}
+            />
 
-          <RemoveButton onClick={() => onRemove(vegetal.id)}>×</RemoveButton>
-        </Row>
-      </RowContainer>
-    ))}
+            <RemoveButton onClick={() => onRemove(vegetal.id)}>×</RemoveButton>
+          </Row>
+        </RowContainer>
+      ))
+      .reverse()}
   </Container>
 )
 
 const Container = styled.div`
   position: relative;
+  margin-bottom: 200px;
 `
 const LayerBadge = styled(LayerBadge_)`
   flex-shrink: 0;
@@ -67,7 +67,8 @@ const Row = styled.div`
 
 const RemoveButton = styled.div`
   cursor: pointer;
-  margin-right: 10px;
+  margin-left: 10px;
+  padding: 4px;
 `
 
 const Name = styled.div`
@@ -75,18 +76,5 @@ const Name = styled.div`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-`
-
-const Input = styled.input`
-  margin-left: auto;
-  height: 30px;
-  width: 60px;
-  padding: 6px;
-  border-radius: 2px;
-  border: none;
-  background-color: rgba(255, 255, 255, 0);
-  transition: background-color 260ms ease;
-  &:focus {
-    background-color: rgba(255, 255, 255, 0.16);
-  }
+  margin-right: auto;
 `

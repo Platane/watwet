@@ -23,11 +23,14 @@ const A = styled.a`
 
   margin: 20px;
 
+  color: inherit;
+
   &:visited {
     color: inherit;
   }
 
   &:active {
+    color: inherit;
     transform: scale(0.98, 0.98);
   }
 `

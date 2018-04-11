@@ -33,7 +33,7 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
             <Bar
               selected={currentLayer == key}
               style={{
-                width: `${100 * layers[key]}%`,
+                width: `${100 * clampU(layers[key])}%`,
                 backgroundColor: color,
               }}
             />
