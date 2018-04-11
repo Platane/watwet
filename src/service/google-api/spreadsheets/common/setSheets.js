@@ -31,7 +31,7 @@ export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
   // re-order / re-name sheet
   ...next_sheets
     .map((b, i) => {
-      const b_index = i + 1
+      const b_index = i
 
       const a = previous_sheets.find(
         a => a.properties.sheetId === b.properties.sheetId
