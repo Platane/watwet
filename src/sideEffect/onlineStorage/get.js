@@ -50,7 +50,7 @@ export const init = store => {
           case 'sites':
             promise = listSitesId()
               .then(res => res.map(id => `site.${id}`))
-              .then(sites => hydrate({ sites }))
+              .then(sites => store.dispatch(hydrate({ sites })))
             break
 
           case 'site':
