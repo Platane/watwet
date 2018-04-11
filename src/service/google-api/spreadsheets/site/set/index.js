@@ -21,21 +21,27 @@ const getHabitatSheetTitle = (habitat: Habitat) =>
 
 const formatSheets = (site: Site) =>
   [
+    // info sheet
     { sheetId: 0, title: 'data_info' },
+
+    // one sheet for
     ...site.habitats.map((habitat, i) => ({
       sheetId: +habitat.id,
       title: getHabitatSheetTitle(habitat),
     })),
-  ].map((x, index) => ({ properties: { index, ...x } }))
+  ].map(properties => ({ properties }))
 
 const setInfoFromCurrentSheet = (
   { properties: { sheetId }, data },
   site: Site
 ) => setCells(sheetId, toGrid(data), formatSiteInfo(site))
 
+const extractNonDataSheet = sheets =>
+  sheets.filter(x => x.properties.title.slice(0, 5) !== 'data_')
+
 export const setFromCurrentSheets = (sheets, site: Site) => [
   // sync the sheets
-  ...setSheets(sheets, formatSheets(site)),
+  ...setSheets(sheets, [...formatSheets(site), ...extractNonDataSheet(sheets)]),
 
   // sync the info sheet
   ...setInfoFromCurrentSheet(

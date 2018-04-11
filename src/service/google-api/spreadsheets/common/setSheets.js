@@ -30,7 +30,9 @@ export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
   //
   // re-order / re-name sheet
   ...next_sheets
-    .map(b => {
+    .map((b, i) => {
+      const b_index = i + 1
+
       const a = previous_sheets.find(
         a => a.properties.sheetId === b.properties.sheetId
       )
@@ -38,15 +40,17 @@ export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
       if (!a) return
 
       if (
-        a.properties.title === b.properties.title &&
-        a.properties.index === b.properties.index
+        // a.properties.title === b.properties.title &&
+        a.properties.index === b_index
       )
         return
 
       return {
         updateSheetProperties: {
-          ...b,
-          fields: 'title,index',
+          properties: {
+            index: b_index,
+          },
+          fields: 'index',
         },
       }
     })
