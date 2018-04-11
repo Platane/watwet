@@ -50,10 +50,13 @@ export const normalizeHabitat = (
 })
 
 const vegetalSortFn = (a, b) => {
-  if (a.representation > b.representation) return -1
-  if (a.representation < b.representation) return 1
+  const ar = Math.round(a.representation * 10000)
+  const br = Math.round(b.representation * 10000)
 
-  return a.id < b.id ? 1 : -1
+  if (ar > br) return -1
+  if (ar < br) return 1
+
+  return a.vegetal.id.toString() < b.vegetal.id.toString() ? 1 : -1
 }
 
 const hydrateHabitat = (vegetal_byId: { [string]: Vegetal }) => (

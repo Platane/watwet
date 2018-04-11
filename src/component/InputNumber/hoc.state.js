@@ -15,7 +15,7 @@ const nextDown = (arr, x) => {
 
 export const injectState = C =>
   class InputNumberState extends Component {
-    state: State = { opened: false, value: this.props.value * 100 }
+    state: State = { opened: false, value: Math.round(this.props.value * 100) }
 
     submit = () => {
       if (this.props.onChange)
@@ -58,7 +58,7 @@ export const injectState = C =>
 
     componentWillReceiveProps(nextProps) {
       if (this.props.value != nextProps.value) {
-        this.setState({ value: nextProps.value * 100 })
+        this.setState({ value: Math.round(nextProps.value * 100) })
       }
     }
 

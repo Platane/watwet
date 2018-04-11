@@ -19,7 +19,7 @@ export const InputNumber = ({
   <Container>
     <Input
       type="number"
-      value={value || ''}
+      value={value}
       onBlur={onBlur}
       onFocus={onFocus}
       onInput={onInput}
