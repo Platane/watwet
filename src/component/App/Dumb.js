@@ -43,7 +43,7 @@ export const Content = ({ anonym, routerKey, routerParam }) => {
 
 export const App = props => (
   <Container>
-    <Header />
+    {!props.anonym && <Header />}
     <ContentWrap>
       <Wallpaper />
       <Content {...props} />
