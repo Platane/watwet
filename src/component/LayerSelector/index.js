@@ -1,8 +1,9 @@
 import { h, Component } from 'preact'
 import styled, { keyframes, css } from 'preact-emotion'
-import { white, trio } from '~/component/_abstract/palette'
+import { white, trio, vibrant } from '~/component/_abstract/palette'
 import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
 import { Slidable } from '~/component/_abstract/Slidable'
+import { Warning } from '~/component/Icon/Warning'
 import { keyToLabel } from '~/store/selector/currentLayer'
 import { clampU } from '~/util/math'
 
@@ -37,8 +38,11 @@ export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
                 backgroundColor: color,
               }}
             />
+            {layers[key] > 1 && <WarningIcon color={vibrant[2]} />}
           </BarContainer>
-          <LabelPercent>{Math.round(layers[key] * 100)}</LabelPercent>
+          <LabelPercent overflow={layers[key] > 1}>
+            {Math.round(layers[key] * 100)}
+          </LabelPercent>
         </Rigth>
       </Layer>
     ))}
@@ -50,6 +54,14 @@ const popAnimation = keyframes`
   50%{ transform: scale(1.4,1.4)}
   80%{ transform: scale(1.27,1.27)}
   100%{ transform: scale(1.3,1.3)}
+`
+
+const WarningIcon = styled(Warning)`
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  right: -6px;
+  top: 6px;
 `
 
 const LayerBadge = styled(LayerBadge_)`
@@ -65,6 +77,7 @@ const Label = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: 20px;
+
   &::after {
     content: '';
     width: 100%;
@@ -113,4 +126,12 @@ const LabelPercent = styled.span`
   height: 30px;
   width: 60px;
   padding: 6px;
+
+  ${props =>
+    props.overflow &&
+    css`
+      color: ${vibrant[2]};
+      font-weight: bold;
+      text-shadow: 0 0 2px #333;
+    `};
 `
