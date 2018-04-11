@@ -2,9 +2,15 @@ import { h } from 'preact'
 import { connect } from 'preact-redux'
 import { Wallpaper as Dumb } from './Dumb'
 import { selectCurrentLayer } from '~/store/selector/currentLayer'
+import { selectCurrentUser } from '~/store/selector/currentUser'
 import { vibrant, variant, trio, white } from '~/component/_abstract/palette'
 
 const getColor = state => {
+  if (!selectCurrentUser(state))
+    return {
+      color: vibrant[1],
+    }
+
   switch (state.router.key) {
     case 'habitat':
       switch (selectCurrentLayer(state)) {

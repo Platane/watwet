@@ -19,13 +19,11 @@ const Picture = styled(Image)`
   flex-shrink: 0;
 `
 
-const Container = styled.div`
+const Container = styled.article`
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 20px;
   min-width: 300px;
-  cursor: pointer;
 `
 const Content = styled.section`
   margin-left: 40px;
@@ -34,10 +32,10 @@ const Content = styled.section`
   flex-grow: 1;
 `
 
-const Name = styled.div`
+const Name = styled.span`
   margin-right: 20px;
 `
-const VegetalCount = styled.div`
+const VegetalCount = styled.span`
   font-size: 0.8em;
   margin-left: auto;
 `

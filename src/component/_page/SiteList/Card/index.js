@@ -18,19 +18,13 @@ export const Card = ({ site, ...props }) => (
   </Container>
 )
 
-const Container = styled.div`
+const Container = styled.article`
   width: 100%;
   height: 160px;
   display: flex;
   flex-direction: row;
   background-color: ${white};
   box-shadow: 2px 1px 4px 0px rgba(0, 0, 0, 0.3);
-
-  transition: transform 100ms ease;
-
-  &:active {
-    transform: scale(0.98, 0.98);
-  }
 `
 const Name = styled.h2`
   overflow: hidden;

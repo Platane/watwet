@@ -15,7 +15,7 @@ export const Breadcrumb = ({ paths, ...props }) => (
   </Container>
 )
 
-const Container = styled.div`
+const Container = styled.nav`
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;

@@ -14,7 +14,7 @@ const Heart = styled.span`
   font-size: 1.2em;
 `
 
-const Container = styled.div`
+const Container = styled.footer`
   background-color: ${grey};
   color: ${white};
   width: 100%;

@@ -68,7 +68,7 @@ const Content = styled.div`
   margin-left: auto;
   margin-right: auto;
 `
-const Container = styled.div`
+const Container = styled.header`
   background-color: ${vibrant[2]};
   box-shadow: 0 -5px 10px 5px rgba(0, 0, 0, 0.3);
   width: 100%;

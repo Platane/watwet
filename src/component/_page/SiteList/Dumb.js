@@ -11,7 +11,9 @@ export const SiteList = ({ sites }) => (
 
     {sites.map(site => (
       <Link key={site.id} href={`/site/${site.id}`}>
-        <Site key={site.id} site={site} />
+        <A>
+          <Site key={site.id} site={site} />
+        </A>
       </Link>
     ))}
 
@@ -20,6 +22,23 @@ export const SiteList = ({ sites }) => (
     </Link>
   </Container>
 )
+
+const A = styled.a`
+  margin: 10px 0;
+
+  text-decoration: none;
+
+  width: 100%;
+  transition: transform 100ms ease;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:active {
+    transform: scale(0.98, 0.98);
+  }
+`
 
 const EmptyState = styled.div`
   padding: 64px;
@@ -63,7 +82,4 @@ const Container = styled.div`
   }
 `
 
-const Site = styled(Card)`
-  margin: 10px 0;
-  cursor: pointer;
-`
+const Site = Card
