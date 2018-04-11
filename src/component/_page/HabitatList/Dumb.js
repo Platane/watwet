@@ -13,14 +13,19 @@ export const HabitatList = ({ siteId, habitats }) => (
         <EmptyState>there is no habitat for this site</EmptyState>
       )}
 
-    <Link href={`/site/${siteId}/habitat/create`}>
-      <AddButton />
-    </Link>
+    {!habitats && <EmptyState>this site does not exist</EmptyState>}
+
+    {habitats && (
+      <Link href={`/site/${siteId}/habitat/create`}>
+        <AddButton />
+      </Link>
+    )}
   </Container>
 )
 
 const EmptyState = styled.div`
-  padding: 64px;
+  margin: 64px auto;
+  text-align: center;
 `
 
 const AddButton = styled.div`

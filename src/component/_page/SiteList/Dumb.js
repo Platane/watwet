@@ -44,7 +44,8 @@ const A = styled.a`
 `
 
 const EmptyState = styled.div`
-  padding: 64px;
+  margin: 64px auto;
+  text-align: center;
 `
 
 const AddButton = styled.div`

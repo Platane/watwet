@@ -2,8 +2,14 @@ import { routeValidator } from '~/service/router/routeValidator'
 import { routes } from './routes'
 import { set } from '~/util/reduxHelper'
 import { keyToLabel } from '~/store/selector/currentLayer'
-import { selectCurrentHabitatId } from '~/store/selector/currentHabitat'
-import { selectCurrentSiteId } from '~/store/selector/currentSite'
+import {
+  selectCurrentHabitat,
+  selectCurrentHabitatId,
+} from '~/store/selector/currentHabitat'
+import {
+  selectCurrentSite,
+  selectCurrentSiteId,
+} from '~/store/selector/currentSite'
 
 import type { State } from './type'
 
@@ -102,6 +108,7 @@ export const reduceGlobal = (state, action) => {
     }
   }
 
+  // force strate query
   if (state.router.key == 'habitat' && !state.router.query.strate)
     state = set(state, ['router', 'query', 'strate'], 'arboree')
 

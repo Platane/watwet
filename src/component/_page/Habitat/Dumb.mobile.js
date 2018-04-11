@@ -13,28 +13,38 @@ export const Habitat = ({
   vegetals,
   updateHabitat,
   selectLayer,
-}) => (
-  <Container>
-    <HabitatHeader habitat={habitat} />
-    <Content>
-      <LayerSelector
-        currentLayer={currentLayer}
-        layers={layers}
-        onSelect={selectLayer}
-      />
+}) =>
+  habitat ? (
+    <Container>
+      <HabitatHeader habitat={habitat} />
+      <Content>
+        <LayerSelector
+          currentLayer={currentLayer}
+          layers={layers}
+          onSelect={selectLayer}
+        />
 
-      <div style={{ height: '64px', width: '32px' }} />
+        <div style={{ height: '64px', width: '32px' }} />
 
-      <VegetalListWithSearch
-        currentLayer={currentLayer}
-        vegetals={vegetals}
-        population={habitat.population.filter(filterPopulation(currentLayer))}
-        population_unfilter={habitat.population}
-        onChange={population => updateHabitat({ ...habitat, population })}
-      />
-    </Content>
-  </Container>
-)
+        <VegetalListWithSearch
+          currentLayer={currentLayer}
+          vegetals={vegetals}
+          population={habitat.population.filter(filterPopulation(currentLayer))}
+          population_unfilter={habitat.population}
+          onChange={population => updateHabitat({ ...habitat, population })}
+        />
+      </Content>
+    </Container>
+  ) : (
+    <EmptyState>this habitat does not exist</EmptyState>
+  )
+
+const EmptyState = styled.div`
+  margin: 64px;
+  text-align: center;
+  z-index: 2;
+  position: relative;
+`
 
 const Container = styled.div`
   display: flex;

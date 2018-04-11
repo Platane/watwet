@@ -10,7 +10,7 @@ const injectState = connect(state => {
 
   return {
     siteId: selectCurrentSiteId(state),
-    habitats: (site && site.habitats) || [],
+    habitats: (site && site.habitats) || null,
   }
 })
 
