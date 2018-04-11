@@ -109,7 +109,10 @@ export const reduceGlobal = (state, action) => {
   }
 
   // force strate query
-  if (state.router.key == 'habitat' && !state.router.query.strate)
+  if (
+    state.router.key == 'habitat' &&
+    !['arboree', 'arbustive', 'herbacee'].includes(state.router.query.strate)
+  )
     state = set(state, ['router', 'query', 'strate'], 'arboree')
 
   return state

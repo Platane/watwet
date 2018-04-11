@@ -3,16 +3,16 @@ import styled, { keyframes, css } from 'preact-emotion'
 import { white, trio } from '~/component/_abstract/palette'
 import { LayerBadge as LayerBadge_ } from '~/component/LayerBadge'
 import { Slidable } from '~/component/_abstract/Slidable'
+import { keyToLabel } from '~/store/selector/currentLayer'
 import { clampU } from '~/util/math'
 
-const layerLabels = [
-  { key: 'A', color: trio[2], label: 'arborée' },
-  { key: 'a', color: trio[1], label: 'arbustif' },
-  { key: 'h', color: trio[0], label: 'herbacé' },
-]
+const capitalize = text => text[0].toUpperCase() + text.slice(1)
 
-const setLayerValue = (onChange, layers, key) => x =>
-  onChange({ ...layers, [key]: clampU(x / 100) })
+const layerLabels = [
+  { key: 'A', color: trio[2] },
+  { key: 'a', color: trio[1] },
+  { key: 'h', color: trio[0] },
+].map(x => ({ ...x, label: capitalize(keyToLabel(x.key)) }))
 
 export const LayerSelector = ({ currentLayer, layers, onChange, onSelect }) => (
   <Container>
