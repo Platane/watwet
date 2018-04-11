@@ -1,6 +1,8 @@
 import { h, Component } from 'preact'
 import { uploadFileImage } from '~/service/imageUploader'
+import { load as loadImage } from '~/service/imageLoader'
 import { readFileAsDataUrl } from '~/service/imageUploader/localFile'
+import { createTransform } from '~/service/cloudinary'
 
 export type State =
   | {
@@ -17,7 +19,7 @@ export const injectState = C =>
   class ImageInputState extends Component {
     state: State = { step: 'selectFile' }
 
-    onChangeFile = file => {
+    onChangeFile = (file: File) => {
       if (this.props.onStartUpload) this.props.onStartUpload()
 
       this.setState({ step: 'uploading', file, progress: 0, dataUrl: null })
@@ -32,11 +34,18 @@ export const injectState = C =>
         this.setState({ progress })
       }
 
-      uploadFileImage(this.state.file, onProgress).then(value => {
-        if (file !== this.state.file) return
-        if (this.props.onChange) this.props.onChange(value)
-        this.setState({ step: 'selectFile', file: null })
-      })
+      uploadFileImage(file, onProgress)
+        .then(value => loadImage(createTransform()(value)).then(() => value))
+        .then(value => {
+          if (file !== this.state.file) return
+          if (this.props.onChange) this.props.onChange(value)
+          this.setState({ step: 'selectFile', file: null })
+        })
+        .catch(err => {
+          this.setState({ step: 'selectFile' })
+
+          throw err
+        })
     }
 
     render() {

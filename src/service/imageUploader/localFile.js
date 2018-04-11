@@ -1,4 +1,7 @@
-export const readFile = (file: File, type: 'dataUrl' | 'arrayBuffer') =>
+export const readFile = (type: 'dataUrl' | 'arrayBuffer') => (
+  file: File,
+  onProgress?: (x: number) => void
+) =>
   new Promise((resolve, reject) => {
     const fr = new FileReader()
 
@@ -6,19 +9,32 @@ export const readFile = (file: File, type: 'dataUrl' | 'arrayBuffer') =>
 
     fr.onerror = reject
 
+    if (onProgress)
+      fr.onprogress = event =>
+        onProgress(
+          event.lengthComputable && event.total ? event.loaded / event.total : 0
+        )
+
     switch (type) {
       case 'dataUrl':
         return fr.readAsDataURL(file)
 
       case 'arrayBuffer':
         return fr.readAsArrayBuffer(file)
-
-      default:
-        return null
     }
   })
 
-export const readFileAsDataUrl = (file: File): Promise<string> =>
-  readFile(file, 'dataUrl')
-export const readFileAsArrayBuffer = (file: File): Promise<ArrayBuffer> =>
-  readFile(file, 'arrayBuffer')
+type ReadFileAsDataUrl = (
+  file: File,
+  onProgress?: (x: number) => void
+) => Promise<string>
+export const readFileAsDataUrl: ReadFileAsDataUrl = readFile('dataUrl')
+
+type ReadFileAsArrayBuffer = (
+  file: File,
+  onProgress?: (x: number) => void
+) => Promise<ArrayBuffer>
+
+export const readFileAsArrayBuffer: ReadFileAsArrayBuffer = readFile(
+  'arrayBuffer'
+)

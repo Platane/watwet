@@ -6,10 +6,11 @@ export const uploadWithProgress = (
   new Promise((resolve, reject, onCancel) => {
     const xhr = new XMLHttpRequest()
 
-    xhr.upload.onprogress = event =>
-      onProgress(
-        event.lengthComputable && event.total ? event.loaded / event.total : 0
-      )
+    if (onProgress)
+      xhr.upload.onprogress = event =>
+        onProgress(
+          event.lengthComputable && event.total ? event.loaded / event.total : 0
+        )
 
     xhr.onload = () => resolve(JSON.parse(xhr.response))
 

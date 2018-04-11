@@ -129,6 +129,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 20px;
+  margin: 20px auto;
   flex: 100px 1 1;
 `
