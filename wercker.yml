@@ -39,6 +39,11 @@ build:
       code: |
         mv src/asset/staticPages/* gh-pages/
     
+    - script:
+      name: screenshots
+      code: |
+        mv src/asset/screenshot/* gh-pages/
+    
 deploy-pages:
   steps:
     - takuma7/gh-pages:
