@@ -37,7 +37,9 @@ const setInfoFromCurrentSheet = (
 ) => setCells(sheetId, toGrid(data), formatSiteInfo(site))
 
 const extractNonDataSheet = sheets =>
-  sheets.filter(x => x.properties.title.slice(0, 5) !== 'data_')
+  sheets.filter(
+    x => x.properties.sheetId && x.properties.title.slice(0, 5) !== 'data_'
+  )
 
 export const setFromCurrentSheets = (sheets, site: Site) => [
   // sync the sheets

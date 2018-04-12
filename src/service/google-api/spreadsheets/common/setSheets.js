@@ -40,7 +40,7 @@ export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
       if (!a) return
 
       if (
-        // a.properties.title === b.properties.title &&
+        a.properties.title === b.properties.title &&
         a.properties.index === b_index
       )
         return
@@ -49,8 +49,9 @@ export const setSheets = (previous_sheets: Sheet[], next_sheets: Sheet[]) => [
         updateSheetProperties: {
           properties: {
             index: b_index,
+            title: b.properties.title,
           },
-          fields: 'index',
+          fields: 'index,title',
         },
       }
     })
