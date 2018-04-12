@@ -6,6 +6,12 @@ export const updateHabitat = habitat => ({
   habitat: normalizeHabitat(habitat),
 })
 
+export const removeHabitat = (siteId, habitatId) => ({
+  type: 'mutation:habitat:remove',
+  siteId,
+  habitatId,
+})
+
 export const createHabitat = (siteId, habitat) => ({
   type: 'mutation:habitat:create',
   siteId,

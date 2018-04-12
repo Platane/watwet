@@ -60,6 +60,34 @@ export const reduceGlobal = (state, action) => {
       break
     }
 
+    case 'mutation:habitat:update': {
+      if (state.router.key === 'habitatEdit')
+        state = {
+          ...state,
+          router: {
+            hash: {},
+            query: {},
+            ...getRoute(
+              `site/${action.habitat.siteId}/habitat/${action.habitat.id}`
+            ),
+          },
+        }
+      break
+    }
+
+    case 'mutation:habitat:remove': {
+      if (state.router.key === 'habitatEdit')
+        state = {
+          ...state,
+          router: {
+            hash: {},
+            query: {},
+            ...getRoute(`site/${action.siteId}`),
+          },
+        }
+      break
+    }
+
     case 'mutation:site:create':
       return {
         ...state,

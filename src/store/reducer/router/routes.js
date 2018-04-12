@@ -9,5 +9,6 @@ export const routes: Route[] = [
   { path: '/site/:siteId/habitat', key: 'habitatList' },
   { path: '/site/:siteId/habitat/create', key: 'habitatCreate' },
   { path: '/site/:siteId/habitat/:habitatId', key: 'habitat' },
+  { path: '/site/:siteId/habitat/:habitatId/edit', key: 'habitatEdit' },
   { path: '/site/:siteId/habitat/:habitatId/:layer', key: 'habitat' },
 ]

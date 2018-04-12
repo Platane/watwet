@@ -7,13 +7,13 @@ import { Footer } from '~/component/Footer'
 import { ToastZone } from '~/component/ToastZone'
 import { Wallpaper } from '~/component/Wallpaper'
 import { CreateHabitat } from '~/component/_page/CreateHabitat'
+import { EditHabitat } from '~/component/_page/EditHabitat'
 import { CreateSite } from '~/component/_page/CreateSite'
 import { HabitatList } from '~/component/_page/HabitatList'
 import { SiteList } from '~/component/_page/SiteList'
 import { Setting } from '~/component/_page/Setting'
 import { Habitat } from '~/component/_page/Habitat'
 import { Login } from '~/component/_page/Login'
-import { variant } from '~/component/_abstract/palette'
 
 export const Content = ({ anonym, routerKey, routerParam }) => {
   if (anonym) return <Login />
@@ -30,6 +30,9 @@ export const Content = ({ anonym, routerKey, routerParam }) => {
 
     case 'habitatCreate':
       return <CreateHabitat />
+
+    case 'habitatEdit':
+      return <EditHabitat />
 
     case 'habitatList':
       return <HabitatList />

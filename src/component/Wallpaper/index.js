@@ -48,6 +48,7 @@ const getColor = state => {
       }
 
     case 'habitatCreate':
+    case 'habitatEdit':
       return {
         color: vibrant[3],
       }

@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import styled, { keyframes } from 'preact-emotion'
 import { Image } from '~/component/Image'
+import { Link } from '~/component/Link'
 
 export const HabitatHeader = ({ habitat }) => (
   <Container>
@@ -12,6 +13,12 @@ export const HabitatHeader = ({ habitat }) => (
     </BackgroundW>
     <Picture src={habitat && habitat.info.picture_url} />
     <Name>{habitat && habitat.info.name}</Name>
+
+    <EditButton>
+      <Link href={`/site/${habitat.siteId}/habitat/${habitat.id}/edit`}>
+        <A>edit</A>
+      </Link>
+    </EditButton>
   </Container>
 )
 
@@ -24,9 +31,33 @@ const BackgroundW = styled.div`
   overflow: hidden;
 `
 
+const A = styled.a`
+  text-decoration: none;
+
+  transition: transform 100ms ease;
+
+  color: inherit;
+
+  &:visited {
+    color: inherit;
+  }
+
+  &:active {
+    color: inherit;
+    transform: scale(0.98, 0.98);
+  }
+`
+
 const nameAnimation = keyframes`
   0%{ transform: translateY(50px); opacity:0;}
   100%{ transform: translateY(0); opacity:1;}
+`
+
+const EditButton = styled.div`
+  position: absolute;
+  bottom: 4px;
+  right: 16px;
+  color: #fff;
 `
 
 const Name = styled.div`

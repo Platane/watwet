@@ -28,6 +28,22 @@ export const reduce = (state, action, original) => {
     }
 
     //
+    case 'mutation:habitat:remove': {
+      const habitatKey = `habitat.${action.habitatId}`
+      const siteKey = `site.${action.siteId}`
+
+      const site = state[siteKey] || original[siteKey]
+
+      return {
+        ...state,
+        [siteKey]: {
+          ...site,
+          habitats: [...site.habitats].filter(key => key !== habitatKey),
+        },
+      }
+    }
+
+    //
     case 'mutation:site:create': {
       const { site } = action
 

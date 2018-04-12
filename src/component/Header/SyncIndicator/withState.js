@@ -40,9 +40,13 @@ export const withState = connect(
       []
 
     return {
-      display: ['habitatList', 'habitat', 'site', 'siteList'].includes(
-        state.router.key
-      ),
+      display: [
+        'habitatList',
+        'habitat',
+        'habitatEdit',
+        'site',
+        'siteList',
+      ].includes(state.router.key),
       path,
       diff,
       offline,
