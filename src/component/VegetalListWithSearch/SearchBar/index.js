@@ -3,40 +3,14 @@ import styled, { css } from 'preact-emotion'
 import { injectFilterState, Typeahead } from 'react-simplest-typeahead'
 import { Drop } from '~/component/Icon/Drop'
 import { water } from '~/component/_abstract/palette'
-import deburr from 'lodash.deburr'
+import { normalize, splitWithPattern } from '~/util/textSearch'
 
 const filterFunction = pattern => {
-  const p = deburr(pattern.toLowerCase())
+  const p = normalize(pattern)
 
   return vegetal =>
-    deburr(vegetal.name_la.toLowerCase()).includes(p) ||
-    deburr(vegetal.name_fr.toLowerCase()).includes(p)
-}
-
-const exposePattern = (word, pattern) => {
-  if (!pattern) return [{ text: word, type: 'normal' }]
-
-  let s = 0
-  let i
-
-  const e = []
-
-  const p = deburr(pattern.toLowerCase())
-  const w = deburr(word.toLowerCase())
-
-  while ((i = w.indexOf(p, s)) >= 0) {
-    const pre = word.slice(s, i)
-
-    s = i + p.length
-
-    const pa = word.slice(i, s)
-
-    e.push({ text: pre, type: 'normal' }, { text: pa, type: 'match' })
-  }
-
-  e.push({ text: word.slice(s), type: 'normal' })
-
-  return e
+    normalize(vegetal.name_la).includes(p) ||
+    normalize(vegetal.name_fr).includes(p)
 }
 
 const renderOption = pattern => ({ option, isHighlighted, ...props }) => (
@@ -44,12 +18,12 @@ const renderOption = pattern => ({ option, isHighlighted, ...props }) => (
     <Left>{option.wet && <DropIcon color={water} />}</Left>
     <Rigth>
       <NameLa>
-        {exposePattern(option.name_la, pattern).map(({ text, type }) => (
+        {splitWithPattern(option.name_la, pattern).map(({ text, type }) => (
           <Text type={type}>{text}</Text>
         ))}
       </NameLa>
       <NameFr>
-        {exposePattern(option.name_fr, pattern).map(({ text, type }) => (
+        {splitWithPattern(option.name_fr, pattern).map(({ text, type }) => (
           <Text type={type}>{text}</Text>
         ))}
       </NameFr>

@@ -3,7 +3,7 @@ import styled, { keyframes } from 'preact-emotion'
 import { grey, vibrant } from '~/component/_abstract/palette'
 import { InputImage as InputImage_ } from '~/component/InputImage'
 import { Link } from '~/component/Link'
-import { Name } from './Name'
+import { Name } from '../CreateHabitat/Name'
 
 export const EditHabitat = ({
   info,

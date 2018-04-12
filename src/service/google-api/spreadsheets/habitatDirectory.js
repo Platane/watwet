@@ -9,6 +9,6 @@ export const get = async (spreadsheetId: string) => {
   return res.result.values.map(x => ({
     codeCorineBiotipe: x[0],
     canonicalName: x[1],
-    isWet: x[2][0] === 'H',
+    wet: x[2][0].toLowerCase() === 'h',
   }))
 }

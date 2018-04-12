@@ -2,12 +2,15 @@ import { h, Component } from 'preact'
 import styled, { css } from 'preact-emotion'
 import { injectFilterState, Typeahead } from 'react-simplest-typeahead'
 import { normalize, splitWithPattern } from '~/util/textSearch'
+import { Drop } from '~/component/Icon/Drop'
+import { water } from '~/component/_abstract/palette'
+import deburr from 'lodash.deburr'
 
 // b prefix a
 const prefix = (a, b) => a.slice(0, b.length) === b
 
 const filterFunction = pattern => ({ normalizedName, codeCorineBiotipe }) =>
-  normalizedName.includes(normalize(pattern)) ||
+  normalizedName.includes(normalize(deburr(pattern))) ||
   prefix(codeCorineBiotipe, normalize(pattern))
 
 const TypeaheadFiltered = injectFilterState({
@@ -17,11 +20,14 @@ const TypeaheadFiltered = injectFilterState({
 
 const renderOption = ({ pattern, option, isHighlighted, ...props }) => (
   <Item key={option.id} {...props} isHighlighted={isHighlighted}>
+    <Left>{option.wet && <DropIcon color={water} />}</Left>
+
     <Code>
       {splitWithPattern(option.codeCorineBiotipe, pattern).map(
         ({ text, type }) => <Text type={type}>{text}</Text>
       )}
     </Code>
+
     <Name>
       {splitWithPattern(option.name, pattern).map(({ text, type }) => (
         <Text type={type}>{text}</Text>
@@ -41,10 +47,28 @@ const Code = styled.span`
 `
 const Name = styled.span``
 
+const DropIcon = styled(Drop)`
+  width: 16px;
+  height: 16px;
+`
+
+const Left = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  margin-right: 8px;
+  margin-left: 4px;
+`
+
 const Item = styled.div`
-  padding: 10px;
+  padding: 10px 4px;
   background-color: ${props => (props.isHighlighted ? '#eee' : 'transparent')};
   cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `
 
 export const SearchBar = ({ value, options, onChange, ...props }) => (
