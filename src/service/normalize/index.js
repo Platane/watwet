@@ -64,7 +64,10 @@ const hydrateHabitat = (
   habitat_byCodeCorindeBiotipe: { [string]: Object }
 ) => (habitat: Habitat_Flat): Habitat => ({
   ...habitat,
-  naturalWet: habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe].wet,
+  naturalWet: !!(
+    habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe] &&
+    habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe].wet
+  ),
   population: habitat.population
     .map(x => ({
       vegetal: vegetal_byId[x.vegetalId],

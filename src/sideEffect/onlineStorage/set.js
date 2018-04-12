@@ -10,6 +10,7 @@ import { set as setHabitat } from '~/service/google-api/spreadsheets/habitat'
 import { selectSpreadsheetApiReady } from '~/store/selector/spreadsheetApiReady'
 import {
   selectVegetal_byId,
+  selectHabitat_byCodeCorindeBiotipe,
   selectDitionariesReady,
 } from '~/store/selector/dictionaries'
 import {
@@ -86,6 +87,7 @@ export const init = async store => {
 
         const site: Site = getSiteFromCache(
           selectVegetal_byId(state),
+          selectHabitat_byCodeCorindeBiotipe(state),
           state.resource
         )(id)
 
@@ -108,6 +110,7 @@ export const init = async store => {
 
         const habitat: Habitat = getHabitatFromCache(
           selectVegetal_byId(state),
+          selectHabitat_byCodeCorindeBiotipe(state),
           state.resource
         )(id)
 

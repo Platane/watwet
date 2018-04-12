@@ -8,10 +8,10 @@ import {
 export const selectCurrentSiteId = state => state.router.param.siteId
 
 export const selectCurrentSite = createSelector(
-  state => state.resource,
   selectVegetal_byId,
   selectHabitat_byCodeCorindeBiotipe,
+  state => state.resource,
   selectCurrentSiteId,
-  (cache, vegetal_byId, habitat_byCodeCorindeBiotipe, siteId) =>
+  (vegetal_byId, habitat_byCodeCorindeBiotipe, cache, siteId) =>
     getSite(vegetal_byId, habitat_byCodeCorindeBiotipe, cache)(siteId)
 )
