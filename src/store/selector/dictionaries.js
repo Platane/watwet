@@ -42,6 +42,15 @@ export const selectVegetal_byId = createSelector(
   }
 )
 
+export const selectHabitat_byCodeCorindeBiotipe = createSelector(
+  state => state.resource.original.habitatDictionary,
+  (arr = []) => {
+    const byCodeCorineBiotipe = {}
+    arr.forEach(x => (byCodeCorineBiotipe[x.codeCorineBiotipe] = x))
+    return byCodeCorineBiotipe
+  }
+)
+
 export const selectDitionariesReady = createSelector(
   selectVegetalDictionary,
   selectHabitatDictionary,

@@ -4,13 +4,12 @@ import { injectFilterState, Typeahead } from 'react-simplest-typeahead'
 import { normalize, splitWithPattern } from '~/util/textSearch'
 import { Drop } from '~/component/Icon/Drop'
 import { water } from '~/component/_abstract/palette'
-import deburr from 'lodash.deburr'
 
 // b prefix a
 const prefix = (a, b) => a.slice(0, b.length) === b
 
 const filterFunction = pattern => ({ normalizedName, codeCorineBiotipe }) =>
-  normalizedName.includes(normalize(deburr(pattern))) ||
+  normalizedName.includes(normalize(pattern)) ||
   prefix(codeCorineBiotipe, normalize(pattern))
 
 const TypeaheadFiltered = injectFilterState({

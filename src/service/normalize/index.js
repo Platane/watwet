@@ -59,10 +59,12 @@ const vegetalSortFn = (a, b) => {
   return a.vegetal.id.toString() < b.vegetal.id.toString() ? 1 : -1
 }
 
-const hydrateHabitat = (vegetal_byId: { [string]: Vegetal }) => (
-  habitat: Habitat_Flat
-): Habitat => ({
+const hydrateHabitat = (
+  vegetal_byId: { [string]: Vegetal },
+  habitat_byCodeCorindeBiotipe: { [string]: Object }
+) => (habitat: Habitat_Flat): Habitat => ({
   ...habitat,
+  naturalWet: habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe].wet,
   population: habitat.population
     .map(x => ({
       vegetal: vegetal_byId[x.vegetalId],
@@ -73,17 +75,25 @@ const hydrateHabitat = (vegetal_byId: { [string]: Vegetal }) => (
     .sort(vegetalSortFn),
 })
 
-export const getHabitat = (vegetal_byId, cache) => habitatId => {
+export const getHabitat = (
+  vegetal_byId,
+  habitat_byCodeCorindeBiotipe,
+  cache
+) => habitatId => {
   const habitatKey = `habitat.${habitatId}`
 
   const habitat = cache.mutated[habitatKey] || cache.original[habitatKey]
 
   if (!habitat) return null
 
-  return hydrateHabitat(vegetal_byId)(habitat)
+  return hydrateHabitat(vegetal_byId, habitat_byCodeCorindeBiotipe)(habitat)
 }
 
-export const getSite = (vegetal_byId, cache) => siteId => {
+export const getSite = (
+  vegetal_byId,
+  habitat_byCodeCorindeBiotipe,
+  cache
+) => siteId => {
   const siteKey = `site.${siteId}`
 
   const site = cache.mutated[siteKey] || cache.original[siteKey]
@@ -98,7 +108,9 @@ export const getSite = (vegetal_byId, cache) => siteId => {
 
         if (!habitat) return
 
-        return hydrateHabitat(vegetal_byId)(habitat)
+        return hydrateHabitat(vegetal_byId, habitat_byCodeCorindeBiotipe)(
+          habitat
+        )
       })
       .filter(Boolean),
   }
