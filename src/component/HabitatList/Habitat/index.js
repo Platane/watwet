@@ -7,11 +7,12 @@ import { water, white } from '~/component/_abstract/palette'
 export const Habitat = ({ info, population, naturalWet, onClick }) => (
   <Container onClick={onClick}>
     <Picture src={info.picture_url} size="small" />
-    {naturalWet && (
-      <DropIconBadge>
-        <DropIcon color={water} />
-      </DropIconBadge>
-    )}
+    {false &&
+      naturalWet && (
+        <DropIconBadge>
+          <DropIcon color={water} />
+        </DropIconBadge>
+      )}
     <Content>
       <Name>{info.name}</Name>
       <VegetalCount>{`${population.length} species`}</VegetalCount>
