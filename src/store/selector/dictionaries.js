@@ -5,11 +5,11 @@ const formatIndex = code => {
   const [a, ...b] = code.toString().split('.')
 
   return [
-    '0'.repeat(5 - a.length) + a,
+    '0'.repeat(10 - a.length) + a,
     ...Array.from({ length: 1 }).map((_, i) => {
       const u = b[i] || ''
 
-      return u + '0'.repeat(5 - u.length)
+      return u + '0'.repeat(10 - u.length)
     }),
   ].join('')
 }
