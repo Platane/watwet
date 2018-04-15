@@ -62,21 +62,28 @@ const vegetalSortFn = (a, b) => {
 const hydrateHabitat = (
   vegetal_byId: { [string]: Vegetal },
   habitat_byCodeCorindeBiotipe: { [string]: Object }
-) => (habitat: Habitat_Flat): Habitat => ({
-  ...habitat,
-  naturalWet: !!(
-    habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe] &&
-    habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe].wet
-  ),
-  population: habitat.population
-    .map(x => ({
-      vegetal: vegetal_byId[x.vegetalId],
-      layer: x.layer,
-      representation: x.representation,
-    }))
-    .filter(x => x.vegetal)
-    .sort(vegetalSortFn),
-})
+) => (habitat: Habitat_Flat): Habitat => {
+  const ref = habitat_byCodeCorindeBiotipe[habitat.info.codeCorineBiotipe]
+
+  return {
+    ...habitat,
+
+    info: {
+      ...habitat.info,
+      codeEunis: (ref && ref.codeEunis) || '',
+      naturalWet: !!(ref && ref.wet),
+    },
+
+    population: habitat.population
+      .map(x => ({
+        vegetal: vegetal_byId[x.vegetalId],
+        layer: x.layer,
+        representation: x.representation,
+      }))
+      .filter(x => x.vegetal)
+      .sort(vegetalSortFn),
+  }
+}
 
 export const getHabitat = (
   vegetal_byId,

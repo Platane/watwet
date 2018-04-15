@@ -23,6 +23,8 @@ export type HabitatInfo = {
   location: string,
   codeCorineBiotipe: string,
   picture_url: string,
+  codeEunis: string,
+  naturalWet: boolean,
   // geoloc: GeolocPoint,
 }
 

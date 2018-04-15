@@ -5,7 +5,7 @@ import type { Site, Habitat } from 'type'
 import type { Grid } from '../../grid'
 
 export const formatHabitat = (habitat: Habitat): Grid => {
-  const h = Math.max(habitat.population.length + 1, 4)
+  const h = Math.max(habitat.population.length + 1, 6)
 
   const grid = []
   fillGrid(21, h)(grid)
@@ -18,6 +18,10 @@ export const formatHabitat = (habitat: Habitat): Grid => {
     grid[1][1] = habitat.info.codeCorineBiotipe
     grid[2][1] = habitat.info.description
     grid[3][1] = habitat.info.location
+    grid[4][1] = habitat.info.codeEunis
+    grid[5][1] = habitat.info.naturalWet
+      ? "humide d'après code corine"
+      : 'non humide d`après code corine'
   }
 
   ;['A', 'a', 'h'].forEach((layer, i) => {
