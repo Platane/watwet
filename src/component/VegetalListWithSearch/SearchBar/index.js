@@ -8,9 +8,8 @@ import { normalize, splitWithPattern } from '~/util/textSearch'
 const filterFunction = pattern => {
   const p = normalize(pattern)
 
-  return vegetal =>
-    normalize(vegetal.name_la).includes(p) ||
-    normalize(vegetal.name_fr).includes(p)
+  return ({ name_fr_normalized, name_la_normalized }) =>
+    name_la_normalized.includes(p) || name_fr_normalized.includes(p)
 }
 
 const renderOption = pattern => ({ option, isHighlighted, ...props }) => (
@@ -44,6 +43,7 @@ const Left = styled.div`
   width: 16px;
   margin-right: 8px;
   margin-left: 4px;
+  flex-shrink: 1;
 `
 const Rigth = styled.div`
   display: flex;

@@ -30,8 +30,15 @@ export const selectHabitatDictionary = createSelector(
       .sort((a, b) => (a.id < b.id ? -1 : 1))
 )
 
-export const selectVegetalDictionary = state =>
-  state.resource.original.vegetalDictionary || []
+export const selectVegetalDictionary = createSelector(
+  state => state.resource.original.vegetalDictionary,
+  (vegetalDictionary = []) =>
+    vegetalDictionary.map(x => ({
+      ...x,
+      name_fr_normalized: normalize(x.name_fr),
+      name_la_normalized: normalize(x.name_la),
+    }))
+)
 
 export const selectVegetal_byId = createSelector(
   selectVegetalDictionary,
