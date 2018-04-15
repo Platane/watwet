@@ -33,17 +33,17 @@ export const SyncIndicator = ({
               </Link>
             )}
 
-            {!next && transition && <OkIcon />}
-            {(next || fetching) && <SpinIcon />}
+            {!offline && !next && transition && <OkIcon />}
+            {!offline && (next || fetching) && <SpinIcon />}
 
             <Label>
               {offline && 'offline, '}
 
-              {next && 'saving …'}
+              {!offline && next && 'saving …'}
 
-              {fetching && 'loading …'}
+              {!offline && fetching && 'loading …'}
 
-              {!next && transition && 'saved'}
+              {!offline && !next && transition && 'saved'}
 
               {(offline || (!fetching && !next && !transition)) &&
                 lastSyncDate && (
