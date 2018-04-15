@@ -102,3 +102,4 @@ This app comes with a few limitations:
 
 * [sentry](https://sentry.io/watwet/watwet/)
 * [cloudinary](https://cloudinary.com/console/)
+* [google sheet api](https://console.cloud.google.com/apis/dashboard?project=watwat-190818&duration=P30D)
