@@ -4,3 +4,5 @@ yarn-error.log*
 lib
 flow-typed
 dist
+_book
+docs/asset

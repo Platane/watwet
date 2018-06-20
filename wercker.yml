@@ -30,9 +30,14 @@ build:
       code: yarn test
 
     - script:
-      name: prepare
+      name: build docs
+      code: yarn docs:build
+
+    - script:
+      name: prepare gh-pages
       code: |
         mv dist gh-pages
+        mv docs/_book gh-pages/docs
 
     - script:
       name: set up permalink
@@ -52,6 +57,7 @@ build:
       name: screenshots
       code: |
         mv src/asset/screenshot/* gh-pages/
+        mv src/asset/logo/* gh-pages/
 
 deploy-pages:
   steps:
