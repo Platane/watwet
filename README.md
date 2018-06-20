@@ -6,6 +6,10 @@
   </a>
 </p>
 
+[WatWet](https://platane.github.io/watwet)
+
+[docs](https://platane.github.io/watwet/docs)
+
 **Easily create a list of vegetals**
 
 Every data is sync with a google doc spreadSheet.
