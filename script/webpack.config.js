@@ -10,7 +10,6 @@ module.exports = {
   entry: {
     index: [
       path.join(__dirname, '../src/index.js'),
-      // path.join(__dirname, '../src/asset/image/favicon/favicon.ico'),
       path.join(__dirname, '../src/index.html'),
     ],
   },
@@ -41,7 +40,7 @@ module.exports = {
       },
 
       {
-        test: [/\.html?$/, /\.ico/],
+        test: [/\.html?$/],
         use: [
           {
             loader: 'file-loader',

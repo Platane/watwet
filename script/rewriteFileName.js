@@ -15,6 +15,9 @@ const replaceFileName = s =>
   s
     .replace('/index.html', PATHNAME_BASE + 'index.html')
     .replace('/manifest.json', PATHNAME_BASE + 'manifest.json')
+    .replace('/icon16x16.png', PATHNAME_BASE + 'icon16x16.png')
+    .replace('/icon32x32.png', PATHNAME_BASE + 'icon32x32.png')
+    .replace('/icon192x192.png', PATHNAME_BASE + 'icon192x192.png')
     .replace('/index.js', PATHNAME_BASE + pathIndex)
     .replace('/sw.js', PATHNAME_BASE + newPathSw)
     .replace('__root', PATHNAME_BASE)

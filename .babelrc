@@ -28,9 +28,6 @@
   ],
   "presets": ["flow"],
   "env": {
-    "production": {
-      "presets": ["minify"]
-    },
     "test": {
       "plugins": ["transform-es2015-modules-commonjs"]
     }
