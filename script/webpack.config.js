@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const WebpackAssetsManifest = require('webpack-assets-manifest')
-const BabiliPlugin = require('babili-webpack-plugin')
 
 const production = process.env.NODE_ENV === 'production'
 
@@ -67,7 +66,7 @@ module.exports = {
     new WebpackAssetsManifest({
       output: path.resolve(__dirname, '../dist', 'assetManifest.json'),
     }),
-  ].filter(Boolean),
+  ],
 
   devtool: production ? 'source-map' : false,
 
