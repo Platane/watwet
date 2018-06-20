@@ -30,7 +30,7 @@ export const reduce = (state: State, action): State => {
         shouldConnect: false,
       }
 
-    case 'location:changed':
+    case 'declarative-router:navigatorChanged':
       if (action.hash && action.hash.id_token)
         return { ...state, pending: true }
       else return state

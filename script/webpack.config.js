@@ -24,6 +24,7 @@ module.exports = {
     alias: {
       react: 'preact-compat',
       'react-dom': 'preact-compat',
+      'react-redux': 'preact-redux',
     },
   },
 

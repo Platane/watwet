@@ -14,7 +14,7 @@ export const reduce = (state: State, action): State => {
     case 'localStorage:read':
       return { ...state, localStorage: true }
 
-    case 'location:changed':
+    case 'declarative-router:navigatorChanged':
       return { ...state, navigator: true }
 
     case 'network:online':

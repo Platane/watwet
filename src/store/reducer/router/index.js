@@ -1,6 +1,3 @@
-import { routeValidator } from '~/service/router/routeValidator'
-import { routes } from './routes'
-import { set } from '~/util/reduxHelper'
 import { keyToLabel } from '~/store/selector/currentLayer'
 import {
   selectCurrentHabitat,
@@ -11,9 +8,21 @@ import {
   selectCurrentSiteId,
 } from '~/store/selector/currentSite'
 
+import { reduce as createReduce, createRouteResolver } from 'declarative-router'
+import { routes } from './routes'
+import { set } from '~/util/reduxHelper'
 import type { State } from './type'
 
-const getRoute = routeValidator(routes)
+const getRoute = createRouteResolver(routes)
+
+const setRoute = state => (path, query = {}, hash = {}) => ({
+  ...state,
+  router: {
+    hash,
+    query,
+    ...getRoute(path),
+  },
+})
 
 export const defaultState = {
   hash: {},
@@ -21,27 +30,7 @@ export const defaultState = {
   ...getRoute('/'),
 }
 
-export const reduce = (state: State, action): State => {
-  state = state || defaultState
-
-  switch (action.type) {
-    case 'location:changed':
-      return {
-        query: action.query,
-        hash: action.hash,
-        ...getRoute(action.pathname),
-      }
-
-    case 'location:goTo':
-      return {
-        query: action.query,
-        hash: action.hash,
-        ...getRoute(action.path),
-      }
-  }
-
-  return state
-}
+export const reduce = createReduce(routes)
 
 export const reduceGlobal = (state, action) => {
   switch (action.type) {
@@ -49,70 +38,38 @@ export const reduceGlobal = (state, action) => {
       const site = state.resource.mutated[`site.${action.siteId}`]
       const habitatId = site.habitats[site.habitats.length - 1].split('.', 2)[1]
 
-      state = {
-        ...state,
-        router: {
-          hash: {},
-          query: {},
-          ...getRoute(`site/${site.id}/habitat/${habitatId}`),
-        },
-      }
+      state = setRoute(state)(`site/${site.id}/habitat/${habitatId}`)
       break
     }
 
     case 'mutation:habitat:update': {
       if (state.router.key === 'habitatEdit')
-        state = {
-          ...state,
-          router: {
-            hash: {},
-            query: {},
-            ...getRoute(
-              `site/${action.habitat.siteId}/habitat/${action.habitat.id}`
-            ),
-          },
-        }
+        state = setRoute(state)(
+          `site/${action.habitat.siteId}/habitat/${action.habitat.id}`
+        )
       break
     }
 
     case 'mutation:habitat:remove': {
       if (state.router.key === 'habitatEdit')
-        state = {
-          ...state,
-          router: {
-            hash: {},
-            query: {},
-            ...getRoute(`site/${action.siteId}`),
-          },
-        }
+        state = setRoute(state)(`site/${action.siteId}`)
+
       break
     }
 
     case 'mutation:site:create':
-      return {
-        ...state,
-        router: {
-          hash: {},
-          query: {},
-          ...getRoute(`site/${action.site.id}`),
-        },
-      }
+      state = setRoute(state)(`site/${action.site.id}`)
+      break
 
     case 'resource:online:read': {
-      if (action.idChanged && action.idChanged[state.router.param.siteId])
-        return {
-          ...state,
-          router: {
-            ...state.router,
-            ...getRoute(
-              state.router.path.replace(
-                state.router.param.siteId,
-                action.idChanged[state.router.param.siteId]
-              )
-            ),
-          },
-        }
+      if (action.idChanged && action.idChanged[state.router.param.siteId]) {
+        const newPath = state.router.path.replace(
+          state.router.param.siteId,
+          action.idChanged[state.router.param.siteId]
+        )
 
+        state = setRoute(state)(newPath, state.router.query, state.router.hash)
+      }
       break
     }
 
@@ -123,14 +80,10 @@ export const reduceGlobal = (state, action) => {
         const siteId = selectCurrentSiteId(state)
         const habitatId = selectCurrentHabitatId(state)
 
-        state = {
-          ...state,
-          router: {
-            hash: {},
-            query: strate ? { strate } : {},
-            ...getRoute(`site/${siteId}/habitat/${habitatId}`),
-          },
-        }
+        state = setRoute(state)(
+          `site/${siteId}/habitat/${habitatId}`,
+          strate ? { strate } : {}
+        )
       }
       break
     }
