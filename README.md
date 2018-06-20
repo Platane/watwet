@@ -1,11 +1,10 @@
-# watwet
+# WatWet
 
 <p align="center">
-  <a href="https://platane.github.io/watwet"></a>
-  <img src="https://platane.github.io/watwet/logo.svg" width="350"/>
+  <a href="https://platane.github.io/watwet">
+    <img src="https://platane.github.io/watwet/logo.svg" width="350"/>
+  </a>
 </p>
-
-[platane.github.io/watwet](https://platane.github.io/watwet/logo.svg)
 
 **Easily create a list of vegetals**
 
@@ -15,7 +14,7 @@ Every data is sync with a google doc spreadSheet.
 
 # Usage
 
-Read the [doc](https://platane.github.io/watwet/docs)
+[docs](https://platane.github.io/watwet/docs)
 
 # Third party
 
