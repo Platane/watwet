@@ -1,6 +1,7 @@
 import { h, Component } from 'preact'
 import styled from 'preact-emotion'
 import { vibrant, white } from '~/component/_abstract/palette'
+import { Spinner } from '~/component/Spinner'
 
 export const Login = ({ pending, login }) => (
   <Container>
@@ -21,6 +22,8 @@ export const Login = ({ pending, login }) => (
         <Button onClick={login}>Login</Button>
       </Center>
     )}
+
+    {pending && <Spinner size={60} color={white} />}
   </Container>
 )
 
