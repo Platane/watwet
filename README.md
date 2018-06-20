@@ -2,13 +2,12 @@
 
 <p align="center">
   <a href="https://platane.github.io/watwet">
-    <img src="https://platane.github.io/watwet/logo.svg" width="350"/>
+    <img src="https://platane.github.io/watwet/logo.svg" width="200"/>
   </a>
 </p>
 
-[WatWet](https://platane.github.io/watwet)
+[app](https://platane.github.io/watwet) • [docs](https://platane.github.io/watwet/docs)
 
-[docs](https://platane.github.io/watwet/docs)
 
 **Easily create a list of vegetals**
 
