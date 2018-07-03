@@ -71,4 +71,7 @@ const Container = styled.footer`
   background-color: ${grey};
   color: #aaa;
   width: 100%;
+
+  position: relative;
+  z-index: 3;
 `

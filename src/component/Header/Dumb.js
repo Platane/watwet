@@ -75,4 +75,7 @@ const Container = styled.header`
   display: flex;
   flex-direction: row;
   color: ${white};
+
+  position: relative;
+  z-index: 3;
 `

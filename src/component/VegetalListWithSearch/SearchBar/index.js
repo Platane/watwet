@@ -96,7 +96,9 @@ const customClassName = {
     border: none;
     border-radius: 2px;
   `,
-  options: css``,
+  options: css`
+    z-index: 5 !important;
+  `,
   typeahead: css``,
 }
 

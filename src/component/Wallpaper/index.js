@@ -38,25 +38,17 @@ const getColor = state => {
     case 'home':
     case 'siteList':
     case 'siteCreate':
-      return {
-        color: vibrant[0],
-      }
+      return { color: vibrant[0] }
+
+    case 'habitatEdit':
+      return { color: vibrant[3] }
 
     case 'habitatList':
-      return {
-        color: vibrant[2],
-      }
-
     case 'habitatCreate':
-    case 'habitatEdit':
-      return {
-        color: vibrant[3],
-      }
+      return { color: vibrant[2] }
 
     default:
-      return {
-        color: vibrant[1],
-      }
+      return { color: vibrant[1] }
   }
 }
 
