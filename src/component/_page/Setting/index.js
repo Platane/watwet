@@ -21,6 +21,8 @@ const injectState = connect(
 
     habitatDictionaryLoaded: !state.resource.shouldFetch['habitatDictionary'],
     vegetalDictionaryLoaded: !state.resource.shouldFetch['vegetalDictionary'],
+
+    version: process.env.VERSION || 'dev',
   }),
   settingActions
 )

@@ -15,6 +15,7 @@ export const Setting = ({
   vegetalDictionaryLoaded,
   setSetting,
   resetSetting,
+  version,
 }) => (
   <Container>
     <PageTitle>
@@ -79,6 +80,11 @@ export const Setting = ({
         </p>
       </Section>
     )}
+
+    <Section>
+      <SectionTitle>About</SectionTitle>
+      <p>Watwet version : {version}</p>
+    </Section>
   </Container>
 )
 

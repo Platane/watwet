@@ -17,7 +17,7 @@ export const Footer = () => (
 
       <Link target="blank" href="https://github.com/platane/watwet">
         <A>
-          <GithubIcon color={white} />
+          <GithubIcon color="#aaa" />
         </A>
       </Link>
     </Center>
