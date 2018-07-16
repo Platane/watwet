@@ -13,7 +13,7 @@ export default C =>
 
     onRemove = id => {
       const population = this.props.population_unfilter.filter(
-        x => x.vegetal.id !== id
+        x => x.vegetal.id !== id || x.layer !== this.props.currentLayer
       )
 
       this.props.onChange(population)
@@ -21,7 +21,10 @@ export default C =>
 
     onChangeRepresentation = (id, representation) => {
       const population = this.props.population_unfilter.map(
-        x => (x.vegetal.id === id ? { ...x, representation } : x)
+        x =>
+          x.vegetal.id === id && x.layer === this.props.currentLayer
+            ? { ...x, representation }
+            : x
       )
 
       this.props.onChange(population)
@@ -29,9 +32,7 @@ export default C =>
 
     render() {
       const population_id = {}
-      this.props.population_unfilter.forEach(
-        x => (population_id[x.vegetal.id] = true)
-      )
+      this.props.population.forEach(x => (population_id[x.vegetal.id] = true))
 
       const options = this.props.vegetals.filter(x => !population_id[x.id])
 
