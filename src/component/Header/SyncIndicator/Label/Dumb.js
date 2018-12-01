@@ -3,31 +3,13 @@ import styled, { css, keyframes } from 'preact-emotion'
 import { variant, grey } from '~/component/_abstract/palette'
 import { Transition } from 'react-propstransition'
 import { TimeAgo } from '~/component/TimeAgo'
-import { Drive } from '~/component/Icon/Drive'
-import { Link } from '~/component/Link'
+import { DriveLink } from '../DriveLink'
 
-export const Label = ({
-  lastSyncDate,
-  mutated,
-  fetching,
-  offline,
-  spreadsheetUrl,
-}) => (
+export const Label = ({ lastSyncDate, mutated, fetching, offline }) => (
   <Transition toTransition={mutated} delay={1200}>
     {({ next, previous, transition }) => (
       <Info>
-        {spreadsheetUrl && (
-          <Link
-            target="blank"
-            href={spreadsheetUrl}
-            onClick={e => e.stopPropagation()}
-            external
-          >
-            <a title="view on google doc">
-              <DriveIcon />
-            </a>
-          </Link>
-        )}
+        <DriveLink />
 
         {!offline && !next && transition && <OkIcon />}
         {!offline && (next || fetching) && <SpinIcon />}
@@ -41,12 +23,13 @@ export const Label = ({
 
           {!offline && !next && transition && 'saved'}
 
-          {(offline || (!fetching && !next && !transition)) && lastSyncDate && (
-            <span>
-              <span>last sync </span>
-              <TimeAgo date={lastSyncDate} />
-            </span>
-          )}
+          {(offline || (!fetching && !next && !transition)) &&
+            lastSyncDate && (
+              <span>
+                <span>last sync </span>
+                <TimeAgo date={lastSyncDate} />
+              </span>
+            )}
         </LabelText>
       </Info>
     )}
@@ -78,16 +61,6 @@ const pop = keyframes`
   0%{ opacity:0; transform: scale(0.4,0.4)};
   70%{ opacity:1; transform: scale(1.25,1.25)};
   100%{ opacity:1; transform: scale(1,1)};
-`
-
-const DriveIcon = styled(Drive)`
-  width: 18px;
-  height: 18px;
-  margin-right: 16px;
-
-  &:active {
-    transform: scale(0.9, 0.9);
-  }
 `
 
 const SpinIcon = styled.span`
