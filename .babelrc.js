@@ -33,9 +33,7 @@ if (process.env.NODE_ENV === 'production') {
     '@babel/plugin-transform-runtime',
     {
       helpers: false,
-      polyfill: false,
       regenerator: true,
-      moduleName: '@babel/runtime',
     },
   ])
 }
