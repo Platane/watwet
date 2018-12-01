@@ -21,7 +21,10 @@ export const create = (sideEffects = []) => {
     applyMiddleware(...middlewares),
     'undefined' != typeof window &&
       window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__(),
+      window.__REDUX_DEVTOOLS_EXTENSION__({
+        actionSanitizer,
+        stateSanitizer,
+      }),
   ].filter(Boolean)
 
   const store = createStore(reduce, defaultState, compose(...enhancers))
@@ -30,3 +33,18 @@ export const create = (sideEffects = []) => {
 
   return store
 }
+
+const stateSanitizer = state => ({
+  ...state,
+  resource: {
+    ...state.resource,
+    original: {
+      ...state.resource.original,
+      habitatDictionary: '<<huge>>',
+      vegetalDictionary: '<<huge>>',
+    },
+  },
+})
+
+const actionSanitizer = action =>
+  action.type === 'localStorage:read' ? stateSanitizer(action) : action
