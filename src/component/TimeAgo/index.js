@@ -3,7 +3,15 @@ import styled from 'preact-emotion'
 import { createTransform } from '~/service/cloudinary'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 
-const intervals = [
+/**
+ * as we don't want to update the label every second,
+ * only update for a certain number of deltas
+ * in ms,
+ *    - every minute for the first 45 min
+ *    - every hours for the first 23 hours
+ *    - every day for the first 30 days
+ */
+const deltas = [
   ...Array.from({ length: 45 }).map((_, x) => 0.5 + x),
   ...Array.from({ length: 23 }).map((_, x) => (1 + x) * 60),
   ...Array.from({ length: 30 }).map((_, x) => (1 + x) * 24 * 60),
@@ -12,8 +20,8 @@ const intervals = [
 const getNextTic = (date): number => {
   const delta = Math.max(0, Date.now() - new Date(date).getTime())
 
-  for (let k = 0; k < intervals.length; k++)
-    if (delta <= intervals[k]) return intervals[k]
+  for (let k = 0; k < deltas.length; k++)
+    if (delta <= deltas[k]) return deltas[k]
 
   return 9999999999
 }

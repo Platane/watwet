@@ -4,6 +4,10 @@ import { grey, vibrant } from '~/component/_abstract/palette'
 import { InputImage as InputImage_ } from '~/component/InputImage'
 import { Button } from '~/component/Button'
 
+/**
+ * collection of styled component to use in a form
+ */
+
 export const PageTitle = styled.h1``
 
 export const Separator = styled.div`
