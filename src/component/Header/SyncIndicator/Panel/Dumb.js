@@ -33,29 +33,28 @@ export const Panel = ({
       )}
     </section>
 
-    {!offline &&
-      !fetching && (
-        <Button
-          onMouseDown={preventDefault}
-          onTouchStart={preventDefault}
-          onClick={createRefresh(props)}
-        >
-          refresh
-        </Button>
-      )}
+    {!offline && !fetching && (
+      <Button
+        onMouseDown={preventDefault}
+        onTouchStart={preventDefault}
+        onClick={createRefresh(props)}
+      >
+        refresh
+      </Button>
+    )}
 
-    {offline &&
-      diff.length > 0 && (
-        <p>you are offline. please connect to publish your changes</p>
-      )}
+    {offline && diff.length > 0 && (
+      <p>you are offline. please connect to publish your changes</p>
+    )}
 
-    {offline &&
-      diff.length > 0 && (
-        <DiffList>
-          <p>changes so far:</p>
-          {diff.map(({ type }, i) => <p key={i}>- {type}</p>)}
-        </DiffList>
-      )}
+    {offline && diff.length > 0 && (
+      <DiffList>
+        <p>changes so far:</p>
+        {diff.map(({ type }, i) => (
+          <p key={i}>- {type}</p>
+        ))}
+      </DiffList>
+    )}
   </Container>
 )
 

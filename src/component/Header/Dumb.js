@@ -7,7 +7,7 @@ import { Gear } from '~/component/Icon/Gear'
 import { Link } from '~/component/Link'
 import { Breadcrumb } from '~/component/Breadcrumb'
 
-export const Header = ({ spreadsheetUrl, user, goToSetting, goToHome }) => (
+export const Header = ({ user, goToSetting, goToHome }) => (
   <Container>
     <Content>
       <Breadcrumb />
