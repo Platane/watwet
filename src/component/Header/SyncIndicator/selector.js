@@ -22,7 +22,7 @@ const getResourceKey = path =>
   (path.length == 1 && `site.${path[0]}`) ||
   (path.length == 2 && `habitat.${path[1]}`)
 
-const selectResourceKey = createSelector(
+export const selectResourceKey = createSelector(
   selectResourcePath,
   getResourceKey
 )

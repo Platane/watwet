@@ -5,8 +5,8 @@ import { Transition } from 'react-propstransition'
 import { TimeAgo } from '~/component/TimeAgo'
 import { DriveLink } from '../DriveLink'
 
-export const Label = ({ lastSyncDate, mutated, fetching, offline }) => (
-  <Transition toTransition={mutated} delay={1200}>
+export const Label = ({ key, lastSyncDate, mutated, fetching, offline }) => (
+  <Transition key={key} toTransition={mutated} delay={1200}>
     {({ next, previous, transition }) => (
       <Info>
         <DriveLink />
