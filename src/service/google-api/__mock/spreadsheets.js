@@ -1,6 +1,24 @@
 import { genUid } from '~/util/uid'
+import { removeDuplicateId } from '~/util/array'
 import { sites as sitesFixtures } from '~/__fixtures__/sites'
 import { vegetals } from '~/__fixtures__/vegetals'
+
+const wait = delay => new Promise(r => setTimeout(r, delay))
+
+const delayApiFn = o => {
+  if (typeof o === 'function')
+    return (...args) => wait(30).then(() => o(...args))
+
+  if (typeof o === 'object') {
+    const copy = {}
+    Object.keys(o).forEach(key => {
+      copy[key] = delayApiFn(o[key])
+    })
+    return copy
+  }
+
+  return o
+}
 
 const __create = () => {
   const site = {}
@@ -8,7 +26,7 @@ const __create = () => {
     site[s.id] = s
   })
 
-  return {
+  return delayApiFn({
     site: {
       get: id => {
         if (!site[id]) throw new Error(404)
@@ -29,17 +47,22 @@ const __create = () => {
     },
     habitat: {
       set: (siteId, habitatId, habitat) => {
-        if (!site[id]) return new Error(404)
+        if (!site[siteId]) return new Error(404)
 
-        const habitats = site[id].habitats.some(({ id }) => id === habitatId)
-          ? site[id].habitats.map(x => (x.id === habitatId ? habitat : x))
-          : [...site[id].habitats, habitat]
+        const habitats = removeDuplicateId([...site[siteId].habitats, habitat])
 
         site[id] = { ...site[id], habitats }
       },
     },
     habitatDictionary: {
-      get: () => [],
+      get: () => [
+        {
+          codeCorineBiotipe: 'A',
+          codeEunis: 'A',
+          canonicalName: 'x',
+          wet: false,
+        },
+      ],
     },
     vegetalDictionary: {
       get: () => vegetals,
@@ -47,7 +70,7 @@ const __create = () => {
     __reset: () => {
       site.length = 0
     },
-  }
+  })
 }
 
 module.exports = { ...__create(), __create }
