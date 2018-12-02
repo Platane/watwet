@@ -3,6 +3,7 @@ export const hydrate = (payload, fromMutation = {}, idChanged = {}) => ({
   ...payload,
   fromMutation,
   idChanged,
+  date: Date.now(),
 })
 
 export const fetchError = (error, key, shouldFetchKey) => ({
@@ -10,6 +11,14 @@ export const fetchError = (error, key, shouldFetchKey) => ({
   error,
   key,
   shouldFetchKey,
+  date: Date.now(),
+})
+
+export const mutateError = (error, key) => ({
+  type: 'resource:online:mutate:error',
+  error,
+  key,
+  date: Date.now(),
 })
 
 export const forceRefreshSite = (siteId: string) => ({

@@ -11,7 +11,7 @@ import { normalizeSite } from '~/service/normalize'
  * delegate to the relevant implementation depending on the type
  */
 export const getEntity = async (key: string, getState: *) => {
-  const [entity, id] = key.split('.', 2)
+  const [entity, id] = key.split('.')
 
   switch (entity) {
     case 'habitatDictionary':
