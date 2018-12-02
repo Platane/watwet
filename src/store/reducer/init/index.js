@@ -14,6 +14,7 @@ export const reduce = (state: State, action): State => {
     case 'localStorage:read':
       return { ...state, localStorage: true }
 
+    case 'declarative-router:goTo':
     case 'declarative-router:navigatorChanged':
       return { ...state, navigator: true }
 
