@@ -18,6 +18,7 @@ const plugins = [
 
   'babel-plugin-emotion',
 
+  '@babel/plugin-proposal-export-namespace-from',
   '@babel/plugin-proposal-class-properties',
   '@babel/plugin-proposal-object-rest-spread',
   ['@babel/plugin-transform-react-jsx', { pragma: 'h' }],

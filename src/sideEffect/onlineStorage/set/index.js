@@ -13,7 +13,7 @@ const priorityFn = key =>
  */
 const sortFn = (a, b) => priorityFn(b) - priorityFn(a)
 
-export const init = async store => {
+export const init = api => async store => {
   let pending = false
   let failed = {}
 
@@ -56,7 +56,7 @@ export const init = async store => {
      * or fails and dispatch an error event
      */
     try {
-      const { res, idChanged } = await setEntity(key, store.getState)
+      const { res, idChanged } = await setEntity(api)(key, store.getState)
       const fromMutation = {}
       Object.keys(res).forEach(key => {
         fromMutation[key] = mutationKey[key]

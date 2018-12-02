@@ -2,7 +2,9 @@ import { hydrate, fetchError } from '~/store/action/onlineStorage'
 import { selectSpreadsheetApiReady } from '~/store/selector/spreadsheetApiReady'
 import { getEntity } from './getEntity'
 
-export const init = store => {
+let k = 0
+
+export const init = api => store => {
   let pending = {}
   let failed = {}
 
@@ -38,7 +40,7 @@ export const init = store => {
      * or fails and dispatch an error event
      */
     try {
-      const res = await getEntity(key, store.getState)
+      const res = await getEntity(api)(key, store.getState)
       store.dispatch(hydrate(res))
     } catch (error) {
       failed[key] = shouldFetchKey

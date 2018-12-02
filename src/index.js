@@ -13,6 +13,7 @@ import { init as initOnlineStorage } from '~/sideEffect/onlineStorage'
 import { init as initServiceWorker } from '~/sideEffect/serviceWorker'
 import { init as initSentryIdentity } from '~/sideEffect/sentryIdentity'
 import { init as initOfflineDetector } from '~/sideEffect/offlineDetector'
+import * as api from '~/service/google-api/spreadsheets'
 
 import * as ReselectTools from 'reselect-tools'
 import * as selectors from './store/selector'
@@ -33,7 +34,7 @@ const sideEffects = [
   initAuth,
   initNavigator,
   initServiceWorker,
-  initOnlineStorage,
+  initOnlineStorage(api),
   initOfflineDetector,
   initUi,
 ]
