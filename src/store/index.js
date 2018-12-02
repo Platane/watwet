@@ -34,17 +34,20 @@ export const create = (sideEffects = []) => {
   return store
 }
 
-const stateSanitizer = state => ({
-  ...state,
-  resource: {
-    ...state.resource,
-    original: {
-      ...state.resource.original,
-      habitatDictionary: '<<huge>>',
-      vegetalDictionary: '<<huge>>',
-    },
-  },
-})
+const stateSanitizer = state =>
+  !state.resource
+    ? state
+    : {
+        ...state,
+        resource: {
+          ...state.resource,
+          original: {
+            ...state.resource.original,
+            habitatDictionary: '<<huge>>',
+            vegetalDictionary: '<<huge>>',
+          },
+        },
+      }
 
 const actionSanitizer = action =>
   action.type === 'localStorage:read' ? stateSanitizer(action) : action
