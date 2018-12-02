@@ -1,11 +1,4 @@
 import {
-  listId as listSitesId,
-  set as setSite,
-  get as getSite,
-  create as createSite,
-} from '~/service/google-api/spreadsheets/site'
-import { set as setHabitat } from '~/service/google-api/spreadsheets/habitat'
-import {
   selectVegetal_byId,
   selectHabitat_byCodeCorindeBiotipe,
 } from '~/store/selector/dictionaries'
@@ -17,7 +10,7 @@ import {
 
 import type { Site, Habitat } from 'type'
 
-export const setEntity = async (key, getState) => {
+export const setEntity = api => async (key, getState) => {
   const [entity, id] = key.split('.')
 
   switch (entity) {
@@ -40,7 +33,7 @@ export const setEntity = async (key, getState) => {
           .map(async key => {
             const { id: previousId, name } = mutated[key]
 
-            const nextId = await createSite(name)
+            const nextId = await api.site.create(name)
 
             idChanged[previousId] = nextId
           })
@@ -49,7 +42,9 @@ export const setEntity = async (key, getState) => {
       /**
        * re-fetch all the sites
        */
-      const res = { sites: (await listSitesId()).map(id => `site.${id}`) }
+      const res = {
+        sites: (await api.site.list()).map(({ id }) => `site.${id}`),
+      }
 
       return { res, idChanged }
     }
@@ -69,12 +64,12 @@ export const setEntity = async (key, getState) => {
       /**
        * update the site
        */
-      await setSite(site)
+      await api.site.set(site)
 
       /**
        * re-fetch the site
        */
-      const res = normalizeSite(await getSite(id))
+      const res = normalizeSite(await api.site.get(id))
 
       return { res }
     }
@@ -94,12 +89,12 @@ export const setEntity = async (key, getState) => {
       /**
        * update the habitat
        */
-      await setHabitat(habitat.siteId, habitat.id, habitat)
+      await api.habitat.set(habitat.siteId, habitat.id, habitat)
 
       /**
        * re-fetch the site
        */
-      const res = normalizeSite(await getSite(habitat.siteId))
+      const res = normalizeSite(await api.site.get(id))
 
       return { res }
     }
