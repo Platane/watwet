@@ -4,12 +4,14 @@ import { normalizeHabitat } from '~/service/normalize'
 export const updateHabitat = habitat => ({
   type: 'mutation:habitat:update',
   habitat: normalizeHabitat(habitat),
+  date: Date.now(),
 })
 
 export const removeHabitat = (siteId, habitatId) => ({
   type: 'mutation:habitat:remove',
   siteId,
   habitatId,
+  date: Date.now(),
 })
 
 export const createHabitat = (siteId, habitat) => ({
@@ -21,6 +23,7 @@ export const createHabitat = (siteId, habitat) => ({
     population: [],
     ...habitat,
   },
+  date: Date.now(),
 })
 
 export const createSite = site => ({
@@ -30,4 +33,5 @@ export const createSite = site => ({
     ...site,
     habitats: [],
   },
+  date: Date.now(),
 })

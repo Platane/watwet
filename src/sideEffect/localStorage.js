@@ -38,11 +38,12 @@ const selectStaticResources = createSelector(
 
 const selectNonStaticResources = createSelector(
   state => state.resource,
-  ({ original, mutated, dateMutated, dateFetched }) => ({
+  ({ original, mutated, dateMutated, dateFetched, mutationKey }) => ({
     original: extractNonStatic(original),
     mutated,
     dateMutated,
     dateFetched,
+    mutationKey,
   })
 )
 

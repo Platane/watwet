@@ -20,9 +20,9 @@ export const init = store => {
      * or which have not already failed
      */
     const { shouldFetch } = state.resource
-    const key = Object.keys(shouldFetch).filter(
-      key => !pending[key] && failed[key] !== shouldFetch[key]
-    )[0]
+    const key = Object.keys(shouldFetch)
+      .filter(key => !pending[key] && failed[key] !== shouldFetch[key])
+      .shift()
 
     if (!key) return
 
