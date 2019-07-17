@@ -1,0 +1,327 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>Formating Google SpreadSheet · watwet</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-prism/prism.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+        <link rel="stylesheet" href="styles/website.css">
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="data-sources.html" />
+    
+    
+    <link rel="prev" href="edit-google-spreadsheet.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    Introduction
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="nomenclature.html">
+            
+                <a href="nomenclature.html">
+            
+                    
+                    Nomenclature
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="basic-usage.html">
+            
+                <a href="basic-usage.html">
+            
+                    
+                    Basic Usage
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.4" data-path="edit-google-spreadsheet.html">
+            
+                <a href="edit-google-spreadsheet.html">
+            
+                    
+                    Editing from Google SpreadSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.5" data-path="formating-google-spreadsheet.html">
+            
+                <a href="formating-google-spreadsheet.html">
+            
+                    
+                    Formating Google SpreadSheet
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="data-sources.html">
+            
+                <a href="data-sources.html">
+            
+                    
+                    Data sources
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >Formating Google SpreadSheet</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="formating-google-spreadsheet">Formating Google SpreadSheet</h1>
+<p>The goal of the app is to fill up the google doc spreadSheet.</p>
+<p>Once this is done, there is a lot you can do to combine and format the data.</p>
+<h2 id="naming-convention">Naming Convention</h2>
+<p><strong>Site</strong></p>
+<p>WatWet will create a spreadsheet per site, with the name <code>ww-site-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>name</span> <span class="token attr-name">of</span> <span class="token attr-name">the</span> <span class="token attr-name">site</span><span class="token punctuation">&gt;</span></span></code></p>
+<p>As you probably don&apos;t want the app to mess with the unrelated files you have in your google doc, every files which name does not start with <code>ww-site-</code> will be ignored.</p>
+<p>This is also a great opportunity to &quot;archive&quot; sites. You may want to keep a site in your doc, but prevent it to be shown in the app.</p>
+<p><img src="asset/screenshot/spreadsheets.png" alt="some spreadsheets"></p>
+<blockquote>
+<p>Some spreadsheets, the app will use only two of these</p>
+</blockquote>
+<p><strong>Habitat</strong></p>
+<p>For every site, WatWet will have a sheet as site info, and one sheet for each habitat.</p>
+<p>The site info sheet is always named <code>data_info</code>, and each habitat sheet is name <code>data_<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>unique</span> <span class="token attr-name">id</span> <span class="token attr-name">for</span> <span class="token attr-name">the</span> <span class="token attr-name">habitat</span><span class="token punctuation">&gt;</span></span></code>.</p>
+<p>Every sheet which does not respect this convention will be left untouched.</p>
+<p><img src="asset/screenshot/spreadsheet-sheets.png" alt="a site sheets"></p>
+<blockquote>
+<p>The sheets for a site, it has two habitats, and one sheet that is ignored by the app</p>
+</blockquote>
+<h2 id="templating">Templating</h2>
+<p><strong>Reference</strong></p>
+<p>Google SpreadSheet have powerful features for templating.</p>
+<p>You can reference a cell from another sheet with the formula <code>=sheetName!B2</code></p>
+<p>That means that for a habitat you can have a presentation sheet, which reference values from the data sheet.</p>
+<p><strong>Indirect reference</strong></p>
+<p>This is great, but to make the template generic we will use another feature.</p>
+<p>With the indirect formula, <code>=INDIRECT(A1&amp;&quot;!B2&quot;)</code> you can reference the cell dynamically, depending of the value of another cell.</p>
+<p>For our case, we can imagine that A1 contains the name of the data sheet for an habitat. We can then build the template using indirect ref based on the value of A1. After, applying the template to another habitat is has easy as changing the value of A1.</p>
+<p><img src="asset/screenshot/spreadsheet-templating.gif" alt="a site sheets"></p>
+<blockquote>
+<p>Filling the template with different habitats</p>
+</blockquote>
+<p>The spreadsheet used as example can be seen here : <a href="https://docs.google.com/spreadsheets/d/1GIXS6iGpzqXhCD7WN3wINXfu-kCGSsNJXPfyb4mhepU/edit#gid=1995987541" target="_blank">docs.google.com/spreadsheets/d/1GIXS6iGpzqXhCD7WN3wINXfu-kCGSsNJXPfyb4mhepU</a></p>
+<h2 id="versioning">Versioning</h2>
+<p>We can check modifications made on the google doc spreadSheet, at what time and by who.</p>
+<p>This is handy to rollback to the last version.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="edit-google-spreadsheet.html" class="navigation navigation-prev " aria-label="Previous page: Editing from Google SpreadSheet">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="data-sources.html" class="navigation navigation-next " aria-label="Next page: Data sources">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"Formating Google SpreadSheet","level":"1.5","depth":1,"next":{"title":"Data sources","level":"1.6","depth":1,"path":"data-sources.md","ref":"./data-sources.md","articles":[]},"previous":{"title":"Editing from Google SpreadSheet","level":"1.4","depth":1,"path":"edit-google-spreadsheet.md","ref":"./edit-google-spreadsheet.md","articles":[]},"dir":"ltr"},"config":{"plugins":["prism","-highlight","github"],"root":"./","styles":{"website":"styles/website.css"},"pluginsConfig":{"github":{"url":"https://github.com/platane/watwet"},"prism":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"theme":"default","pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"variables":{"version":"1.0.4"},"title":"watwet","gitbook":">=3.0.0"},"file":{"path":"formating-google-spreadsheet.md","mtime":"2019-07-17T08:04:15.246Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2019-07-17T08:07:16.495Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-github/plugin.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
